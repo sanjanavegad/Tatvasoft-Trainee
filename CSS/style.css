@@ -66,11 +66,12 @@ a {
 }
 .main .btn-primary {
   border: 1px solid #ffffff80;
-  background-color: transparent !important;
+  background-color: #29626D;
+  line-height: 1.2;
 }
-.main .btn a {
-  line-height: 161px;
-  margin: auto;
+.main .btn-primary :hover {
+  background-color: #ffffff80;
+  color: #29626D;
 }
 .main .nav-item a {
   margin-left: 15px;
@@ -144,8 +145,14 @@ a {
   border-radius: 27px;
   border: 1px solid #ffffff;
   color: white;
+  height: 55px;
+  line-height: 2;
   background-color: rgba(29, 122, 140, 0.5);
   /* font-size: 1px; */
+}
+.main-btn-center .btn-center :hover{
+  color: #1D7A8C;
+  background-color: #FFFFFF;
 }
 #main-btn-down{
   height: 40px;
@@ -413,72 +420,72 @@ a {
     }
 }
 /* footer */
-#footer {
-  background: #111111;
+.site-footer .container { 
+  max-width: 1420px; 
+}
+.site-footer .footer-top { 
+  background: #111111; padding: 27px 0; 
+}
+.site-footer a { 
+  display: inline-block; 
+}
+.site-footer ul { 
+  list-style: none; padding: 0; margin: 0; 
+}
+.site-footer ul.footer-navigation li a:hover, .site-footer ul.social-media-list a:hover { opacity: 0.8; }
+.site-footer ul.footer-navigation { 
+  flex-wrap: wrap; 
+}
+.site-footer ul.footer-navigation li+li { 
+  margin-left: 30px; 
+}
+.site-footer ul.footer-navigation li a { 
+  color: #F1F1F1; text-decoration: none; text-transform: uppercase; font-size: 14px; line-height: 2.14; transition: opacity 0.3s;
+ }
+.site-footer ul.social-media-list li { 
+  text-align: center; 
+}
+.site-footer ul.social-media-list a { 
+  width: 20px; height: 20px; transition: opacity 0.3s;
+}
+.site-footer ul.social-media-list li:last-child { 
+  margin-left: 20px; 
+}
+.site-footer .footer-bottom { 
+  background: #292929; padding: 19px 0; position: relative; 
+}
+.ok-btn { 
+  position: absolute; text-decoration: none; color: #4F4F4F !important; background: #EED507; border-radius: 20px; width: 99px; height: 40px; line-height: 40px; right: 15px; top: 50%; transform: translateY(-50%); 
+}
+.site-footer .footer-bottom p { 
+  color: #f1f1f1; margin-bottom: 0; font-size: 14px; 
+}
+.site-footer .footer-bottom p a { 
+  text-decoration: none; color: #6EABEF; 
+}
+.row-bottom{ 
+  color: #9ba0a3;  
+}
+.row-bottom :hover{ 
+  color:white;  
 }
 
-.foot-text {
-  columns: #f1f1f1;
-  font-size: 14px;
-  font-weight: 400;
-}
-#footer .row2{
-  font-size: 14px;
-  /* width: 493px; */ 
-  padding-bottom: 15px;
-}
-@media (max-width:576px){
-    #footer .block{
-        display: block;
-    }
-}
 
-/* footer-bottom section */
-
-
-/* footer cookie section */
-#cookie {
-  background: #292929;
+@media (max-width: 766px) {
+  .footer-widget .social-media-list {
+    margin: auto;
+  }
 }
-
-#cookie a {
-  color: #6eabef;
-}
-#cookie .text1 p {
-  padding-top: 20px;
-}
-#cookie p {
-  font-size: 14px;
-  font-weight: 400;
-}
-#cookie .btn {
-  width: 99px;
-  background-color: #eed507;
-  border-radius: 20px;
-  margin: 12px 0px;
-  /* font-size: 16px;
-    font-weight: 500;
-    color: #4F4F4F; */
-}
-#cookie .btn p {
-  font-size: 16px;
-  font-weight: 500;
-  color: #4f4f4f;
-}
-
-a:hover{
-  color:#1D7A8C;
-}
-
 
 /* ******************************************   Similar code top of the pagee--- navbar img and main text------ */
 /*---------- small navbar ------------*/
 .small-nav{
   height: 64px;
 }
-.navbar {
+.small-nav .navbar {
   padding: 6px 0px !important;
   background-color: #525252;
+  position: sticky-top;
 }
 .small-nav .navbar .container-fluid {
   padding: 0 15px !important;
@@ -486,6 +493,7 @@ a:hover{
 .small-nav .nav-link {
   color: white;
   font-size: 17px;
+  line-height: 1.2;
   letter-spacing: 0px;
   text-align: center;
 }
