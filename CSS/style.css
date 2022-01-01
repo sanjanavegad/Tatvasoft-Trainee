@@ -1269,3 +1269,94 @@ a {
   border-radius:20px;
   font-size: 16px;
 }
+
+/*****************customer_service_history*********************/
+.heading-service-history{
+    font-family: Roboto;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 2.05;
+    color: #646464;
+    font-size: 22px;
+}
+.btn-export-service-history{
+  background-color:#146371;
+  color: white;
+  border-radius:20px;
+  height: 37px;
+  float: right;
+  font-size: 14px;
+  padding-top: 6px;
+}
+@media(max-width:1255px){
+  .btn-export-service-history{
+    margin:auto;
+  }
+}
+.payment-service-history{
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  color: #1d7a8c;
+}
+.history-cap{
+  border: solid 1px #aaa;
+  border-radius: 50%;
+  padding: 8px;
+  margin-top: 4px;
+}
+.btn-status-service-history{
+  background-color: #67b644;
+  color: white;
+  font-size: 13px;
+}
+.btn-rate-service-history{
+  background-color: #6da9b5;
+  font-size: 13px;
+  color: white;
+  border-radius:20px;
+}
+.h4-service-history{
+  display: inline; 
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: lighter;
+  line-height: 1.71;
+  color: #646464;
+  margin-top: 10px;
+}
+.p-service-history{
+  border: 1px solid #E1E1E1;
+  border-radius: 3px;
+  width: 62px; 
+  display:inline;
+  padding: 5px;
+  background:none;
+}
+.nav-service-history{
+ float: right;
+
+}
+@media (max-width:952px){
+  .pagination-1 {
+    
+    /* display: block;   */
+  }
+}
+@media (max-width:952px){
+  .h4-service-history {
+    margin-left: 10%;
+  }
+}
+
+@media (max-width:952px){
+  .nav-service-history{
+    margin-top: 20px;
+    margin-right: 5%;
+    width: auto;
+    
+  }
+}
+
+
