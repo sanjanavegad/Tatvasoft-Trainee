@@ -1,0 +1,108 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <!--line-star-->
+    <section class="line-star">
+        <section class="line-star">
+            <h5 class="main-heading"> Create An Account</h5>
+            <div class="row row2 justify-content-center">
+                <div class="line"></div>
+                <img class="px-0" id="seprator" src="images/separator.png" alt="">
+                <div class="line"></div>
+            </div>
+        </section>
+    </section>
+    <!--line-star-->
+    <section id="create_account_user" class="create_account_user justify-content-center mt-4">
+        <form class="row class1">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputlastname" placeholder="Last Name">
+            </div>
+            <div class="col-md-6">
+                <input type="tel" class="form-control" id="inputnumber" placeholder="Phone number">
+            </div>
+            <div class="col-md-6">
+                <input type="email" class="form-control" id="inputemail" placeholder="Email">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputpassword" placeholder="Password">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputconfirmpassword" placeholder="Conform Password">
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="checkbox">
+                        <label>
+                            <input formcontrolname="NewsletterSubscription" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
+                            <span class="checkbox-text">
+                                Yes, I would like to subscribe to the
+                                newsletter of Helperland GmbH with vouchers, trends, promotions and individualized offers. I can
+                                unsubscribe from the newsletter at any time in the newsletter and in the customer account itself.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="checkbox">
+                        <label>
+                            <input formcontrolname="IAgreeTermsCondition" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
+                            <span class="checkbox-text">
+                                I agree with the
+                                <a class="terms-text" data-toggle="modal" href="#termsAndConditions" title="Terms and Conditions">
+                                    terms and conditions
+                                </a> of Helperland GmbH.
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mb-2">
+                    <div class="checkbox">
+                        <label>
+                            <input formcontrolname="IAgreePrivacyPolicy" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
+                            <span class="checkbox-text">
+                                I have read the
+                                <a class="terms-text" data-toggle="modal" href="#privacy-policy-modal" title="privacy policy">privacy policy</a> .
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center g-recaptcha-wrapper">
+                <re-captcha id="registerRecaptcha">
+                    <div class="Robot-card">
+                        <div>
+                            <iframe title="reCAPTCHA"
+                                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LfV25IcAAAAAEhaM94ZyAWXQxViyg9Y6Rl6L2Oe&amp;co=aHR0cHM6Ly93ZWIxLmFuYXNvdXJjZS5jb206NDQz&amp;hl=en&amp;v=TDBxTlSsKAUm3tSIa0fwIqNu&amp;size=normal&amp;cb=76emyj4edauw"
+                                    width="304" height="78" role="presentation" name="a-s8gkajnu9yv2" frameborder="0" scrolling="no"
+                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                        </div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response"
+                                        style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                    </div><iframe style="display: none;"></iframe>
+                </re-captcha>
+                <input formcontrolname="recaptchaReactive" type="hidden" value="" class="ng-untouched ng-pristine ng-invalid">
+            </div>
+            <div class="col-12 mt-4 mb-2">
+                <button type="submit" class="btn submit-button">Register</button>
+            </div>
+            <div class="bottom-text">
+                Already registered?
+                <a class="login-now" data-dismiss="modal" data-toggle="modal" asp-area="" asp-controller="Home" asp-action="Index">Login now</a>
+            </div>
+        </form>
+    </section>
+</div>   

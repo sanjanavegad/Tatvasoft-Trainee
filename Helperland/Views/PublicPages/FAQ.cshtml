@@ -1,0 +1,238 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+
+<!--Navbar-->
+<img src="../images\faq-banner.png" alt="" class="main-img">
+<section class="line-star">
+    <h5 class="main-heading">FAQs</h5>
+    <div class="row row2 justify-content-center">
+        <div class="line"></div>
+        <img class="px-0" id="seprator" src="../images/separator.png" alt="">
+        <div class="line"></div>
+    </div>
+</section>
+<section class="main-content">
+    <p class="customer-p">
+        Whether you are Customer or Service provider,<br>
+        We have tried our best to solve all your queries and questions.
+    </p>
+    <br>
+    <section class="faq-main" id="faq-main">
+        <div class="row row-btn">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified px-0" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="for-customer-tab" data-bs-toggle="tab"
+                            data-bs-target="#for-customer" type="button" role="tab" aria-controls="for-customer"
+                            aria-selected="true">
+                        FOR CUSTOMER
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="for-service-tab" data-bs-toggle="tab" data-bs-target="#for-service"
+                            type="button" role="tab" aria-controls="for-service" aria-selected="false">
+                        FOR SERVICE
+                        PROVIDER
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content px-0">
+                <div class="tab-pane active text" id="for-customer" role="tabpanel" aria-labelledby="for-customer-tab">
+
+                    <div class="container-fluid px-0 text-left" id="accordion">
+
+                        <div class="card px-0 ">
+                            <div class="d-flex card-header mx-0 px-0 justify-content-start">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseOne" aria-expanded="false"
+                                        aria-controls="collapseOne">
+
+                                    <img class="right" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseOne"
+                                       aria-expanded="false" aria-controls="collapseOne">
+                                        <p class="mb-0">
+                                            What's included in a cleaning?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseOne" class="collapse" data-bs-parent="#accordion" style="">
+                                <div class="card-body answer">
+                                    Bedroom, Living Room &amp; Common Areas, Bathrooms, Kitchen, Extras
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card px-0 ">
+                            <div class="collapsed d-flex card-header mx-0 px-0 justify-content-start">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseFalse">
+
+                                    <img class="right" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseTwo"
+                                       aria-expanded="false" aria-controls="collapseFalse">
+                                        <p class="mb-0">
+                                            Which Helperland professional will come to my place?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                <div class="card-body answer">
+                                    Helperland has a vast network of experienced, top-rated cleaners. Based on the time
+                                    and date of your request, we work to assign the best professional available. Like
+                                    working with a specific pro? Add them to your Pro Team from the mobile app and
+                                    they'll be requested first for all future bookings. You will receive an email with
+                                    details about your professional prior to your appointment.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card px-0 ">
+                            <div class="d-flex card-header mx-0 px-0 justify-content-start collapsed">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                    <img class="" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseThree"
+                                       aria-expanded="false" aria-controls="collapseThree">
+                                        <p class="mb-0">
+                                            Can I skip or reschedule bookings?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                                <div class="card-body answer">
+                                    You can reschedule any booking for free at least 24 hours in advance of the
+                                    scheduled start time. If you need to skip a booking within the minimum commitment,
+                                    we’ll credit the value of the booking to your account. You can use this credit on
+                                    future cleanings and other Helperland services.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card px-0 ">
+                            <div class="d-flex card-header mx-0 px-0 justify-content-start">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+
+                                    <img class="right" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseFour"
+                                       aria-expanded="false" aria-controls="collapseOne">
+                                        <p class="mb-0">
+                                            Do I need to be home for the booking?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+                                <div class="card-body answer">
+                                    We strongly recommend that you are home for the first clean of your booking to show
+                                    your cleaner around. Some customers choose to give a spare key to their cleaner, but
+                                    this decision is based on individual preferences.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane text" id="for-service" role="tabpanel" aria-labelledby="for-service-tab">
+                    <div class="container-fluid px-0 text-left" id="accordion2">
+                        <div class="card px-0 ">
+                            <div class="d-flex card-header mx-0 px-0 justify-content-start">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseOne" aria-expanded="false"
+                                        aria-controls="collapseOne">
+
+                                    <img class="right" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseOne"
+                                       aria-expanded="false" aria-controls="collapseOne">
+                                        <p class="mb-0">
+                                            How much do service providers earn?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseOne" class="collapse" data-bs-parent="#accordion2" style="">
+                                <div class="card-body answer">
+                                    The self-employed service providers working with Helperland set their own payouts,
+                                    this means that they decide how much they earn per hour.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card px-0 ">
+                            <div class="collapsed d-flex card-header mx-0 px-0 justify-content-start">
+                                <button type="submit" class="btn question ques-arrow col-auto px-0 collapsed"
+                                        data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseFalse">
+
+                                    <img class="right" src="../images/right-arrow.png" alt="" width="22">
+                                </button>
+                                <div class="col px-0">
+                                    <a class="question ques collapsed" data-bs-toggle="collapse" href="#collapseTwo"
+                                       aria-expanded="false" aria-controls="collapseFalse">
+                                        <p class="mb-0">
+                                            What support do you provide to the service providers?
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-bs-parent="#accordion2">
+                                <div class="card-body answer">
+                                    Our call-centre is available to assist the service providers with all queries or
+                                    issues in regards to their bookings during office hours. Before a service provider
+                                    starts receiving jobs, every individual partner receives an orientation session to
+                                    familiarise with the online platform and their profile.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- customer section -->
+<section class="container-fluid" id="customer" style="background-color: white;">
+    <div class="row justify-content-center" id="row3">
+        <div class="col-md-12 col-sm-8 order-1 order-sm-2">
+            <div class="container-fluid mx-0 px-0">
+                <div class="row mx-0 px-0 text-center ">
+                    <p class="title mb-1">GET OUR NEWSLETTER</p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-auto p-0 newletter-input">
+                        <input class="form-control" type="email" name="" id="" placeholder="YOUR EMAIL">
+                    </div>
+                    <div class="col-sm-1 py-2 py-sm-0 newletter-input">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
