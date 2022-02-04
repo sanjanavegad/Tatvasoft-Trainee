@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin > Service Request</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/style.css">
+
+</head>
+
+<body>
+    <!--Navbar-->
+    <section id="nevbar" class="small-nav">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1fb6ff;">
+            <div class="helperland-header">
+                helperland
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mymenu"
+                aria-controls="mymenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-auto" id="mymenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="usermng" role="button" aria-expanded="false">
+                            <img src="images/admin-user.png" alt="notification"> <span class="admin-name">James
+                                Smith</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" style="margin: 2px 10px 0px -10px">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                            <img src="images/logout.png" alt="Flag">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <!--Navbar-->
+    <section class="user-management">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 ">
+                    <!--Admin Service Request sidebar-->
+                    <div class="row" style="padding-top:px;">
+                        <div class="col-md-8">
+                            <button class="navbar-toggler navbar-light justify-content-center mb-1"
+                                style="width: 70px; margin-top: 20px; border: 1px solid rgb(180, 179, 179);"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#sidebarmenu"
+                                aria-controls="sidebarmenu" aria-expanded="false" aria-label="sidebarToggle">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <h5 class="pt-1 pl-5" style="display: inline;">
+                                User Request</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="add-new-user-btn justify-content-end mt-4">
+                                <img src="images/add.png" alt="" style="padding-right: 7px;">
+                                Add New User
+                            </button>
+                        </div>
+                        <div class=" sidebar-menu collapse navbar-collapse " id="sidebarmenu">
+                            <ul style="list-style: none; margin-left: -55px;"><br>    
+                                <li><a href="Admin_usermanagement.html" class="nav-item-user-management">User Management </a></li>
+                                <div class="bottom-lines"></div>
+                                <li><a href="Admin_user_request.html" class="nav-item-user-management">User Requests </a></li>
+                                <div class="bottom-lines"></div>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Admin Service Request side bar-->
+                    <!--Admin Service Request-Serch user-->
+                    <div id="accordionFlushExample">
+                        <div class="accordion-item mt-3">
+                            <h3 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed accordionbtn" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    Search User
+                                </button>
+                            </h3>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse mt-4"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="container">
+                                    <form class="form-inline form1">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control form2-request-history"
+                                                id="Service ID" placeholder="Service ID">
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-select form2-request-history"
+                                                aria-label="Default select example">
+                                                <option>Customer</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-select form2-request-history"
+                                                aria-label="Default select example">
+                                                <option> Select Service Provider</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-select form2-request-history"
+                                                aria-label="Default select example">
+                                                <option> Select Status</option>
+                                                <option value="1">New</option>
+                                                <option value="2">Completed</option>
+                                                <option value="3">Pending</option>
+                                                <option value="3">Cancle</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="Date" class="form-control form2-request-history" id="Date"
+                                                placeholder="From Date">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="Date" class="form-control form2-request-history" id="Date"
+                                                placeholder="To Date">
+                                        </div>
+                                        <button class="user-search-btn">Search</button>
+                                        <button class="user-clear-btn">Clear</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Admin Service Request-Serch user-->
+                    <br>
+                    <!-- Admin Service Request-table for user managment-->
+                    <div class="table-user-management">
+                        <table class="table">
+                            <thead class="table-header-admin-usermanagement">
+                                <tr>
+                                    <th scope="col"> Service ID <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Service Date <img src="images\sort.png" alt=""> </th>
+                                    <th scope="col"> Cutomer Details <img src="images\sort.png" alt=""></th>
+                                    <th scope="col"> Service Provider <img src="images\sort.png" alt=""> </th>
+                                    <th scope="col"> Status <img src="images\sort.png" alt=""></th>
+                                    <th scope="col"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-user-management">
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #f2bb37;">New</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Deactivate</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #f2bb37;">New</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Deactivate</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #1fb6ff; width: 72px;">Pending</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li >
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit &
+                                                        Reschedule</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Cancle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Change
+                                                        SP</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #1fb6ff; width: 72px;">Pending</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit &
+                                                        Reschedule</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Cancle</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Change
+                                                        SP</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn" style="width: 72px;">Completed</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn" style="width: 72px;">Completed</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #ff6b6b; width: 72px;">Cancle</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Deactivate</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn" style="width: 72px;">Completed</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn"
+                                            style="background-color: #ff6b6b; width: 72px;">Cancle</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Deactivate</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">323436</th>
+                                    <td>
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018<br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </td>
+                                    <td> David Bough
+                                        <br>
+                                        <img src="images\layer-719.png" alt="">
+                                        Musterstrabe 5,12345 Bonn
+                                    </td>
+                                    <td>
+                                        <img src="images\cap.png" alt="">
+                                        Lyum Watson
+                                        <br>
+                                        <img src="images\yellow-small-star.png" alt="" style="margin-left:15%;"><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img
+                                            src="images\grey-small-star.png" alt="">
+                                        4
+                                    </td>
+                                    <td>
+                                        <button type="button" class="active-btn" style="width: 72px;">Completed</button>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="images/group-38.png" alt="" style="margin-top: -10px;">
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                style="background: white;">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Refund</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#"
+                                                        style="color: #646464;">Escalate</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Hidtory
+                                                        log</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" style="color: #646464;">Download
+                                                        Invoice</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <div class="row justify-content-center" style="margin-top: 15px;">
+                                            <div class="col-lg-7 col-md-5 col-sm-12 justify-content-center">
+
+                                                <h5 class="h4-service-history" style="margin-left:30px;"> Show
+                                                    <button class="p-service-history"> 10 <img
+                                                            src="images\keyboard-right-arrow-button.png"
+                                                            alt=""></button>
+                                                    Entries
+                                                </h5>
+                                            </div>
+                                            <div class="col-lg-5 col-md-7 col-sm-12"
+                                                style="display: inline; padding-left:12%;">
+                                                <div class="pagination-main">
+                                                    <a href="#">&laquo;</a>
+                                                    <a class="active" href="#">1</a>
+                                                    <a href="#">2</a>
+                                                    <a href="#">3</a>
+                                                    <a href="#">4</a>
+                                                    <a href="#">5</a>
+                                                    <a href="#">6</a>
+                                                    <a href="#">&raquo;</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Admin Service Request-table for user managment-->
+                    <div class="admin-user-footer">©2018 Helperland. All rights reserved.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>

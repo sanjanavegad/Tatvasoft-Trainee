@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer > Service History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+
+</head>
+
+<body>
+
+
+    <!--Navbar-->
+    <div class="wrapper" id="navbar-provider">
+        <nav id="sidebar">
+            <div class="container-fluid">
+                <div class="row row1">
+                    <strong>Welcome, Sandeep.</strong>
+                </div>
+        
+                <div class="row row2 ">
+                    <ul class="nav nav-tabs flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Service_History.html">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Service_History.html">Service History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Service_History.html">Service Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Service_History.html">Favorite Pros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Customer_Settings.html">My Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home.html">Logout</a>
+                        </li>
+        
+                    </ul>
+                </div>
+                <div class="row row3">
+                    <ul class="navbar-nav">
+        
+                        <li class="nav-item">
+                            <a class="nav-link login-trigger btn" href="#">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Book_Now.html">Book a Cleaner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Prices.html">Price & services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="About.html">Warranty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact.html">Contact </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Service_Provider.html">Become a
+                                Helper</a>
+                        </li>
+                    </ul>
+        
+                </div>
+                <hr>
+                <div class="row4">
+                    <img class="socialmedia" src="images/ic-facebook.png" alt="" style="margin-right: 40px; ">
+                    <img class="socialmedia" src="images/ic-instagram.png" alt="">
+                </div>
+            </div>
+        
+        </nav>
+        <div id="nevbar">
+            <section class="small-nav">
+                <nav class="navbar navbar-expand-lg navbar-dark mynav">
+                    <a class="navbar-brand" href="Home.html"><img src="images/logo-small.png" alt="Helperland"></a>
+                    <button class="navbar-toggler" id="sidebarCollapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link mt-1" href="#">Price & services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mt-1" href="#">Warranty</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mt-1" href="#">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mt-1" href="#">Contact </a>
+                            </li>
+
+                            <div class="vr" style="color: white;"></div>
+                            <li class="nav-item dropdown notification-icon">
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <img src="images\icon-notification.png" alt="notification">
+                                </a>
+                            </li>
+                            <div class="vr" style="color: white;"></div>
+                            <div class="nav-item dropdown user-dropdown hidden-sm hidden-xs dropdown"
+                                style="border: none !important">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" href="#"
+                                    title="Profile" aria-expanded="false">
+                                    <img src="images\user.png" alt="First Customer">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li class="username p-2">Welcome,
+                                        <b>First Customer</b>
+                                    </li>
+                                    <hr class="h1">
+                                    <li>
+                                        <a title="My Dashboard"  href="Service_History.html">My Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a title="My Settings" href="Customer_Settings.html">My Settings</a>
+                                    </li>
+                                    <li>
+                                        <a style="cursor: pointer;" title="Logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </ul>
+                    </div>
+                </nav>
+            </section>
+        </div>
+
+        <div class="overlay"></div>
+
+    </div>
+    <!--Navbar-->
+
+    <!--Welcome heading-->
+    <section class="first-heading">
+        <div class="welcome-heading">
+            <h6 class="Welcome ">Welcome,<b> Gaurang!</b></h6>
+        </div>
+    </section>
+    <!--Welcome heading-->
+    <!--Main-section-->
+    <section class="main-section-upcoming-services " id="main-customer-section">
+        <div class="row">
+            <div class="col-md-3  mb-2">
+               <div class="nav-upcoming-sevices">
+                <nav class="side-nav  nav-upcoming-sevices">
+                    <ul class="nav-menu nav nav-tabs flex-column" role="tablist">
+                        <li class=" nav-item-upcoming-service mt-3">
+                            <a class=" " data-bs-toggle="tab" href="#dashboard">Dashboard</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="active" data-bs-toggle="tab" href="#servicehistory">Service history</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#serviceschedule">Service Schedule</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class="nav-item nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#favouritepros">Favourite pros</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#invoices">Invoices</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service pb-3">
+                            <a class="" data-bs-toggle="tab" href="#notification">Notification</a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+               </div>
+    
+            </div>
+            <div class="col"> 
+                <div class="tab-content">
+                    <div id="dashboard" class="container tab-pane fade">
+                        <div class="heading-service-history mt-3">
+                            Dashboard
+                            <button type="button" class="btn btn-export-service-history">Export</button>
+                        </div>
+                        <!-- </div> -->
+                        <table class="table">
+                            <thead class="table-header-upcoming-services">
+                                <tr>
+                                    <th scope="col">Service Details <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Service Provider <img src="images\sort.png" alt=""> </th>
+                                    <th scope="col">Payment <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Rate SP <img src="images\sort.png" alt=""></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-upcoming-services">
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <!-- Rescedule button Modal-->
+                                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule">Reschedule</button>
+                                            <div class="modal fade" id="Reschedule" tabindex="-1" role="dialog" aria-labelledby="Reschedule" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="">
+                                                                <div id="Reschedule-model">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div style="font-size: 16px;">Select New Date & Time</div>
+                                                                            <div class="row mt-2">
+                                                                                <div class="col-md-7 col-12">
+                                                                                    <input type="date" class="form-control" placeholder="date" aria-label="Postal code"
+                                                                                        id="currentDate">
+                                                                                </div>
+                                                                                <div class="col-md-5 col-12">
+                                                                                    <input type="time" class="form-control" name="time" id="currentTime">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button type="button" class="model-action-button mt-4" >Update</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Cancel Button model -->
+                                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal" data-target="#cancel-request">Cancel</button>
+                                            <div class="modal fade" id="cancel-request" tabindex="-1" role="dialog" aria-labelledby="cancel-request" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Cancel Service Request</h5>
+                                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="">
+                                                                <div id="Reschedule-model">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div style="font-size: 16px;">Why you want to cancel the service request?</div>
+                                                                            <textarea name="" id="" cols="50" rows="2" class="form-control"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button type="button" class="model-action-button mt-4">Cancel now</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule">Reschedule</button>
+                                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal" data-target="#cancel-request">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule">Reschedule</button>
+                                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal" data-target="#cancel-request">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule">Reschedule</button>
+                                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal" data-target="#cancel-request">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        
+                        <div class="row pagination-1">
+                            <div class="col-lg-6 col-md-4 col-sm-12">
+                                <h5 class="h4-service-history"> Show
+                                    <button class="p-service-history"> 10 <img src="images\keyboard-right-arrow-button.png" alt=""></button>
+                                    entries | Total Record: 55
+                                </h5>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-12 nav-service-history">
+                                <nav class="nav-service-history">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\first-page.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item disabled " title="previous">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item active" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">2</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">3</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">4</a>
+                                        </li>
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\first-page.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="servicehistory" class="container tab-pane active">
+                        <!-- <div class="col-12"> -->
+                        <div class="heading-service-history">
+                            Service History
+                            <button type="button" class="btn btn-export-service-history">Export</button>
+                        </div>
+                        <!-- </div> -->
+                        <table class="table">
+                            <thead class="table-header-upcoming-services">
+                                <tr>
+                                    <th scope="col">Service Details <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Service Provider <img src="images\sort.png" alt=""> </th>
+                                    <th scope="col">Payment <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Status <img src="images\sort.png" alt=""></th>
+                                    <th scope="col">Rate SP <img src="images\sort.png" alt=""></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-upcoming-services">
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate SP</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="RateSPModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="row pt-3">
+                                                            <div class="col-1" style="margin-right: 25px;">
+                                                                <img src="images\cap.png" alt="" class="history-cap">
+                                                            </div>
+                                                            <div class="col-8">Sandip Patel<br>
+                                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                    src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                    src="images\grey-small-star.png" alt="">
+                                                                4
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn-close" style="float: right;" data-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h6><strong>Rate your service provider</strong></h6>
+                                                        <hr class="hr-line">
+                                                        <table style="width:300px">
+                                                            <tr>
+                                                                <td>On time arrival</td>
+                                                                <td>
+                                                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\grey-small-star.png" alt="">
+                                                                    3.6
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Friendly</td>
+                                                                <td>
+                                                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\grey-small-star.png" alt="">
+                                                                    4
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Quality of service</td>
+                                                                <td>
+                                                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                                        src="images\yellow-small-star.png" alt="">
+                                                                    5
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <div class="row mt-3 mb-3">
+                                                            <div><strong>Feedback on sevice provider</strong></div>
+                                                            <div>
+                                                                <textarea name="" id="" cols="10" rows="2" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="th-upcoming-service">
+                                        <img src="images\calendar2.png" alt="">
+                                        09/04/2018
+                                        <br>
+                                        <img src="images\layer-712.png" alt="">
+                                        12:00 - 18:00
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="images\cap.png" alt="" class="history-cap">
+                                            </div>
+                                            <div class="col-9">
+                                                Lyum Watson <br>
+                                                <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                    alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                                    src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                                4
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="payment-service-history">€ 63</p>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-status-service-history">Completed</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-rate-service-history" data-toggle="modal" data-target="#RateSPModel">Rate
+                                            SP</button>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    
+                        <div class="row pagination-1">
+                            <div class="col-lg-6 col-md-4 col-sm-12">
+                                <h5 class="h4-service-history"> Show
+                                    <button class="p-service-history"> 10 <img src="images\keyboard-right-arrow-button.png" alt=""></button>
+                                    entries | Total Record: 55
+                                </h5>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-12 nav-service-history">
+                                <nav class="nav-service-history">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\first-page.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item disabled " title="previous">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item active" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">2</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">3</a>
+                                        </li>
+                                        <li class="page-item disabled" title=" ">
+                                            <a href="" class="page-link rounded-circle m-1">4</a>
+                                        </li>
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\first-page.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li class="page-item disabled" title="next">
+                                            <a href="homepage.html" class="page-link rounded-circle m-1">
+                                                <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="serviceschedule" class="container tab-pane fade">
+                        
+                    </div>
+                    <div id="Favouritepros" class="container tab-pane fade">
+                        <table class="table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Service ID</th>
+                                    <th>Service date </th>
+                                    <th>Customer details</th>
+                                    <th>Distance</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="serviceid">32346</td>
+                                    <td>
+                                        <ul class="servicedate">
+                                            <li class="date">09/04/2018</li>
+                                            <li class="time">12:00-18:00</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        David Bough
+                                        <ul class="customerdetails">
+                                            <li class="address">Musterstrabe 5,12345 bonn</li>
+                                        </ul>
+                                    </td>
+                                    <td class="distance">15km</td>
+                                    <td class="actions"><a class="btn" href="#">cancel</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="serviceid">32346</td>
+                                    <td>
+                                        <ul class="servicedate">
+                                            <li class="date">09/04/2018</li>
+                                            <li class="time">12:00-18:00</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        David Bough
+                                        <ul class="customerdetails">
+                                            <li class="address">Musterstrabe 5,12345 bonn</li>
+                                        </ul>
+                                    </td>
+                                    <td class="distance">15km</td>
+                                    <td class="actions"><a class="btn" href="#">cancel</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="serviceid">32346</td>
+                                    <td>
+                                        <ul class="servicedate">
+                                            <li class="date">09/04/2018</li>
+                                            <li class="time">12:00-18:00</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        David Bough
+                                        <ul class="customerdetails">
+                                            <li class="address">Musterstrabe 5,12345 bonn</li>
+                                        </ul>
+                                    </td>
+                                    <td class="distance">15km</td>
+                                    <td class="actions"><a class="btn" href="#">cancel</a></td>
+                                </tr>
+    
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <section id="mobile-card">
+        <div class="tab-content">
+            <div id="dashboard" class="container tab-pane fade">
+                <div class="mobile-card">
+                    <h2>Dashboard</h2>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row pagination-1">
+                        <div class="col-12">
+                            <h5 class="h4-service-history" style="margin-left:20%;"> Show
+                                <button class="p-service-history"> 10 <img src="images\keyboard-right-arrow-button.png"
+                                        alt=""></button>
+                                entries | Total Record: 55
+                            </h5>
+                        </div>
+                        <div class="col-12 nav-service-history " style="margin: auto;">
+                            <nav class="nav-service-history">
+                                <ul class="pagination">
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\first-page.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled " title="previous">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item active" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">2</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">3</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">4</a>
+                                    </li>
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\first-page.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="servicehistory" class="container tab-pane active">
+                <div class="mobile-card">
+                    <h2>Service History</h2>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <img src="images\calendar2.png" alt=""> 09/04/2018
+                                <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="images\cap.png" alt="" class="history-cap">
+                                    </div>
+                                    <div class="col-10">
+                                        Lyum Watson <br>
+                                        <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                            alt=""><img src="images\yellow-small-star.png" alt=""><img
+                                            src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ 63</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history">Rate SP</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row pagination-1">
+                        <div class="col-12">
+                            <h5 class="h4-service-history" style="margin-left:20%;"> Show
+                                <button class="p-service-history"> 10 <img src="images\keyboard-right-arrow-button.png"
+                                        alt=""></button>
+                                entries | Total Record: 55
+                            </h5>
+                        </div>
+                        <div class="col-12 nav-service-history " style="margin: auto;">
+                            <nav class="nav-service-history">
+                                <ul class="pagination">
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\first-page.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled " title="previous">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item active" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">2</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">3</a>
+                                    </li>
+                                    <li class="page-item disabled" title=" ">
+                                        <a href="" class="page-link rounded-circle m-1">4</a>
+                                    </li>
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\first-page.png" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled" title="next">
+                                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                                            <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+    </section>
+
+
+
+
+    <!--Main-section-->
+
+    <!-- footer section -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 footer-widget">
+                        <a href="#" title="Helper Hand">
+                            <img src="images/footer-logo.png" alt="Helper Hand">
+                        </a>
+                    </div>
+                    <div class="col-lg-8 footer-widget">
+                        <ul class="footer-navigation d-flex justify-content-center">
+                            <li>
+                                <a href="Home.html" title="Home">Home</a>
+                            </li>
+                            <li>
+                                <a href="About.html" title="About">About</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Testimonials">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="FAQ.html" title="FAQs">FAQs</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Insurance Policy">Insurance Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Impressum">Impressum</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 footer-widget">
+                        <ul class="social-media-list d-flex justify-content-end">
+                            <li>
+                                <a href="#" target="_blank" title="Facebook">
+                                    <img src="images/ic-facebook.png" alt="Facebook">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" title="Instagram">
+                                    <img src="images/ic-instagram.png" alt="Instagram">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="row-bottom justify-content-lg-center text-center" style="font-size: 16px;">
+                    <div>©2018 Helperland. All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+                            class="row-bottom">Terms
+                            and Conditions</a> | <a href="" class="row-bottom">Privacy Policy</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#dismiss, .overlay').on('click', function () {
+                // hide sidebar
+                $('#sidebar').removeClass('active');
+                // hide overlay
+                $('.overlay').removeClass('active');
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                // open sidebar
+                $('#sidebar').addClass('active');
+                // fade in the overlay
+                $('.overlay').addClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+</body>
+
+</html>
