@@ -65,7 +65,7 @@
                                 <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Become a Helper
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service_Provider">Become a Helper
                                 </a>
                             </li>
                         </ul>
@@ -111,10 +111,8 @@
                                        style="padding-left: 20px;padding-right: 20px; margin-bottom: 4px;" href="#">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;"
-                                       href="Service_Provider.html">
-                                        Become a
-                                        Helper
+                                    <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;">
+                                        Become a Helper
                                     </a>
                                 </li>
                             </ul>

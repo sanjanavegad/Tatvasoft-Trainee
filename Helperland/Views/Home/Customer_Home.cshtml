@@ -1,7 +1,7 @@
 ﻿@using Helperland.Models
 @model User
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Customer Home-Page";
 }
 
 <!doctype html>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
-    <title>Helperland</title>
+    <title>Customer Home-page</title>
 </head>
 
 <body>
@@ -58,23 +58,24 @@
                         <ul class="navbar-nav">
 
                             <li class="nav-item">
-                                <a class="nav-link login-trigger btn">Login</a>
+                                <a class="nav-link login-trigger btn" href="#">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="Contact">Book a  Cleaner</a>
+                                <a class="nav-link" href="Book_Now.html">Book a Cleaner</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Prices">Price & services</a>
+                                <a class="nav-link" href="Prices.html">Price & services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Warranty</a>
+                                <a class="nav-link" href="About.html">Warranty</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact </a>
+                                <a class="nav-link" href="Contact.html">Contact </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">
-                                    Become a Helper
+                                <a class="nav-link" href="Service_Provider.html">
+                                    Become a
+                                    Helper
                                 </a>
                             </li>
                         </ul>
@@ -88,88 +89,64 @@
                 </div>
 
             </nav>
-            <div id="nevbar ">
-                <section class="small-nav p-3">
-                    <nav class="navbar navbar-expand-lg navbar-dark mynav" style="background:transparent">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="../../images/logo-large.png" alt="Helperland"></a>
+            <div id="nevbar">
+                <section class="small-nav">
+                    <nav class="navbar navbar-expand-lg navbar-dark mynav pt-5" style="background-color: transparent;">
+                        <a class="navbar-brand" href="Home.html"><img src="../images/logo-large.png" class="pt-2" alt="Helperland"></a>
                         <button class="navbar-toggler" id="sidebarCollapse" type="button">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                                <li class="nav-item">
+                            <ul class="navbar-nav">
+                                <li class="nav-item pt-1">
                                     <a class="nav-link btn btn1 btn-outline-light text-white btn-home"
-                                       style="padding-left: 15px;padding-right: 15px;" href="Book_Now.html">
-                                        Book a Cleaner
+                                       href="Book_Now.html">Book Now</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mt-1 " href="Prices.html">Price & services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mt-1" href="#">Warranty</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mt-1" href="#">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mt-1" href="Contact.html">Contact </a>
+                                </li>
+
+                                <div class="vr " style="color: white; margin-left: 20px;"></div>
+                                <li class="nav-item dropdown notification-icon">
+                                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <img src="../images\icon-notification.png" alt="notification">
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="PublicPages" asp-action="Prices">Prices</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="About.html">Our Guarantee</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="#">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-outline-light text-white  btn-home" data-bs-target="#login" data-bs-toggle="modal"
-                                       style="width: 110px;" href="#">Login</a>
-
-                                    <!-- login popup -->
-                                    <div id="login" class="modal fade " aria-labelledby="loginLabel" tabindex="-1" aria-modal="true"
-                                         role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <partial name="~/Views/Home/LoginModel.cshtml" model="Model" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Forgotpassword popup -->
-                                    <div class="modal fade" id="forgetPasswordModal" aria-hidden="true"
-                                         aria-labelledby="forgetPasswordModalLabel" tabindex="-1">
-                                        <div class="modal-dialog  modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body p-3">
-                                                    <div class="popup-heading">Forget Password</div>
-                                                    <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    <form method="post">
-                                                        <input asp-for="Email" type="email" name="" class="form-control" placeholder="Email Address" />
-                                                        <button type="submit" class="btn send-button">Send</button>
-                                                    </form>
-                                                    <a href="#" class="back-login text-center" data-bs-toggle="modal" data-bs-target="#login"> <-- Back to Login</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-outline-light text-white btn-home" style="padding-left: 15px;padding-right: 15px;">Become a Helper</a>
-                                </li>
-                                <li class="nav-item dropdown show mt-1 ml-2 ">
-                                    <a class="dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                       aria-haspopup="true" aria-expanded="false">
-                                        <img src="../images/ic-flag.png" alt="Flag">
+                                <div class="vr" style="color: white;"></div>
+                                <li class="nav-item dropdown user-dropdown">
+                                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="../images/user.png" alt="Flag">
+                                        <i class="bi bi-chevron-down"></i>
                                     </a>
-                                    <div class="dropdown-menu languages-dropdown" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#"><img src="../images/ic-flag.png" alt="Flag"> USA</a>
-                                        <a class="dropdown-item" href="#"><img src="../images/ic-flag.png" alt="Flag"> CANADA</a>
-                                        <a class="dropdown-item" href="#"><img src="../images/ic-flag.png" alt="Flag"> INDIA</a>
-                                    </div>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <div class="dropdown-service-history-header">
+                                            Welcome,<br><strong>
+                                                First
+                                                customer
+                                            </strong>
+                                        </div>
+                                        <hr>
+                                        <a href="customer_service_history.html">My Dashboard</a>
+                                        <br>
+                                        <a href="mysetting.html"> My settings</a>
+                                        <br>
+                                        <a href="#">Logout</a>
+                                    </ul>
                                 </li>
 
                             </ul>
                         </div>
                     </nav>
-
-
                 </section>
             </div>
 
@@ -201,6 +178,7 @@
                     <span>secure online payment method</span>
                 </div>
             </div>
+        </div>
         </div>
         <div id="main-btn-center">
             <div class="main-btn-center ">
@@ -266,7 +244,7 @@
                 <div class="container-fluid px-0 mx-0">
                     <div class="row ">
                         <div class="col-lg-4 col-md-6 mb-lg-0 card text-center middle-section-card  ">
-                            <img class="img-fluid card-img-top" src="../images/group-21.png" width="320" height="320"
+                            <img class="img-fluid card-img-top" src="../../images/group-21.png" width="320" height="320"
                                  alt="image group 23">
                             <div class="card-body">
                                 <p class="card-title">Friendly & Certified Helpers</p>
@@ -280,7 +258,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-6 card text-center  mb-lg-0 middle-section-card ">
-                            <img class="img-fluid card-img-top" src="../images/group-23.png" width="320" height="320"
+                            <img class="img-fluid card-img-top" src="../../images/group-23.png" width="320" height="320"
                                  alt="image group 23">
                             <div class="card-body">
                                 <p class="card-title">Transparent and secure payment</p>
@@ -294,7 +272,7 @@
                         </div>
 
                         <div class="col-lg-4 col-md-6  card text-center middle-section-card  mb-lg-0">
-                            <img class="img-fluid card-img-top" src="../images/group-24.png" width="320" height="320"
+                            <img class="img-fluid card-img-top" src="../../images/group-24.png" width="320" height="320"
                                  alt="image group 23">
                             <div class="card-body">
                                 <p class="card-title">We're here for you</p>
@@ -316,8 +294,8 @@
     <!-- <our blog> -->
     <section class="container-fluid" id="our-blog">
 
-        <img id="blog-left" src="../images/blog-left-bg.png" alt="" srcset="">
-        <img id="blog-right" src="../images/blog-right-bg.png" alt="" srcset="">
+        <img id="blog-left" src="../../images/blog-left-bg.png" alt="" srcset="">
+        <img id="blog-right" src="../../images/blog-right-bg.png" alt="" srcset="">
 
         <div class="row sub-row1 justify-content-center">
             <div class="col-md-6 order-2 order-md-1">
@@ -338,7 +316,7 @@
                 </p>
             </div>
             <div class="col-md-3 text-center order-1 order-lg-2">
-                <img class="img-fluid" src="../images/group-36.png" alt="">
+                <img class="img-fluid" src="../../images/group-36.png" alt="">
             </div>
         </div>
 
@@ -354,7 +332,7 @@
 
                     <div class="col-lg-3 col-sm-6 mb-sm-2 mb-lg-0 ">
                         <div class="card shadow">
-                            <img class="img-fluid card-img-top" src="../images/group-28.png" alt="" width="357px" height="164px">
+                            <img class="img-fluid card-img-top" src="../../images/group-28.png" alt="" width="357px" height="164px">
                             <div class="card-body">
                                 <p class="card-title">Lorem ipsum dolor sit amet</p>
                                 <p class="card-subtitle">January 28, 2019</p>
@@ -363,7 +341,7 @@
                                     pulvinar aliquet.
                                 </p>
                                 <a class="card-link" href="">
-                                    Read the post <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read the post <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                        srcset="">
                                 </a>
                             </div>
@@ -374,7 +352,7 @@
                     <div class="col-lg-3 col-sm-6 mb-sm-2 mb-md-0 ">
 
                         <div class="card shadow">
-                            <img class="img-fluid card-img-top" src="../images/group-29.png" alt="" width="357px" height="164px">
+                            <img class="img-fluid card-img-top" src="../../images/group-29.png" alt="" width="357px" height="164px">
                             <div class="card-body">
                                 <p class="card-title">Lorem ipsum dolor sit amet</p>
                                 <p class="card-subtitle">January 28, 2019</p>
@@ -383,7 +361,7 @@
                                     pulvinar aliquet.
                                 </p>
                                 <a class="card-link" href="">
-                                    Read the post <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read the post <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                        srcset="">
                                 </a>
                             </div>
@@ -394,7 +372,7 @@
                     <div class="col-lg-3 col-sm-6 mb-sm-2 mb-md-0 ">
 
                         <div class="card shadow">
-                            <img class="img-fluid card-img-top" src="../images/group-30.png" alt="" width="357px" height="164px">
+                            <img class="img-fluid card-img-top" src="../../images/group-30.png" alt="" width="357px" height="164px">
                             <div class="card-body">
                                 <p class="card-title">Lorem ipsum dolor sit amet</p>
                                 <p class="card-subtitle">January 28, 2019</p>
@@ -403,7 +381,7 @@
                                     pulvinar aliquet.
                                 </p>
                                 <a class="card-link" href="">
-                                    Read the post <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read the post <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                        srcset="">
                                 </a>
                             </div>
@@ -431,10 +409,10 @@
 
                     <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0">
                         <div class="card row2-card">
-                            <img class="img-fluid customer-card-img" src="../images/message.png" height="35px" width="33px" alt="">
+                            <img class="img-fluid customer-card-img" src="../../images/message.png" height="35px" width="33px" alt="">
                             <div class="row px-0 mx-2 ">
                                 <div class="col-3 mts-43 text-align-right">
-                                    <img src="../images/group-31.png" class="img-fluid" width="70" height="70" alt="">
+                                    <img src="../../images/group-31.png" class="img-fluid" width="70" height="70" alt="">
                                 </div>
                                 <div class="col mts-43">
                                     <p class="card-title pt-2">Lary Watson</p>
@@ -449,7 +427,7 @@
                                     sit amet, consectetur tortor.
                                 </p>
                                 <a class="card-link px-0 mx-3" href="">
-                                    Read More <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read More <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                    srcset="">
                                 </a>
                             </div>
@@ -458,10 +436,10 @@
 
                     <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0">
                         <div class="card row2-card">
-                            <img class="img-fluid customer-card-img" src="../images/message.png" height="35px" width="33px" alt="">
+                            <img class="img-fluid customer-card-img" src="../../images/message.png" height="35px" width="33px" alt="">
                             <div class="row px-0 mx-2 ">
                                 <div class="col-3 mts-43 text-align-right">
-                                    <img src="../images/group-32.png" class="img-fluid" width="70" height="70" alt="">
+                                    <img src="../../images/group-32.png" class="img-fluid" width="70" height="70" alt="">
                                 </div>
                                 <div class="col mts-43">
                                     <p class="card-title pt-2">John Smith</p>
@@ -476,7 +454,7 @@
                                     sit amet, consectetur tortor.
                                 </p>
                                 <a class="card-link px-0 mx-3" href="">
-                                    Read More <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read More <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                    srcset="">
                                 </a>
                             </div>
@@ -485,10 +463,10 @@
 
                     <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0">
                         <div class="card row2-card">
-                            <img class="img-fluid customer-card-img" src="../images/message.png" height="35px" width="33px" alt="">
+                            <img class="img-fluid customer-card-img" src="../../images/message.png" height="35px" width="33px" alt="">
                             <div class="row px-0 mx-2 ">
                                 <div class="col-3 mts-43 text-align-right">
-                                    <img src="../images/group-33.png" class="img-fluid" width="70" height="70" alt="">
+                                    <img src="../../images/group-33.png" class="img-fluid" width="70" height="70" alt="">
                                 </div>
                                 <div class="col mts-43">
                                     <p class="card-title pt-2">Lars Johnson</p>
@@ -503,7 +481,7 @@
                                     sit amet, consectetur tortor.
                                 </p>
                                 <a class="card-link px-0 mx-3" href="">
-                                    Read More <img class="img-fluid" src="../images/shape-2.png" alt=""
+                                    Read More <img class="img-fluid" src="../../images/shape-2.png" alt=""
                                                    srcset="">
                                 </a>
                             </div>
@@ -517,7 +495,7 @@
             <div class=" col-6 col-sm-2 col-md-1 order-2 order-sm-1">
                 <div id="foma-container">
                     <a asp-area="" asp-controller="Home" asp-action="Index">
-                        <img class="img-fluid" src="../images/forma-1.png" alt="" id="foma-5">
+                        <img class="img-fluid" src="../../images/forma-1.png" alt="" id="foma-5">
                     </a>
                 </div>
             </div>
@@ -537,7 +515,7 @@
                 </div>
             </div>
             <div class="col-6 col-sm-2 col-md-1 order-2 order-sm-3 text-center mb-2 mb-sm-0">
-                <img class="img-fluid" src="../images/layer-598.png" height="63px" width="63px" alt="">
+                <img class="img-fluid" src="../../images/layer-598.png" height="63px" width="63px" alt="">
             </div>
         </div>
     </section>
@@ -547,7 +525,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 footer-widget">
                         <a asp-area="" asp-controller="Home" asp-action="Index" title="Helper Hand">
-                            <img src="../images/footer-logo.png" alt="Helper Hand">
+                            <img src="../../images/footer-logo.png" alt="Helper Hand">
                         </a>
                     </div>
                     <div class="col-lg-8 footer-widget">
@@ -576,12 +554,12 @@
                         <ul class="social-media-list d-flex justify-content-end">
                             <li>
                                 <a href="#" target="_blank" title="Facebook">
-                                    <img src="../images/ic-facebook.png" alt="Facebook">
+                                    <img src="../../images/ic-facebook.png" alt="Facebook">
                                 </a>
                             </li>
                             <li>
                                 <a href="#" target="_blank" title="Instagram">
-                                    <img src="../images/ic-instagram.png" alt="Instagram">
+                                    <img src="../../images/ic-instagram.png" alt="Instagram">
                                 </a>
                             </li>
                         </ul>
@@ -626,12 +604,9 @@
         }
     </script>
 
-    <script type="text/javascript">
-        function OnComplete() {
-            $("#login").modal("hide");
-        }
-    </script>
+
 
 </body>
 
 </html>
+

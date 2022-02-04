@@ -623,7 +623,7 @@ a {
 
 #login .login-button {
     width: 300px;
-    height: 60px;
+    height: 50px;
     border-radius: 30px;
     background-color: #2d7e8f;
     font-weight: 400;
@@ -697,7 +697,7 @@ a {
 
 #create_account_user .form-control, .form-select {
     font-size: 14px;
-    margin-bottom: 15px !important;
+    margin-bottom : 15px !important;
     color: #646464;
 }
 
@@ -745,7 +745,7 @@ a {
 }
 
 #create_account_user .bottom-text {
-    text-align: center;
+    float:right;
     font-size: 16px;
     margin-bottom: 300px;
 }
@@ -1512,7 +1512,7 @@ a {
 
 #get-in-touch .form-control, .form-select {
     font-size: 16px;
-    margin-bottom: 15px !important;
+    margin-top:15px !important;
     color: #a0a0a0;
 }
 
@@ -2672,6 +2672,5 @@ a {
         border-bottom: 3px solid #1d7a8c !important;
         border-bottom-color: transparent;
     }
-
 
 

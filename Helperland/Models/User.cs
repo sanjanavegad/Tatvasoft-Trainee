@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -19,16 +20,35 @@ namespace Helperland.Models
         }
 
         public int UserId { get; set; }
+
+        [Required(ErrorMessage = "Please enter your first name")]
+        [MaxLength(100)]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name")]
+        [MaxLength(100)]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your email")]
+        [MaxLength(100)]
+        [EmailAddress(ErrorMessage ="Please Enter valid email address")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Please enter a strong password")]
+        //[Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
+        [MaxLength(100)]
         public string Password { get; set; }
+
+        
+
+        [Required(ErrorMessage = "Please enter your mobile number")]
+        [MaxLength(20)]
         public string Mobile { get; set; }
+
         public int UserTypeId { get; set; }
-        public int? RoleId { get; set; }
+
         public int? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string WebSite { get; set; }
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
         public string PaymentGatewayUserRef { get; set; }
@@ -36,7 +56,6 @@ namespace Helperland.Models
         public bool WorksWithPets { get; set; }
         public int? LanguageId { get; set; }
         public int? NationalityId { get; set; }
-        public string ResetKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public int ModifiedBy { get; set; }
@@ -44,7 +63,6 @@ namespace Helperland.Models
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public int? Status { get; set; }
-        public bool IsOnline { get; set; }
         public string BankTokenId { get; set; }
         public string TaxNo { get; set; }
 

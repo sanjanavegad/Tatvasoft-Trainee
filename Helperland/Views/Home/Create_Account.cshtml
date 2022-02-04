@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Helperland.Models
+@model User
 @{
     Layout = "_Layout";
 }
@@ -12,38 +11,50 @@
             <h5 class="main-heading"> Create An Account</h5>
             <div class="row row2 justify-content-center">
                 <div class="line"></div>
-                <img class="px-0" id="seprator" src="images/separator.png" alt="">
+                <img class="px-0" id="seprator" src="../images/separator.png" alt="">
                 <div class="line"></div>
             </div>
         </section>
     </section>
     <!--line-star-->
     <section id="create_account_user" class="create_account_user justify-content-center mt-4">
-        <form class="row class1">
+        <div class="text-danger mb-3 text-center">
+            @ViewBag.Message
+        </div>
+        <form asp-controller="Home" asp-action="Create_Account" method="post" class="row class1">
+
             <div class="col-md-6">
-                <input type="text" class="form-control" id="inputfirstname" placeholder="First Name">
+                <span asp-validation-for="FirstName" class="text-danger small"></span>
+                <input asp-for="FirstName" class="form-control" id="inputfirstname" placeholder="First Name">
+
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" id="inputlastname" placeholder="Last Name">
+                <span asp-validation-for="LastName" class="text-danger small"></span>
+                <input asp-for="LastName" class="form-control" id="inputlastname" placeholder="Last Name">
             </div>
             <div class="col-md-6">
-                <input type="tel" class="form-control" id="inputnumber" placeholder="Phone number">
+                <span asp-validation-for="Mobile" class="text-danger small"></span>
+                <input asp-for="Mobile" class="form-control" id="inputnumber" placeholder="Phone number">
             </div>
             <div class="col-md-6">
-                <input type="email" class="form-control" id="inputemail" placeholder="Email">
+                <span asp-validation-for="Email" class="text-danger small"></span>
+                <input asp-for="Email" class="form-control" id="inputemail" placeholder="Email">
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" id="inputpassword" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger small"></span>
+                <input asp-for="Password" type="Password" class="form-control" id="inputpassword" placeholder="Password">
+
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" id="inputconfirmpassword" placeholder="Conform Password">
+
+                <input type="password" class="form-control" placeholder="Confirm Password">
             </div>
-            <div class="row">
+            <div class="row px-3">
                 <div class="col-sm-12">
                     <div class="checkbox">
                         <label>
-                            <input formcontrolname="NewsletterSubscription" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
-                            <span class="checkbox-text">
+                            <input class=" mr-3 checkbox1" type="checkbox" required>
+                            <span class="ml-3 checkbox-text">
                                 Yes, I would like to subscribe to the
                                 newsletter of Helperland GmbH with vouchers, trends, promotions and individualized offers. I can
                                 unsubscribe from the newsletter at any time in the newsletter and in the customer account itself.
@@ -52,12 +63,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row px-3">
                 <div class="col-sm-12">
                     <div class="checkbox">
                         <label>
-                            <input formcontrolname="IAgreeTermsCondition" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
-                            <span class="checkbox-text">
+                            <input type="checkbox" class="checkbox1" required>
+                            <span class="ml-3 checkbox-text">
                                 I agree with the
                                 <a class="terms-text" data-toggle="modal" href="#termsAndConditions" title="Terms and Conditions">
                                     terms and conditions
@@ -68,21 +79,20 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row px-3">
                 <div class="col-sm-12 mb-2">
                     <div class="checkbox">
                         <label>
-                            <input formcontrolname="IAgreePrivacyPolicy" type="checkbox" class="checkbox1 ng-untouched ng-pristine ng-valid">
-                            <span class="checkbox-text">
+                            <input type="checkbox" class="checkbox1" required>
+                            <span class="ml-3 checkbox-text">
                                 I have read the
                                 <a class="terms-text" data-toggle="modal" href="#privacy-policy-modal" title="privacy policy">privacy policy</a> .
                             </span>
                         </label>
-
                     </div>
                 </div>
             </div>
-            <div class="text-center g-recaptcha-wrapper">
+            @*<div class="text-center g-recaptcha-wrapper">
                 <re-captcha id="registerRecaptcha">
                     <div class="Robot-card">
                         <div>
@@ -95,14 +105,15 @@
                     </div><iframe style="display: none;"></iframe>
                 </re-captcha>
                 <input formcontrolname="recaptchaReactive" type="hidden" value="" class="ng-untouched ng-pristine ng-invalid">
-            </div>
+            </div>*@
             <div class="col-12 mt-4 mb-2">
                 <button type="submit" class="btn submit-button">Register</button>
             </div>
-            <div class="bottom-text">
+            <div class="col-12 bottom-text">
                 Already registered?
-                <a class="login-now" data-dismiss="modal" data-toggle="modal" asp-area="" asp-controller="Home" asp-action="Index">Login now</a>
+                <a class="login-now" asp-area="" asp-controller="Home" asp-action="Index">Login now</a>
             </div>
         </form>
     </section>
-</div>   
+</div>
+
