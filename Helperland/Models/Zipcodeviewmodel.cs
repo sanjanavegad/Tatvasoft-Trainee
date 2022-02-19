@@ -5,12 +5,8 @@ using System.Threading.Tasks;
 
 namespace Helperland.Models
 {
-    public class EmailModel
+    public class Zipcodeviewmodel
     {
-        public string To { get; set; }
-        public string Subject { get; set; }
-
+        public string ZipcodeValue { get; set; }
     }
 }
-
-

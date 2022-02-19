@@ -43,3 +43,92 @@ function scrollFunction() {
     }
 }
 // Write your JavaScript code.
+
+
+/*currunt Date and time*/
+   
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        var currentTime = date.getHours() + ':' + date.getMinutes();
+        document.getElementById('currentDate').value = currentDate;
+        document.getElementById('currentTime').value = currentTime;
+ 
+
+   
+ ///* <!--move to next button-- >*/
+ //       form = document.getElementById('Form');
+ //       fieldsets = document.querySelectorAll('fieldset');
+ //       back = document.getElementById('back');
+ //       back1 = document.getElementById('back1');
+ //       nextORsubmit = document.getElementById('nextORsubmit');
+
+
+
+ //       let i = 0;
+
+ //       form.addEventListener('submit', (e) => {
+
+ //           if (i < fieldsets.length - 1) {
+ //               e.preventDefault();
+
+ //               console.log('Validate, but don\'t send form');
+ //               fieldsets[i].style.display = 'none';
+ //               fieldsets[i + 1].style.display = 'block';
+ //               back.style.display = 'inline';
+ //               $("#progressbar li").eq($("fieldset").index(fieldsets[i + 1])).addClass("active");
+ //               i++;
+
+
+
+ //               // set required on current fieldset inputs, except if they're checkboxes
+ //               fieldsets[i].querySelectorAll('input:not([type="checkbox"])').forEach(el => {
+ //                   el.required = true;
+ //               })
+ //           }
+ //       });
+
+ //       back.addEventListener('click', () => {
+ //           console.log('going back a step');
+ //           fieldsets[i].style.display = 'none';
+ //           fieldsets[i - 1].style.display = 'block';
+ //           $("#progressbar li").eq($("fieldset").index(fieldsets[i])).removeClass("active");
+ //           i--;
+
+ //           // remove required on inputs from the next fieldset that we've just hid
+ //           fieldsets[i + 1].querySelectorAll('input:not([type="checkbox"])').forEach(el => {
+ //               el.required = false;
+ //           })
+
+ //           // remove back button when you go back to the first step
+ //           if (i == 0) {
+ //               back.style.display = 'none';
+ //           }
+ //       })
+ //       back1.addEventListener('click', () => {
+ //           console.log('going back a step');
+ //           fieldsets[i].style.display = 'none';
+ //           fieldsets[i - 1].style.display = 'block';
+ //           $("#progressbar li").eq($("fieldset").index(fieldsets[i])).removeClass("active");
+ //           i--;
+
+ //           // remove required on inputs from the next fieldset that we've just hid
+ //           fieldsets[i + 1].querySelectorAll('input:not([type="checkbox"])').forEach(el => {
+ //               el.required = false;
+ //           })
+
+ //           // remove back button when you go back to the first step
+ //           if (i == 0) {
+ //               back1.style.display = 'none';
+ //           }
+ //       })
+
+  
+ //   /*<!--move to next button-- >*/
+
+
+ //       $(document).ready(function () {
+ //           $('.btn1').click(function () {
+ //               $(this).addClass('active');
+ //           });
+ //       });
+ 

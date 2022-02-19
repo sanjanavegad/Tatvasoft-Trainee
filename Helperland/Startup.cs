@@ -1,6 +1,7 @@
 using Helperland.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,8 +25,13 @@ namespace Helperland
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
- 
-            services.AddDbContext<HelperlandContext>();
+#if DEBUG
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+#endif
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            services.AddDbContext<HelperlandContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HelperlandContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +46,8 @@ namespace Helperland
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

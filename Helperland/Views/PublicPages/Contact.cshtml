@@ -63,6 +63,7 @@
 </section>
 <!--line-star-->
 <section id="get-in-touch" class="get-in-touch justify-content-center">
+    <span class="text-danger text-center mb-3">@ViewBag.message</span>
     <form asp-controller="PublicPages" asp-action="Contact"  method="post" class="row class1">
 
         <div class="col-md-6">
@@ -70,7 +71,7 @@
             <span asp-validation-for="Name" class="text-danger small"></span>
         </div>
         <div class="col-md-6">
-            <input asp-for="Name" class="form-control" placeholder="Last Name">
+            <input asp-for="Name" name="Lastname" class="form-control" placeholder="Last Name">
             <span asp-validation-for="Name" class="text-danger small"></span>
         </div>
         <div class="col-md-6">

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Helperland.Controllers
@@ -13,46 +15,63 @@ namespace Helperland.Controllers
     public class PublicPagesController : Controller
     {
         private readonly HelperlandContext _helperlandContext;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        
-
-        public PublicPagesController(HelperlandContext helperlandContext, IWebHostEnvironment webHostEnvironment)
+        public PublicPagesController(HelperlandContext helperlandContext)
         {
            _helperlandContext = helperlandContext;
-            _webHostEnvironment = webHostEnvironment;
         }
-
 
         public IActionResult FAQ()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Contact()
         {
-            ContactU c = new ContactU();
             return View();
         }
         [HttpPost]
-        public IActionResult Contact(ContactU contactU)
+        public IActionResult Contact(ContactU c, String Lastname)
         {
             if (ModelState.IsValid)
             {
-                if (contactU.AttechmentFile != null) 
+                using (HelperlandContext objHelperlandContext = new HelperlandContext())
                 {
-                    String folder = "AttechmentFiles/";
-                    folder += Guid.NewGuid().ToString() + "_" + contactU.AttechmentFile.FileName;
-                    String serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                    _ = contactU.AttechmentFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                    contactU.FileName = folder;
+                    string lastname = Convert.ToString(Lastname);
+                    c.Name = (c.Name + " " + lastname);
+                    c.Message = ("This mail is sent by " + c.Name + " . <br/> Email:  " + c.Email + "<br/> Phone number:  " + c.PhoneNumber + "<br/> The main message of the mail is : " + c.Message);
+                    c.CreatedOn = DateTime.Now;
+                    objHelperlandContext.ContactUs.Add(c);
+                    objHelperlandContext.SaveChanges();
+                    SendEmail(c.Message, c.Subject);
+                    // Int64 id = objEmployee.EmployeeID;
+                    ModelState.Clear();
                 }
-                contactU.CreatedOn = DateTime.Now;
-                _helperlandContext.ContactUs.Add(contactU);
-                _ = _helperlandContext.SaveChangesAsync();
-                return RedirectToAction("Contact");
+                // return View(objEmployee);
             }
             return View();
+        }
+
+        private void SendEmail(string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("sanjanavegad123@gmail.com", "sanjanabavegad.4464@gmail.com"))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true
+                };
+                NetworkCredential NetworkCred = new NetworkCredential("sanjanavegad123@gmail.com", "s@sanju123");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+                ViewBag.message = "Email send to admin successfully";
+            }
         }
 
         public IActionResult About()

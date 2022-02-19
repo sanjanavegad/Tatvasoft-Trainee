@@ -34,10 +34,14 @@ namespace Helperland.Models
         [EmailAddress(ErrorMessage ="Please Enter valid email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter a strong password")]
-        //[Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
-        [MaxLength(100)]
+        [Required(ErrorMessage = "Please enter your password password")]
+        [DataType(DataType.Password)]
+        [RegularExpression("([a-z]|[A-Z]|[0-9]|[\\W]){4}[a-zA-Z0-9\\W]{4,16}", ErrorMessage = "Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character")]
+        [Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
         public string Password { get; set; }
+
+        [Required]
+        public string ConfirmPassword { get; set; }
 
         
 
@@ -52,6 +56,9 @@ namespace Helperland.Models
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
         public string PaymentGatewayUserRef { get; set; }
+
+        [Required(ErrorMessage = "Please enter ZipCode")]
+        [MaxLength(10)]
         public string ZipCode { get; set; }
         public bool WorksWithPets { get; set; }
         public int? LanguageId { get; set; }
@@ -65,6 +72,8 @@ namespace Helperland.Models
         public int? Status { get; set; }
         public string BankTokenId { get; set; }
         public string TaxNo { get; set; }
+
+        public string ResetPasswordCode { get; set; }
 
         public virtual ICollection<FavoriteAndBlocked> FavoriteAndBlockedTargetUsers { get; set; }
         public virtual ICollection<FavoriteAndBlocked> FavoriteAndBlockedUsers { get; set; }
