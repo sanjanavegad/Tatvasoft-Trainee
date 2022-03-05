@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Helperland.Models
+@model Helperland.Models.ServiceRequest
+
+<div class="modal fade" id="ServiceDetailes" tabindex="-1" role="dialog" aria-labelledby="ServiceDetailes" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Detailes</h5>
+                <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="font-size: 15px;">
+                <div class="row">
+                    <div class="col-12">
+                        <h6>@Model.ServiceStartDate.ToString("dd/MM/yyyy")  &nbsp; @Model.ServiceStartDate.ToString("HH:mm")</h6>
+                        <div><strong>Duration : </strong>@Model.SubTotal</div>
+                        <hr class="hr-line">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div><strong>Service Id : </strong>@Model.ServiceRequestId</div>
+                        <div><strong>Extras : </strong>Cleaning the fridge, cleaning the oven, washing and drying </div>
+                        <div><strong>Net Amount : </strong><p class="text-center payment-service-history">@Model.TotalCost</p></div>
+                    </div>
+                </div>
+                <hr class="hr-line">
+                    <div class="row">
+                        <div class="col-12">
+                            <div><strong>Service Address : </strong>@Model.AddressLine2 , @Model.AddressLine1</div>
+                            <div><strong>Billing Address : </strong>Same as address</div>
+                            <div><strong>Phone : </strong>@Model.Mobile</div>
+                            <div><strong>Email : </strong>@Model.Email</div>
+                        </div>
+                    </div>
+
+                <hr class="hr-line">
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Do you want to tell your helper somthing?</strong><br>
+                        I have no pets at home
+                    </div>
+                </div>
+                <hr class="hr-line">
+                <button type="button" class="btn btn-reschedule" data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#Reschedule">Reschedule</button>
+                <button type="button" class="btn btn-reschedule-cancel" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cancel-request">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

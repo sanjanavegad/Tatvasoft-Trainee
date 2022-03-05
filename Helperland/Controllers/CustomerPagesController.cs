@@ -2,6 +2,7 @@
 using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,21 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Book_Now()
         {
-            return View();
+            string loggedin = HttpContext.Session.GetString("isLoggedIn");
+
+            if (loggedin == "true")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
+
         [HttpPost]
         public ActionResult ValidZip(Zipcodeviewmodel ForZip)
         {
-
             HttpContext.Session.SetString("ZipcodeValue", ForZip.ZipcodeValue);
             var Zipcode = _helperlandContext.Zipcodes.Where(z => z.ZipcodeValue == ForZip.ZipcodeValue);
             if (Zipcode.Count() > 0)
@@ -34,8 +44,9 @@ namespace Helperland.Controllers
             }
             return Ok(Json("false"));
         }
+
         [HttpPost]
-        public ActionResult Scheduledetails(Scheduledetails scheduledetails)
+        public ActionResult Scheduledetails()
         {
             if (ModelState.IsValid)
             {
@@ -46,11 +57,50 @@ namespace Helperland.Controllers
                 return Ok(Json("false"));
             }
         }
+        [HttpGet]
+        public JsonResult Loadaddress()
+        {
+
+            List<UserAddress> Address = new List<UserAddress>();
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            var result = _helperlandContext.UserAddresses.Where(x => x.UserId == Id).ToList();
+            foreach (var add in result)
+            {
+                UserAddress useraddress = new UserAddress();
+                useraddress.AddressId = add.AddressId;
+                useraddress.AddressLine1 = add.AddressLine1;
+                useraddress.AddressLine2 = add.AddressLine2;
+                useraddress.City = add.City;
+                useraddress.PostalCode = add.PostalCode;
+                useraddress.IsDefault = add.IsDefault;
+                useraddress.Mobile = add.Mobile;
+                Address.Add(useraddress);
+            }
+            return new JsonResult(Address);
+        }
+        [HttpPost]
+        public ActionResult NewAddress(UserAddress newuseradd)
+        {
+
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            newuseradd.UserId = (int)Id;
+            newuseradd.IsDefault = true;
+            newuseradd.IsDeleted = false;
+            User user = _helperlandContext.Users.Where(x => x.UserId == Id).FirstOrDefault();
+            newuseradd.Email = user.Email;
+            var result = _helperlandContext.UserAddresses.Add(newuseradd);
+            _helperlandContext.SaveChanges();
+            if (result != null)
+            {
+                return Ok(Json("true"));
+            }
+            return Ok(Json("False"));
+        }
 
         [HttpPost]
         public ActionResult Completebooking(Completebooking Finalbooking)
         {
-            int Id = (int)HttpContext.Session.GetInt32("userID");
+            int Id = (int)HttpContext.Session.GetInt32("UserId");
             ServiceRequest add = new ServiceRequest();
             add.UserId = Id;
             add.ServiceId = Id;
@@ -125,5 +175,281 @@ namespace Helperland.Controllers
             }
             return Ok(Json("False"));
         }
+
+
+        [HttpGet]
+        public IActionResult Customer_Dashboard()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult CustomerDashboard(ServiceRequest data)
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                //ServiceRequest serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == dashboard.UserId).FirstOrDefault();
+                int id = (int)HttpContext.Session.GetInt32("UserId");
+                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == id && x.Status == 3).ToList();
+                //status=> 1=Complete, 2=Cancel, 3=Pending
+
+                List<User> user = new List<User>();
+                foreach (ServiceRequest users in serviceRequest)
+                {
+                    //User temp = new User();
+                    if (users.ServiceProviderId != null)
+                    {
+                        User sp = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == users.UserId);
+                        user.Add(sp);
+                        //var temp = ObjHelperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
+
+                    }
+                    else
+                    {
+                        user.Add(null);
+                    }
+                }
+
+                ViewBag.users = user;
+                ViewBag.services = serviceRequest;
+                return PartialView("CustomerDashboardPartial");
+            }
+        }
+
+        public IActionResult ServiceDetailes(int id)
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                var servicerequest = ObjHelperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+                var address = ObjHelperlandContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+                servicerequest.AddressLine1 = address.AddressLine1;
+                servicerequest.AddressLine2 = address.AddressLine2;
+                servicerequest.Email = address.Email;
+                servicerequest.Mobile = address.Mobile;
+
+                return PartialView("_CustomerModelPartial", servicerequest);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ServiceSchedule(int id)
+        {
+                var schedulerequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+                return PartialView("_CustomerSchedulePartial", schedulerequest);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateScheduleRequest(ServiceRequest schedule)
+        {
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            if (Id != null)
+            {
+                ServiceRequest updated = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == schedule.ServiceRequestId);
+                string date = schedule.ServiceDate.ToString("yyyy-MM-dd");
+                string time = schedule.ServiceTime.ToString("HH:mm:ss");
+                DateTime startDateTime = Convert.ToDateTime(date).Add(TimeSpan.Parse(time));
+                updated.ServiceStartDate = startDateTime;
+                updated.ModifiedDate = DateTime.Now;
+                var result = _helperlandContext.ServiceRequests.Update(updated);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+            return PartialView("CustomerDashboardPartial");
+        }
+
+        [HttpGet]
+        public IActionResult CancelServiceModel(int id)
+        {
+             var schedulerequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+             return PartialView("_CustomerServiceCancelPartial", schedulerequest);
+        }
+
+        [HttpPost]
+        public IActionResult CancelServiceRequest(ServiceRequest cancel)
+        {
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            if (Id != null)
+            {
+                ServiceRequest cancelrequest = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
+                cancelrequest.Status = 2;
+                var result = _helperlandContext.ServiceRequests.Update(cancelrequest);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+            return PartialView("CustomerDashboardPartial");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult CustomerSettings()
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                int id = (int)HttpContext.Session.GetInt32("UserId");
+                User user = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == id);
+
+                List<UserAddress> addsressrequest = ObjHelperlandContext.UserAddresses.Where(x => x.UserId == id && x.IsDeleted == false).ToList();
+
+                ViewBag.users = user;
+                ViewBag.addresses = addsressrequest;
+                return PartialView("CustomerSettingPartial");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUserDetailes(User user)
+        {
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            if (Id != null)
+            {
+                User updated = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id);
+                updated.FirstName = user.FirstName;
+                updated.LastName = user.LastName;
+                updated.Mobile = user.Mobile;
+                updated.Email = user.Email;
+                updated.DateOfBirth = user.DateOfBirth;
+                updated.ModifiedDate = DateTime.Now;
+                var result = _helperlandContext.Users.Update(updated);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+            return PartialView("CustomerSettingPartial");
+        }
+
+        [HttpGet]
+        public IActionResult AddressModel(int id)
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                var user = ObjHelperlandContext.UserAddresses.Where(x => x.AddressId == id).FirstOrDefault();
+
+                return PartialView("_CustomerAddressPartial", user);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUserAddress(UserAddress data)
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                UserAddress updated = ObjHelperlandContext.UserAddresses.FirstOrDefault(x => x.AddressId == data.AddressId);
+                updated.AddressLine1 = data.AddressLine1;
+                updated.AddressLine2 = data.AddressLine2;
+                updated.PostalCode = data.PostalCode;
+                updated.State = data.State;
+                updated.Mobile = data.Mobile;
+                var result = _helperlandContext.UserAddresses.Update(updated);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult DeleteAddressModel(int id)
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                var user = ObjHelperlandContext.UserAddresses.Where(x => x.AddressId == id).FirstOrDefault();
+
+                return PartialView("_CustomerAddressDeletePartial", user);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUserAddress(UserAddress add)
+        {
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            if (Id != null)
+            {
+                UserAddress delete = _helperlandContext.UserAddresses.FirstOrDefault(x => x.AddressId == add.AddressId);
+                delete.IsDeleted = true;
+                var result = _helperlandContext.UserAddresses.Update(delete);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+            return PartialView("_CustomerAddressPartial");
+        }
+
+        [HttpPost]
+        public IActionResult CustomerChangePassword(User u)
+        {
+            int? Id = HttpContext.Session.GetInt32("UserId");
+            if (Id != null)
+            {
+                User updated = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id );
+                updated.Password = u.Password;
+                var result = _helperlandContext.Users.Update(updated);
+                _helperlandContext.SaveChanges();
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+                return Ok(Json("False"));
+            }
+            return PartialView("_CustomerAddressPartial");
+        }
+
+        
+        public IActionResult CustomerHistory()
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
+                int id = (int)HttpContext.Session.GetInt32("UserId");
+                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == id && (x.Status == 2 || x.Status == 1)).ToList();
+
+                List<User> user = new List<User>();
+                foreach (ServiceRequest users in serviceRequest)
+                {
+                    //User temp = new User();
+                    if (users.ServiceProviderId != null)
+                    {
+                        User sp = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == users.UserId);
+                        user.Add(sp);
+                        //var temp = ObjHelperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
+
+                    }
+                    else
+                    {
+                        user.Add(null);
+                    }
+                }
+
+                ViewBag.users = user;
+                ViewBag.services = serviceRequest;
+                return PartialView("CustomerHistoryPartial");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult RateSPModal(int id)
+        {
+            var raterequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+            return PartialView("_CustomerRateingPartial", raterequest);
+        }
+
     }
 }
+
+
+ 

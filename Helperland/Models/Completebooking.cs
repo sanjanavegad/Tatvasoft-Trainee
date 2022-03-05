@@ -49,5 +49,7 @@ namespace Helperland.Models
         public bool Laundry { get; set; }
 
         public bool Terms { get; set; }
+
+
     }
 }

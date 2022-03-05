@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -35,15 +36,14 @@ namespace Helperland.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your password password")]
-        [DataType(DataType.Password)]
-        [RegularExpression("([a-z]|[A-Z]|[0-9]|[\\W]){4}[a-zA-Z0-9\\W]{4,16}", ErrorMessage = "Password must contain at least 1 capital letter, 1 small letter, 1 number and one special character")]
         [Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [NotMapped]
         [Required]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
-
-        
 
         [Required(ErrorMessage = "Please enter your mobile number")]
         [MaxLength(20)]
@@ -53,6 +53,15 @@ namespace Helperland.Models
 
         public int? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+
+        [NotMapped]
+        public DateTime? Date { get; set; }
+        [NotMapped]
+        public DateTime? Month { get; set; }
+        [NotMapped]
+        public DateTime? Year { get; set; }
+
+
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
         public string PaymentGatewayUserRef { get; set; }

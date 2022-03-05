@@ -137,8 +137,8 @@
                                                 Welcome,<br><strong>@Context.Session.GetString("Name")</strong>
                                             </li>
                                             <hr>
-                                            <li><a href="customer_service_history.html">My Dashboard</a></li>
-                                            <li><a href="mysetting.html"> My settings</a></li>
+                                            <li><a asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard">My Dashboard</a></li>
+                                            <li><a class="dropdown-link" data-bs-toggle="tab" asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard#settings"> My settings</a></li>
                                             <li>
                                                 <a asp-controller="Home" asp-action="Logout">Logout</a>
                                             </li>
@@ -167,6 +167,7 @@
                                                                     <span class="input-group-text "><i class="fas fa-user"></i></span>
                                                                 </div>
                                                             </div>
+
                                                             <div class="input-group">
                                                                 <input asp-for="Password" type="Password" class="form-control" placeholder="password" />
                                                                 <div class="input-group-prepend">
@@ -175,7 +176,7 @@
                                                             </div>
                                                             <div>
                                                                 <input class="checkbox1" type="checkbox" value="" />
-                                                                <label style="margin-left: 25px;"> Remember me</label>
+                                                                <label style="margin:8px 25px "> Remember me</label>
                                                             </div><br />
                                                             <button type="submit" class="btn login-button">Login</button>
                                                             <br><br>
@@ -277,7 +278,7 @@
         </div>
         <div id="main-btn-center">
             <div class="main-btn-center ">
-                <a class="btn btn-center" href="Book_Now.html">Let's Book a Cleaner</a>
+                <a class="btn btn-center" asp-area="" asp-controller="Home">Let's Book a Cleaner</a>
 
             </div>
         </div>

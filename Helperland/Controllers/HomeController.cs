@@ -37,14 +37,18 @@ namespace Helperland.Controllers
                 ModelState.Clear();
                 if (p.Count == 1)
                 {
-                    var Name = user.FirstName + " " + user.LastName;
+                    User userdetails = ObjHelperlandContext.Users.Where(c => c.Email == user.Email && c.Password == user.Password).FirstOrDefault();
+                    var Name = userdetails.FirstName + " " + userdetails.LastName;
                     ViewBag.userType = user.UserTypeId;
-                    HttpContext.Session.SetString("isLoggedIn", true.ToString());
+                    HttpContext.Session.SetString("isLoggedIn", "true");
                     HttpContext.Session.SetString("Name", Name);
+                    HttpContext.Session.SetInt32("UserId", userdetails.UserId);
+
+                     
                     if (p.FirstOrDefault().UserTypeId == 1)
                     {
                         HttpContext.Session.SetString("UserTypeId", user.UserTypeId.ToString());
-                        return RedirectToAction("Create_Account", "Home");
+                        return RedirectToAction("Customer_Dashboard", "CustomerPages");
                     }
                     else if (p.FirstOrDefault().UserTypeId == 2)
                     {

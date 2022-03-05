@@ -18,7 +18,7 @@ a {
 }
 
 /*/////////////////////////////////////Home section////////////////////////////////////////////////*/
-.main {
+    .main {
     width: 100%;
     height: 930px;
     /* height: auto; */
@@ -302,7 +302,7 @@ a {
 
 #our-blog .card {
     border-radius: 0%;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border: 1px soild rgba(0, 0, 0, 0.125);
 }
 
 #our-blog .card-title {
@@ -583,15 +583,19 @@ a {
 }
 
 #login .modal-dialog {
-    width: 350px !important;
+    width:400px !important;
     color: #646464;
+    
 }
 
 #login .form-control {
     height: 50px;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
-    border-right: none;
+    /*background-image: url('../images/lock-solid.svg');
+
+    background-repeat:no-repeat;
+    background-position-x:280px;*/
 }
 
 #login .input-group-text {
@@ -606,8 +610,8 @@ a {
     background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    border-left: none;
-    margin-left: -10px;
+    padding-bottom: 9px;
+    margin-bottom: 21px;
 }
 
 #login .fas {
@@ -617,18 +621,21 @@ a {
 }
 
 #login .login-button {
-    width: 300px;
+    width: 100%;
     height: 50px;
     border-radius: 30px;
     background-color: #2d7e8f;
     font-weight: 400;
     color: #FFFFFF;
 }
+#login .modal-body{
+    padding:20px
+}
 
 #login .checkbox1 {
     font-size: 14px !important;
     position: absolute;
-    margin-top: 5px;
+    margin-top: 10px;
     border: solid 1px #c7c7c7;
     border-radius: 4px;
     width: 20px;
@@ -643,7 +650,7 @@ a {
 #login .account {
     color: #4f4f4f;
     font-size: 16px;
-    margin-left: -3px;
+    text-align:center;
 }
 
 #login .create-account {
@@ -761,6 +768,7 @@ a {
     .small-nav .navbar {
         padding: 6px 20px !important;
         background-color: rgba(39,39,39,.7);
+        position: sticky-top;
     }
 
         .small-nav .navbar .container-fluid {
@@ -802,6 +810,9 @@ a {
     width: 100px;
 }
 
+.small-nav a:hove {
+    background-color: #29626D;
+}
 
 .small-nav .btn-primary {
     border: 1px solid rgba(255,255,255,.5) !important;
@@ -865,7 +876,7 @@ a {
     .line-star .main-heading {
         font-size: 36px;
         color: #4F4F4F;
-        font-weight: 600;
+        font-weight: 600px;
         opacity: 1;
         margin-top: 38px;
         margin-bottom: 9px;
@@ -1144,7 +1155,7 @@ a {
     font-family: "Roboto";
     color: #FFFFFF;
     opacity: 1;
-    font-weight: 500;
+    font-weight: 550;
     padding-top: 10px;
 }
 
@@ -1737,15 +1748,14 @@ a {
         width: 100%;
     }
 }
-user-dropdown
+
 /* ////////////////////////////// Upcoming services /////////////////////// */
 .contact-nav {
     margin-right: 30px;
 }
 
 .notification-icon {
-    margin-right: 30px;
-    border-left:1px solid white;
+    margin-right: 10px;
 }
 
 .welcome-heading {
@@ -1820,6 +1830,10 @@ user-dropdown
     font-size: 18px;
 }
 
+#back, fieldset:not(:first-of-type) {
+    display: none;
+}
+
 .table-header-upcoming-services {
     font-size: 18px;
     line-height: 1.63;
@@ -1841,6 +1855,79 @@ user-dropdown
     }
 }
 
+.cal-month {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.cal-weekdays {
+    background-color: #f9f9f9;
+    color: #646464;
+    padding: 7px 0;
+    display: flex;
+    border: 0.5px solid rgb(202, 202, 202);
+}
+
+.cal-days {
+    font-weight: 300;
+    display: flex;
+    flex-wrap: wrap;
+    border: 0.5px solid rgb(202, 202, 202);
+}
+
+    .cal-weekdays div,
+    .cal-days div {
+        text-align: center;
+        width: 14.23%;
+    }
+
+    .cal-days div {
+        padding: 20px 0;
+        /* border: 0.5px solid rgb(202, 202, 202); */
+        border-bottom: 0.5px solid rgb(202, 202, 202);
+        border-right: 0.5px solid rgb(202, 202, 202);
+    }
+
+.cal-prev_date {
+    color: #999;
+}
+
+.cal-today {
+    background-color: #22a7f4;
+    color: #fff;
+}
+
+.cal-days div:hover {
+    cursor: pointer;
+    background-color: #dfe6e9
+}
+
+.cal-prev,
+.cal-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 23px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+}
+
+    .cal-prev:hover,
+    .cal-next:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+#month {
+    font-size: 30px;
+    margin: 0px 20px;
+    font-weight: 500;
+}
 
 #mobile-card .mobile-card {
     z-index: -1;
@@ -1856,8 +1943,8 @@ user-dropdown
     }
 }
 
-@media (max-width:792px) {
-    .main-section-upcoming-services {
+@media (max-width:922px) {
+    .col1, .col2 {
         display: none;
     }
 }
@@ -1923,7 +2010,7 @@ user-dropdown
     line-height: 0.65;
     text-align: left;
     color: #FFFFFF;
-    letter-spacing: 2px;
+    letter-spacing: 2.0;
     padding: 15px;
     width: 250px;
 }
@@ -2199,6 +2286,12 @@ user-dropdown
     color: white;
     font-size: 13px;
 }
+.btn-status-cancel-service-history {
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 13px;
+}
+
 
 .btn-rate-service-history {
     width: 100px;
@@ -2507,16 +2600,6 @@ user-dropdown
     z-index: -1;
 }
 
-#back,
-fieldset:not(:first-of-type) {
-    display: none;
-}
-
-#Form fieldset:not(:first-of-type) {
-    display: none
-}
-
-
 #progressbar li.active:before,
 #progressbar li.active:after {
     background: #1D7A8C;
@@ -2533,6 +2616,8 @@ fieldset:not(:first-of-type) {
 #progressbar .active .white-imgs {
     display: inline;
 }
+
+
 
 #book-now .form-control {
     font-size: 14px;
@@ -2739,9 +2824,7 @@ fieldset:not(:first-of-type) {
 .mfp-hide {
     display: none !important;
 }
-.user-dropdown{
-    border-left:1px solid white;
-}
+
 .user-dropdown > a:after {
     position: absolute;
     content: "";
@@ -2760,11 +2843,14 @@ fieldset:not(:first-of-type) {
     font-size: 16px;
     color: #646464;
     padding: 10px 15px;
-    border-left:1px solid white;
 }
 
 .dropdown-menu a {
     margin-left: -10px;
+}
+
+.dropdown-link a {
+    padding: 20px;
 }
 
 ul > a:hover {
@@ -2773,7 +2859,7 @@ ul > a:hover {
 
 .user-dropdown .dropdown-menu .h1 {
     margin: 8px 0px;
-    
+    ;
 }
 
 /* -------------------     Customer setting page       ------------------------------------------- */
@@ -2814,7 +2900,7 @@ ul > a:hover {
 #adrress .address-setting {
     font-size: 16px;
     color: #646464;
-    font-weight: 100;
+    font-weight: 100px;
 }
 
     #adrress .address-setting strong {
@@ -2846,7 +2932,7 @@ ul > a:hover {
     margin-top: -5px;
 }
 
-#settings .address-setting-form .edit-btn {
+.address-setting-form .edit-btn {
     font-size: 16px;
     color: white;
     background-color: #1d7a8c;
@@ -2866,8 +2952,7 @@ ul > a:hover {
     margin-top: 10px;
     color: #1D7A8C;
 }
-
-#settings .Delete-Button {
+ .Delete-Button {
     font-size: 16px;
     color: white;
     background-color: #1d7a8c;
@@ -2896,7 +2981,7 @@ ul > a:hover {
 #change-pwd .form-control {
     font-size: 16px;
     color: #646464;
-    font-weight: 100;
+    font-weight: 100px;
 }
 
 #settings .save-btn {
@@ -2917,20 +3002,8 @@ ul > a:hover {
     font-weight: 100;
 }
 
-.logout-modal{
-    font-weight:400;
-    margin:30px auto;
-    font-size:24px;
-}
-.Ok-Button {
-    width:100px;
-    height: 70px;
-    border-radius: 25px;
-    background-color: #2d7e8f;
-    color: #FFFFFF;
-    font-size: 18px;
-    margin-bottom: 10px;
-    padding: 16px;
+.blank-button {
+    background-color: white;
     border: none;
-    line-height: 0.5;
+    color:#646464;
 }

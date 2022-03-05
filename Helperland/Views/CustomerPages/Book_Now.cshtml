@@ -1,6 +1,6 @@
 ﻿@using Helperland.Models
-@model Zipcodeviewmodel
-
+@model User
+@using Microsoft.AspNetCore.Http;
 @{
     Layout = "_Layout1";
 }
@@ -42,14 +42,14 @@
                     </ul> <!-- fieldsets -->
                     <!-- first tabs -->
                     <fieldset>
-                        <div class="form-card" >
+                        <div class="form-card">
                             <div id="Setup-Service" class="tabcontent">
                                 <div>
                                     <strong>Enter Your Postal Code</strong>
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <div id="divAddress"></div><br />
-                                            <input type="text" id="inputnumber"  class="form-control" placeholder="Postal code" required>
+                                            <input type="text" id="inputnumber" class="form-control" placeholder="Postal code">
                                         </div>
                                     </div>
                                 </div>
@@ -59,37 +59,46 @@
                     </fieldset>
                     <!-- second tabs -->
                     <fieldset>
-                        <div class="form-card" >
-                            <div id="Schedule-Plan" class="tabcontent">
+                        <div class="form-card">
+                            <div class="tabcontent" id="scheduleform">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div><strong>When do you need the cleaner?</strong></div>
                                         <div class="row">
                                             <div class="col-md-7 col-12">
-                                                <input  type="date" class="form-control" id="currentDate" @*onchange="datechange()"*@ placeholder="From Date" required>
+                                                <input type="date" class="form-control" id="servicestartdate" placeholder="From Date" onchange="datechange()">
                                             </div>
                                             <div class="col-md-5 col-12">
-                                                <input type="time" id="currentTime" name="appt-time" class="form-control" @*onchange="timechange()"*@>
+                                                <select class="form-select form-control" id="serviceTime" name="Time" onchange="timechange()">
+                                                    <option value="01:00" selected>01:00</option>
+                                                    <option value="02:00">02:00</option>
+                                                    <option value="03:00">03:00</option>
+                                                    <option value="04:00">04:00</option>
+                                                    <option value="05:00">05:00</option>
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div><strong>How long do you need your cleaner to stay?</strong></div>
                                         <div class="col-sm-5">
-                                            <select class="form-select form-control" id="serviceHours" name="Hours" @*onchange="hourschange()"*@>
+                                            <select class="form-select form-control" id="ServiceHours" name="Hours" onchange="hourschange()">
                                                 <option selected>Select Hour</option>
-                                                <option value="1">1 Hrs</option>
-                                                <option value="1">1.5 Hrs</option>
-                                                <option value="2">2 Hrs</option>
-                                                <option value="2">2.5 Hrs</option>
-                                                <option value="3">3 Hrs</option>
-                                                <option value="3">3.5 Hrs</option>
-                                                <option value="4">4 Hrs</option>
-                                                <option value="4">4.5 Hrs</option>
-                                                <option value="5">5 Hrs</option>
-                                                <option value="5">5.5 Hrs</option>
-                                                <option value="6">6 Hrs</option>
+                                                <option value="1">1.0 Hrs</option>
+                                                <option value="2">2.0 Hrs</option>
+                                                <option value="3">3.0 Hrs</option>
+                                                <option value="4">4.0 Hrs</option>
+                                                <option value="5">5.0 Hrs</option>
+                                                <option value="6">6.0 Hrs</option>
                                             </select>
+
                                         </div>
                                     </div>
                                 </div>
@@ -101,27 +110,26 @@
                                     <!-- css in prices page -->
                                     <div class="col">
                                         <div class="extra-services-card">
-                                            <label for="Insidecabinet">
-                                                <input type="checkbox" id="Insidecabinet" style="height: 0px; width: 0px;" @*onchange="etc1change()"*@ />
-                                                <div class="btn1 extra-services-card-img1"></div>
+                                            <label for="InsideCabinet">
+                                                <input type="checkbox" id="InsideCabinet" style="height: 0px; width: 0px;" onchange="etc1change()">
+                                                <div class="btn1 extra-services-card-img1"> </div>
                                             </label>
-                                            <h6 class="small-t">Inside <br /> cabinets</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="extra-services-card" =>
-                                            <label for="Insidefridge">
-                                                <input type="checkbox"  id="Insidefridge" style="height: 0px; width: 0px;"
-                                                       @*onchange="etc2change()"*@ />
-                                                <div class="btn1 extra-services-card-img2"> </div>
-                                            </label>
-                                            <h6 class="small-t">Inside <br /> Fridge</h6>
+                                            <h6 class="small-t">Inside cabinets</h6>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="extra-services-card">
-                                            <label for="Insideoven">
-                                                <input type="checkbox"  id="Insideoven" style="height: 0px; width: 0px;" @*onchange="etc3change()"*@ />
+                                            <label for="InsideFridge">
+                                                <input type="checkbox" id="InsideFridge" style="height: 0px; width: 0px;" onchange="etc2change()">
+                                                <div class="btn1 extra-services-card-img2"> </div>
+                                            </label>
+                                            <h6 class="small-t">Inside Fridge</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="extra-services-card">
+                                            <label for="InsideOven">
+                                                <input type="checkbox" id="InsideOven" style="height: 0px; width: 0px;" onchange="etc3change()">
                                                 <div class="btn1 extra-services-card-img3"> </div>
                                             </label>
                                             <h6 class="small-t">Inside Oven</h6>
@@ -129,8 +137,8 @@
                                     </div>
                                     <div class="col">
                                         <div class="extra-services-card" style="width: 139px;">
-                                            <label for="Insidelaundry">
-                                                <input type="checkbox"  id="Insidelaundry" style="height: 0px; width: 0px;" @*onchange="etc5change()"*@ />
+                                            <label for="InsideLaundry">
+                                                <input type="checkbox" id="InsideLaundry" style="height: 0px; width: 0px;" onchange="etc4change()">
                                                 <div class="btn1 extra-services-card-img4"> </div>
                                             </label>
                                             <h6 class="small-t">Laundry Wash & Dry </h6>
@@ -138,8 +146,8 @@
                                     </div>
                                     <div class="col">
                                         <div class="extra-services-card" style="width: 118px;">
-                                            <label for="Insidewindows">
-                                                <input type="checkbox"  id="Insidewindows" style="height: 0px; width: 0px;" @*onchange="etc4change()"*@ />
+                                            <label for="InteriorWindows">
+                                                <input type="checkbox" id="InteriorWindows" style="height: 0px; width: 0px;" onchange="etc5change()">
                                                 <div class="btn1 extra-services-card-img5"> </div>
                                             </label>
                                             <h6 class="small-t">Interior Windows</h6>
@@ -150,98 +158,89 @@
                                 <hr class="hr-line">
                                 <div class="row">
                                     <label for=""><strong>Comment</strong></label>
-                                    <textarea  name="Enter your comment..." class="form-control" id="comments" cols="2" rows="2"></textarea><br>
+                                    <textarea name="Enter your comment..." class="form-control" id="comments" cols="2" rows="2"></textarea><br>
                                 </div>
-
-                                <div class="form-check">
-                                    <input  type="checkbox" id="checkhaspet" name="" required>
-                                    <label  class="form-check-label" for="myCheck">
-                                        I have pets at home
-                                    </label>
-                                </div>
+                                <label>
+                                    <input type="checkbox" id="checkpets" name="" required>
+                                    I have pets at home
+                                </label>
                                 <hr class="hr-line">
                             </div>
                         </div>
                         <div style="float: right;">
                             <button id="back" class="continue-button" type="button">Back</button>
-                            <button id="nextORsubmit" class="continue-button button1" onclick="schedulesubmit()" value="Continue" />Continue</button>
+                            <button id="nextORsubmit" class="continue-button button1" onclick="schedulesubmit()" type="button"> Continue</button>
                         </div>
                     </fieldset>
                     <!-- Third tabs -->
                     <fieldset>
-                        <div class="form-card">
-                            <div id="Your-Details" class="tabcontent">
+                        <div class="form-card" id="">
+                            <div class="tabcontent">
                                 <div>
                                     <strong>Enter your contact details, so we can serve you in better way!</strong>
                                 </div>
-                                <div class="row">
+                                <div class="row" id="addressform">
                                     <div class="col-12 form-control">
-                                        <input type="radio" class="" id="" name="" value="">
                                         <label for="" style="font-size: 16px;">
+                                            <input type="radio" class="" id="" name="" value="" checked>
                                             <strong>Address : </strong> Koeringstrasse 112, Tmbaach-deiletherz99897 <br />
-                                            <strong>Phone Number : </strong> 98765456789
+                                            <strong> Phone Number : </strong> 98765456789
                                         </label>
                                     </div>
-                                    <div class="col-12 form-control">
-                                        <input type="radio" class="" id="" name="" value="">
-                                        <label for="" style="font-size: 16px;">
-                                            <strong>Address : </strong> Koeringstrasse 112, Tmbaach-deiletherz 99897 <br />
-                                            <strong>Phone Number : </strong> 98765456789
-                                        </label>
-                                    </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-12">
                                         <button id="button11" class="add-new-address2 mb-3" type="button"> + Add New Address </button>
                                         <div id="box" style="display:none;">
                                             <div class="col-12 card add-new-address-card p-3 mb-4">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-1">
-                                                        <label for="">
+                                                        <label for="streetname">
                                                             <strong>Street Name</strong>
+                                                            <input type="text" class="form-control" id="addstreetname" placeholder="Street Name">
                                                         </label>
-                                                        <input type="text" class="form-control" id="" placeholder="Street Name">
                                                     </div>
                                                     <div class="col-md-6 mb-1">
-                                                        <label for="">
+                                                        <label for="housenumber">
                                                             <strong>House Number</strong>
+                                                            <input type="number" class="form-control" id="addhousenumber" placeholder="House Number">
                                                         </label>
-                                                        <input type="number" class="form-control" id="" placeholder="House Number">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-1">
-                                                        <label for="">
+                                                        <label for="postalcode">
                                                             <strong>Postal Code</strong>
+                                                            <input class="form-control" id="addpostalcode" placeholder="320008" value="320008" readonly>
                                                         </label>
-                                                        <input type="number" class="form-control" id="" placeholder="Postal code" value="78638">
                                                     </div>
                                                     <div class="col-md-6 mb-1">
-                                                        <label for="">
+                                                        <label for="city">
                                                             <strong>City</strong>
+                                                            <input type="text" class="form-control" id="addcity"  placeholder="Ahmedabad" value="Ahmedabad" readonly>
                                                         </label>
-                                                        <input type="text" class="form-control" id="" placeholder="House Number" value="Tmbaach-deiletherz">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-1">
-                                                        <label for="">
+                                                        <label for="phonenumber">
                                                             <strong>Phone Number</strong>
+                                                            <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" value="">
                                                         </label>
-                                                        <input type="tel" class="form-control" id="" placeholder="Phone Number" value="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     &nbsp;&nbsp;&nbsp;
-                                                    <input type="button" name="Save" class="col-md-2 col-sm-5 continue-button" value="Save" />
+                                                    <input type="button" class="col-md-2 col-sm-5 continue-button" id="addsave" onclick="addresssubmit();" />
                                                     &nbsp;&nbsp;&nbsp;
                                                     <input type="button" name="Cancel" class="col-md-2 col-sm-5  continue-button cancel" value="Cancel" />
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
+
                                 <div><strong>Your Favorite Service providers</strong></div>
                                 <hr style="margin-bottom: 10px;">
                                 <div>You can choose your fevorite service provider from the below list</div>
@@ -261,13 +260,13 @@
                         </div>
                         <div style="float: right;">
                             <button id="back1" class="continue-button" type="button">Back</button>
-                            <button id="nextORsubmit" class="continue-button button1" value="Continue" />Continue</button>
+                            <button id="nextORsubmit" class="continue-button button1" onclick="afteraddress()" value="Continue" />Continue</button>
                         </div>
                     </fieldset>
                     <!-- Forth tabs -->
                     <fieldset>
                         <div class="form-card">
-                            <div id="Make-Payment" class="tabcontent">
+                            <div id="Pymentdetails" class="tabcontent">
                                 <div class="row">
                                     <div><strong>Pay securely with Helperland payment gateway!</strong></div>
                                     <div class="col-md-4 mt-2">
@@ -283,21 +282,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="row">
-                                                <div _ngcontent-c3=""
-                                                     class="field input--focus StripeElement StripeElement--empty"
-                                                     ref="card">
-                                                    <div class="__PrivateStripeElement"
-                                                         style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
-                                                        <iframe name="__privateStripeFrame9845" frameborder="0"
-                                                                allowtransparency="true" scrolling="no"
-                                                                allow="payment *"
-                                                                src="https://js.stripe.com/v3/elements-inner-card-dacb456181b43c4ebccba487f39a836f.html#locale=En&amp;wait=false&amp;mids[guid]=NA&amp;mids[muid]=14903f96-4c22-4abb-96d2-7ce22c1970d7971d41&amp;mids[sid]=NA&amp;hidePostalCode=true&amp;style[base][iconColor]=%23666EE8&amp;style[base][color]=%2331325F&amp;style[base][lineHeight]=36px&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23c5c5c5&amp;rtl=false&amp;componentName=card&amp;keyMode=test&amp;apiKey=pk_test_CbN2mTsadzVC1WpDPDgcDWbG&amp;referrer=https%3A%2F%2Fweb1.anasource.com%2Ftrainee2021%2Fbook-service&amp;controllerId=__privateStripeController9841"
-                                                                title="Secure card payment input frame"
-                                                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; height: 36px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true"
-                                                                                                                                                                                                                                                                                                                                                               aria-label=" " autocomplete="false" maxlength="1"
-                                                                                                                                                                                                                                                                                                                                                               style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
-                                                    </div>
-                                                </div>
+
                                             </div>
 
                                         </div>
@@ -309,10 +294,8 @@
                                 </div>
                                 <hr class="hr-line">
                                 <div class="row">
-                                    <div class="col-1">
-                                        <input type="checkbox" value="">
-                                    </div>
-                                    <div class="col-11 small justify-content-end">
+                                    <input type="checkbox" class="checkbox1 " />
+                                    <div class="col-11 small justify-content-end ml-3">
                                         I accepted <a href="" class="book-now-a">terms and conditions.</a>, the <a href="" class="book-now-a">cancellation policy</a> and
                                         the <a href="" class="book-now-a">privacy policy</a>. I confirm that
                                         Helperland starts toexecute the
@@ -327,7 +310,7 @@
 
                             <!-- <button type="submit" name="complete-booking" class="complete-booking" style="float: right;" value="Complete Booking">Complete Booking</button> -->
                             <button type="submit" class="complete-booking" data-toggle="modal" style="float: right;"
-                                    data-target=".bd-example-modal-sm">
+                                    data-target=".bd-example-modal-sm" onclick="completebooking()">
                                 Complete Booking
                             </button>
                             <div class="modal fade bd-example-modal-sm mt-5" tabindex="-1" role="dialog"
@@ -362,16 +345,39 @@
                     </div>
                     <div class="row-2 p-3">
                         <div class="first-line">
-                            01/01/2018  4:00 pm <br> 1 bed, 1 bath.
+                            <span id="servicecarddate">
+                                @{
+                                    String date = DateTime.Now.AddDays(1).ToString("dd/mm/yyyy");
+                                    date = date.Replace('-', '/');
+                                }
+                                @date
+                            </span>
+                            <span id="servicecardtime">
+                                08:00
+                            </span>
                             <br /><br>
                         </div>
                         <div class="second-line"> Duration </div>
+                        <span id="servicecardhour"></span>
                         <div class="row">
-                            <div class="col-8">Basic <br> Inside cabinets (extra)</div>
-                            <div class="col-4 text-end"> 3 Hrs <br> 30 Mins</div>
+                            <div class="col-8 d-none" id="etc-1">Basic <br> Inside cabinets (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc1"> 3 Hrs <br> 30 Mins</div>
+
+                            <div class="col-8 d-none" id="etc-1">Inside fridge (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc1"> 30 Mins</div>
+
+                            <div class="col-8 d-none" id="etc-2">Inside oven (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc2">  30 Mins</div>
+
+                            <div class="col-8 d-none" id="etc-3">Inside loundry (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc3">  30 Mins</div>
+
+                            <div class="col-8 d-none" id="etc-4">Inside Windows (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc4">  30 Mins</div>
+
                             <hr class="second-line-hr">
                             <div class="col-8"><strong>Total Service Time</strong> </div>
-                            <div class="col-4 text-end"> <strong>3.5 Hrs</strong> </div>
+                            <div class="col-4 text-end" id="totaltime" onchange="servicetime()"> <strong>3.5 Hrs</strong> </div>
                         </div>
                     </div>
                     <hr class="main-hr">
@@ -528,3 +534,5 @@
         </div>
     </div>
 </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

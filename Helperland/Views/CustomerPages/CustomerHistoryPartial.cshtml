@@ -1,0 +1,138 @@
+﻿@{
+    List<ServiceRequest> service = null;
+    if (ViewBag.services != null)
+    {
+        service = ViewBag.services;
+    }
+    List<User> serviceprovider = ViewBag.users;
+    int i = 0;
+}
+
+<div id="servicehistory" class="container tab-pane active">
+    <!-- <div class="col-12"> -->
+    <div class="heading-service-history">
+        Service History
+        <button type="button" class="btn btn-export-service-history">Export</button>
+    </div>
+    <!-- </div> -->
+
+    <table class="table" id="datatable2">
+        <thead class="table-header-upcoming-services">
+            <tr>
+                <th scope="col">Service Id <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Service Details <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Service Provider <img src="../images\sort.png" alt=""> </th>
+                <th scope="col">Payment <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Status <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Rate SP <img src="../images\sort.png" alt=""></th>
+            </tr>
+        </thead>
+        <tbody class="tbody-upcoming-services">
+            @foreach (ServiceRequest dbs in service)
+            {
+                <tr>
+                    <td>
+                        <button class="blank-button text-center ml-5" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="detailes(this)" data-bs-target="#ServiceDetailes">@dbs.ServiceRequestId</button>
+                    </td>
+                    <td scope="row" class="th-upcoming-service">
+                        <button class="blank-button" data-bs-toggle="modal" data-bs-target="#ServiceDetailes">
+                            <img src="../images\calendar2.png" alt="">
+                            @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                            <br />
+                            <img src="../images\layer-712.png" alt="">
+                            @dbs.ServiceStartDate.ToString("HH:mm")
+                        </button>
+                    </td>
+                    <td>
+                        @if (serviceprovider[i] != null)
+                        {
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="../images\cap.png" alt="" class="history-cap">
+                                </div>
+                                <div class="col-9">
+                                    @serviceprovider[i].FirstName<br>
+                                    <img src="../images\yellow-small-star.png" alt="">
+                                    <img src="../images\yellow-small-star.png" alt="">
+                                    <img src="../images\yellow-small-star.png" alt="">
+                                    <img src="../images\yellow-small-star.png" alt="">
+                                    <img src="../images\grey-small-star.png" alt="">
+                                    4
+                                </div>
+                            </div>
+                            i++;
+                        }
+
+                    </td>
+                    <td>
+                        <p class="payment-service-history">€ @dbs.TotalCost</p>
+                    </td>
+                    <td>
+                        @if (@dbs.Status == 1)
+                        {
+                            <button type="button" class="btn btn-status-service-history">Completed</button>
+                        }
+                        else {
+                            <button type="button" class="btn btn-status-cancel-service-history">Canceled</button>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
+                        <!-- Modal -->
+                        
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <div class="row pagination-1">
+        <div class="col-lg-6 col-md-4 col-sm-12">
+            <h5 class="h4-service-history">
+                Show
+                <button class="p-service-history"> 10 <img src="../images\keyboard-right-arrow-button.png" alt=""></button>
+                entries | Total Record: 55
+            </h5>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-12 nav-service-history">
+            <nav class="nav-service-history">
+                <ul class="pagination">
+                    <li class="page-item disabled" title="next">
+                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                            <img src="../images\first-page.png" alt="">
+                        </a>
+                    </li>
+                    <li class="page-item disabled " title="previous">
+                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                            <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
+                        </a>
+                    </li>
+                    <li class="page-item active" title=" ">
+                        <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                    </li>
+                    <li class="page-item disabled" title=" ">
+                        <a href="" class="page-link rounded-circle m-1">2</a>
+                    </li>
+                    <li class="page-item disabled" title=" ">
+                        <a href="" class="page-link rounded-circle m-1">3</a>
+                    </li>
+                    <li class="page-item disabled" title=" ">
+                        <a href="" class="page-link rounded-circle m-1">4</a>
+                    </li>
+                    <li class="page-item disabled" title="next">
+                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                            <img src="../images\first-page.png" alt="">
+                        </a>
+                    </li>
+                    <li class="page-item disabled" title="next">
+                        <a href="homepage.html" class="page-link rounded-circle m-1">
+                            <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

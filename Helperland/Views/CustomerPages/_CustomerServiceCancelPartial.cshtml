@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Helperland.Models
+@model Helperland.Models.ServiceRequest
+
+<div class="modal fade" id="CancelRequest" tabindex="-1" role="dialog" aria-labelledby="cancel-request" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancel Service Request</h5>
+                <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div id="Reschedule-model">
+                        <div class="row">
+                            <div class="col-12">
+                                <div style="font-size: 16px;">Why you want to cancel the service request?</div>
+                                <textarea name="" id="" cols="50" rows="2" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" id="id" value="@Model.ServiceRequestId">
+                    <button type="button" class="model-action-button mt-4" data-bs-dismiss="modal" onclick="cancelservice()">Cancel now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

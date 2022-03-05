@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Helperland.Models
+@model Helperland.Models.ServiceRequest
+
+<div class="modal fade" id="Reschedule" tabindex="-1" role="dialog" aria-labelledby="Reschedule" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div id="Reschedule-model">
+                        <div class="row">
+                            <div class="col-12">
+                                <div style="font-size: 16px;">Select New Date & Time</div>
+                                <div class="row mt-2">
+                                    <div class="col-md-7 col-12">
+                                        <input type="date" class="form-control" placeholder="@Model.ServiceStartDate.ToString("dd/MM/yyyy")" id="CurrentDate">
+                                    </div>
+                                    <div class="col-md-5 col-12">
+                                        <select class="form-select form-control" placeholder="@Model.ServiceStartDate.ToString("HH:mm")" id="CurrentTime" name="Time">
+                                            <option value="01:00">01:00</option>
+                                            <option value="02:00">02:00</option>
+                                            <option value="03:00">03:00</option>
+                                            <option value="04:00">04:00</option>
+                                            <option value="05:00">05:00</option>
+                                            <option value="06:00">06:00</option>
+                                            <option value="07:00">07:00</option>
+                                            <option value="08:00">08:00</option>
+                                            <option value="09:00">09:00</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="12:00">12:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" id="id" value="@Model.ServiceRequestId">
+                    <button type="button"  class="model-action-button mt-4" onclick="updateschedule()" data-bs-dismiss="modal">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

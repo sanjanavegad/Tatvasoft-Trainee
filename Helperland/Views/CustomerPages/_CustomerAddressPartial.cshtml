@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using Helperland.Models
+@model Helperland.Models.UserAddress
+
+<div class="modal" id="Modaleditaddress">
+    <div class="modal-dialog modal-dialog-centered address-setting-model">
+        <div class="modal-content reschedule-model">
+            <div class="modal-header">
+                <p class="modal-title" id="popup-loginLabel">
+                    <strong>
+                        <h5>Edit Address</h5>
+                    </strong>
+                </p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body  ">
+                <form method="post" class="row  address-setting-form">
+                    <div class="col-md-6">
+                        <label for="streetname" class="form-label"><strong>Street</strong></label>
+                        <input type="text" class="form-control" id="streetname" value="@Model.AddressLine1">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="housenumber" class="form-label"><strong>House number</strong></label>
+                        <input type="number" class="form-control" id="housenumber" value="@Model.AddressLine2">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label for="postalcode" class="form-label"><strong>Postal code</strong></label>
+                        <input type="number" class="form-control" id="postalcode" value="@Model.PostalCode">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label for="statename" class="form-label"><strong>Location</strong></label>
+                        <input type="number" class="form-control" id="statename" value="@Model.State">
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <label for="mobilenum" class="form-label"><strong>Phone Number</strong></label>
+                        <input type="number" class="form-control" id="mobilenum" placeholder="@Model.Mobile">
+                    </div>
+                    <input type="hidden" class="form-control" id="id" value="@Model.AddressId">
+                    <br>
+                    <button type="button" class="btn edit-btn" data-bs-dismiss="modal" onclick="saveaddress()">Add to</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

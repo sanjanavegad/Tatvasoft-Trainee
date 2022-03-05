@@ -1,0 +1,394 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+
+<section class="first-heading">
+    <div class="welcome-heading">
+        <h6 class="Welcome ">Welcome,<b> Gaurang!</b></h6>
+    </div>
+</section>
+
+<section class="main-section-upcoming-services " id="main-customer-section">
+    <div class="row row1">
+        <div class="col-md-3 col-lg-2 col1 mb-2">
+            <div class="nav-upcoming-sevices">
+                <nav class="side-nav  nav-upcoming-sevices">
+                    <ul class="nav-menu nav nav-tabs flex-column" role="tablist">
+                        <li class=" nav-item-upcoming-service mt-3">
+                            <a class=" " data-bs-toggle="tab" href="#" onclick="loaddashboard();">Dashboard</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadhistory();">Service history</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#serviceschedule">Service Schedule</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class="nav-item nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#favouritepros">Favourite pros</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadsettings();">My Settings</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service pb-3">
+                            <a class="" data-bs-toggle="tab" href="#notification">Notification</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="col-md-9 col-lg-10 col2">
+            <div class="tab-content" id="my-tab">
+                @*<partial name="CustomerDashboardPartial" />
+                    <partial name="CustomerHistoryPartial" />
+                    <partial name="CustomerSettingPartial" />*@
+            </div>
+        </div>
+
+        <div class="col col3" id="mobile-card">
+            <div class="tab-content">
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="model1">
+</section>
+
+<section id="model2">
+</section>
+<section id="model3">
+</section>
+
+<section id="model4">
+</section>
+
+<section id="model5">
+</section>
+
+<section id="model6">
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            
+            $.ajax({
+                url: '/CustomerPages/CustomerDashboard',
+                type: 'GET',
+                success: function (response) {
+                    $('#my-tab').html(response);
+                    $('#datatable1').DataTable({
+
+                        "searching": false,
+                        columnDefs: [{
+                            targets: [0],
+                            orderData: [0, 1]
+                        }, {
+                            targets: [1],
+                            orderData: [1, 0]
+                        }, {
+                            targets: [4],
+                            orderData: [4, 0]
+                        }]
+                    });
+                }
+            });
+        });
+        function loaddashboard() {
+            $.ajax({
+                url: '/CustomerPages/CustomerDashboard',
+                type: 'GET',
+                success: function (response) {
+                    $('#my-tab').html(response);
+                    $('#datatable1').DataTable({
+
+                        "searching": false,
+                        columnDefs: [{
+                            targets: [0],
+                            orderData: [0, 1]
+                        }, {
+                            targets: [1],
+                            orderData: [1, 0]
+                        }, {
+                            targets: [4],
+                            orderData: [4, 0]
+                        }]
+                    });
+                }
+            });
+        }
+        function loadhistory() {
+            debugger;
+            $.ajax({
+                url: '/CustomerPages/CustomerHistory',
+                type: 'GET',
+                success: function (response) {
+
+                    $('#my-tab').html(response);
+                    $('#datatable2').DataTable({
+
+                        "searching": false,
+                        columnDefs: [{
+                            targets: [0],
+                            orderData: [0, 1]
+                        }, {
+                            targets: [1],
+                            orderData: [1, 0]
+                        }, {
+                            targets: [4],
+                            orderData: [4, 0]
+                        }]
+                    });
+                }
+            });
+        }
+        function loadsettings() {
+            $.ajax({
+                url: '/CustomerPages/CustomerSettings',
+                type: 'GET',
+                success: function (response) {
+                    $('#my-tab').html(response);
+                }
+            });
+        }
+    </script>
+    <script>
+        function detailes(db) {
+            debugger;
+            var id = db.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/ServiceDetailes',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model1").html(responce);
+                    $("#ServiceDetailes").modal("show");
+                }
+
+            });
+        }
+        function schedule(dt) {
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/ServiceSchedule',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model2").html(responce);
+                    $("#Reschedule").modal("show");
+                }
+
+            });
+        }
+        function updateschedule() {
+            debugger;
+            var data = {};
+            data.serviceRequestId = document.getElementById("id").value;
+            data.serviceDate = document.getElementById("CurrentDate").value;
+            data.serviceTime = document.getElementById("CurrentTime").value;
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/UpdateScheduleRequest',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loaddashboard();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+
+        function cancelservicemodel(dt) {
+            debugger;
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/CancelServiceModel',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model3").html(responce);
+                    $("#CancelRequest").modal("show");
+                }
+
+            });
+        }
+
+        function cancelservice() {
+            debugger;
+            var data = {};
+            data.serviceRequestId = document.getElementById("id").value;
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/CancelServiceRequest',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loaddashboard();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+
+        function ratingmodal(dt) {
+            debugger;
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/RateSPModal',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model6").html(responce);
+                    $("#RateSPModel").modal("show");
+                }
+
+            });
+        }
+
+
+        function addressmodel(db) {
+            debugger;
+            var id = db.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/AddressModel',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model4").html(responce);
+                    $("#Modaleditaddress").modal("show");
+                }
+
+            });
+        }
+
+        function savedetailes() {
+            debugger;
+            var data = {};
+            data.firstName = document.getElementById("firstname").value;
+            data.lastName = document.getElementById("lastname").value;
+            data.mobile = document.getElementById("mobile").value;
+            data.dateOfBirth = document.getElementById("dateofbirth").value;
+
+            console.log("get detailes new");
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/UpdateUserDetailes',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadsettings();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+
+        function saveaddress() {
+            var data = {};
+            data.addressId = document.getElementById("id").value;
+            data.addressLine1 = document.getElementById("streetname").value;
+            data.addressLine2 = document.getElementById("housenumber").value;
+            data.postalCode = document.getElementById("postalcode").value;
+            data.state = document.getElementById("statename").value;
+            data.mobile = document.getElementById("mobilenum").value;
+
+            console.log("get detailes new");
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/UpdateUserAddress',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadsettings();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+
+        function deletemodel(db) {
+            debugger;
+            var id = db.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/DeleteAddressModel',
+                data: { "id": id },
+                success: function (responce) {
+                    $("#model5").html(responce);
+                    $("#Modaldeleteaddress").modal("show");
+                }
+
+            });
+        }
+
+        function deleteaddress(del) {
+            debugger;
+            var data = {};
+            data.addressId = document.getElementById("id").value;
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/DeleteUserAddress',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadsettings();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+
+        function changepassword() {
+            debugger;
+            var data = {};
+            data.password = document.getElementById("newpassword").value;
+            $.ajax({
+                type: 'POST',
+                url: '/CustomerPages/CustomerChangePassword',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadsettings();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
+    </script>
+}
