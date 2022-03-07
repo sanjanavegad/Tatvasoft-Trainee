@@ -4,13 +4,12 @@
     {
         service = ViewBag.services;
     }
-    List<User> serviceprovider = ViewBag.users;
-    int i = 0;
 }
+@using Helperland.Models;
 
 <div id="servicehistory" class="container tab-pane active">
     <!-- <div class="col-12"> -->
-    <div class="heading-service-history">
+    <div class="heading-service-history mb-3">
         Service History
         <button type="button" class="btn btn-export-service-history">Export</button>
     </div>
@@ -30,28 +29,27 @@
         <tbody class="tbody-upcoming-services">
             @foreach (ServiceRequest dbs in service)
             {
+                double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
                 <tr>
                     <td>
                         <button class="blank-button text-center ml-5" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="detailes(this)" data-bs-target="#ServiceDetailes">@dbs.ServiceRequestId</button>
                     </td>
                     <td scope="row" class="th-upcoming-service">
-                        <button class="blank-button" data-bs-toggle="modal" data-bs-target="#ServiceDetailes">
+                        <button class="blank-button" data-bs-toggle="modal" data-bs-target="#ServiceDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
                             <img src="../images\calendar2.png" alt="">
                             @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
                             <br />
                             <img src="../images\layer-712.png" alt="">
-                            @dbs.ServiceStartDate.ToString("HH:mm")
+                            @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
                         </button>
                     </td>
                     <td>
-                        @if (serviceprovider[i] != null)
-                        {
                             <div class="row">
                                 <div class="col-3">
                                     <img src="../images\cap.png" alt="" class="history-cap">
                                 </div>
                                 <div class="col-9">
-                                    @serviceprovider[i].FirstName<br>
+                                    @dbs.FirstName<br>
                                     <img src="../images\yellow-small-star.png" alt="">
                                     <img src="../images\yellow-small-star.png" alt="">
                                     <img src="../images\yellow-small-star.png" alt="">
@@ -60,8 +58,6 @@
                                     4
                                 </div>
                             </div>
-                            i++;
-                        }
 
                     </td>
                     <td>
@@ -72,14 +68,15 @@
                         {
                             <button type="button" class="btn btn-status-service-history">Completed</button>
                         }
-                        else {
+                        else
+                        {
                             <button type="button" class="btn btn-status-cancel-service-history">Canceled</button>
                         }
                     </td>
                     <td>
                         <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
                         <!-- Modal -->
-                        
+
 
                     </td>
                 </tr>
@@ -87,8 +84,19 @@
 
         </tbody>
     </table>
+</div>
 
-    <div class="row pagination-1">
+
+
+
+
+
+
+
+
+
+
+@*<div class="row pagination-1">
         <div class="col-lg-6 col-md-4 col-sm-12">
             <h5 class="h4-service-history">
                 Show
@@ -134,5 +142,4 @@
                 </ul>
             </nav>
         </div>
-    </div>
-</div>
+    </div>*@

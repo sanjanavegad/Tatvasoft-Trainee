@@ -4,12 +4,11 @@
     {
         service = ViewBag.services;
     }
-    List<User> serviceprovider = ViewBag.users;
-    int i = 0;
 }
+@using Helperland.Models;
 
 <div id="dashboard" class="container tab-pane active" >
-    <div class="heading-service-history mt-3">
+    <div class="heading-service-history mb-3">
         Dashboard
         <button type="button" class="btn btn-export-service-history">Export</button>
     </div>
@@ -27,8 +26,7 @@
         <tbody class="tbody-upcoming-services">
             @foreach (ServiceRequest dbs in service)
             {
-                //double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
-                //var finaltime = dbs.ServiceTime.AddHours(time).ToString("HH:mm");
+                double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
 
                 <tr>
                     <td>
@@ -36,33 +34,29 @@
                         
                     </td>
                     <td scope="row" class="th-upcoming-service">
-                        <button class="blank-button" data-toggle="modal" data-target="#ServiceDetailes">
+                        <button class="blank-button" data-toggle="modal" data-target="#ServiceDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
                             <img src="../images\calendar2.png" alt="">
                             @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
                             <br />
                             <img src="../images\layer-712.png" alt="">
-                            @dbs.ServiceStartDate.ToString("HH:mm")
+                            @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
                         </button>
                     </td>
                     <td>
-                        @if (serviceprovider[i] != null)
-                        {
                             <div class="row">
                                 <div class="col-3">
                                     <img src="../images\cap.png" alt="" class="history-cap">
                                 </div>
                                 <div class="col-9">
-                                    @serviceprovider[i].FirstName<br>
-                                    <img src="../images\yellow-small-star.png" alt="">
+                                    @dbs.FirstName<br>
                                     <img src="../images\yellow-small-star.png" alt="">
                                     <img src="../images\yellow-small-star.png" alt="">
                                     <img src="../images\yellow-small-star.png" alt="">
                                     <img src="../images\grey-small-star.png" alt="">
-                                    4
+                                    <img src="../images\grey-small-star.png" alt="">
+                                    3
                                 </div>
                             </div>
-                            i++;
-                        }
 
                     </td>
 
@@ -86,54 +80,6 @@
 
         </tbody>
     </table>
-
-    <div class="row pagination-1">
-            <div class="col-lg-6 col-md-4 col-sm-12">
-                <h5 class="h4-service-history">
-                    Show
-                    <button class="p-service-history"> 10 <img src="../images\keyboard-right-arrow-button.png" alt=""></button>
-                    entries | Total Record: 55
-                </h5>
-            </div>
-            <div class="col-lg-6 col-md-8 col-sm-12 nav-service-history">
-                <nav class="nav-service-history">
-                    <ul class="pagination">
-                        <li class="page-item disabled" title="next">
-                            <a href="homepage.html" class="page-link rounded-circle m-1">
-                                <img src="../images\first-page.png" alt="">
-                            </a>
-                        </li>
-                        <li class="page-item disabled " title="previous">
-                            <a href="homepage.html" class="page-link rounded-circle m-1">
-                                <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
-                            </a>
-                        </li>
-                        <li class="page-item active" title=" ">
-                            <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
-                        </li>
-                        <li class="page-item disabled" title=" ">
-                            <a href="" class="page-link rounded-circle m-1">2</a>
-                        </li>
-                        <li class="page-item disabled" title=" ">
-                            <a href="" class="page-link rounded-circle m-1">3</a>
-                        </li>
-                        <li class="page-item disabled" title=" ">
-                            <a href="" class="page-link rounded-circle m-1">4</a>
-                        </li>
-                        <li class="page-item disabled" title="next">
-                            <a href="homepage.html" class="page-link rounded-circle m-1">
-                                <img src="../images\first-page.png" alt="">
-                            </a>
-                        </li>
-                        <li class="page-item disabled" title="next">
-                            <a href="homepage.html" class="page-link rounded-circle m-1">
-                                <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
 </div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">

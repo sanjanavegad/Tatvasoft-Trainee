@@ -17,6 +17,8 @@ a {
     text-decoration: none;
 }
 
+
+
 /*/////////////////////////////////////Home section////////////////////////////////////////////////*/
     .main {
     width: 100%;
@@ -1999,8 +2001,28 @@ a {
     margin: 10px 0px;
 }
 
-/* ////////////////////////admin _ user management////////////////// */
-.Rectangle-1 {
+.table.dataTable thead .sorting_asc {
+    background-image: none !important;
+}
+
+.table.dataTable thead .sorting_desc {
+    background-image: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border: 1px solid #979797 ;
+    border-radius: 50px;
+    background-color: #1d7a8c !important;
+}
+
+.table > :not(caption) > * > * {
+    padding: .5rem .5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0px;
+    box-shadow: none;
+}
+    /* ////////////////////////admin _ user management////////////////// */
+    .Rectangle-1 {
     height: 60px;
     background-color: #1fb6ff;
 }

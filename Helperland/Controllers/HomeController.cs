@@ -30,14 +30,12 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Index(User user)
         {
-            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
-            {
                 string email = user.Email;
-                var p = ObjHelperlandContext.Users.Where(c => c.Email == email && c.Password == user.Password).ToList();
+                var p = _helperlandContext.Users.Where(c => c.Email == email && c.Password == user.Password).ToList();
                 ModelState.Clear();
                 if (p.Count == 1)
                 {
-                    User userdetails = ObjHelperlandContext.Users.Where(c => c.Email == user.Email && c.Password == user.Password).FirstOrDefault();
+                    User userdetails = _helperlandContext.Users.Where(c => c.Email == user.Email && c.Password == user.Password).FirstOrDefault();
                     var Name = userdetails.FirstName + " " + userdetails.LastName;
                     ViewBag.userType = user.UserTypeId;
                     HttpContext.Session.SetString("isLoggedIn", "true");
@@ -72,11 +70,11 @@ namespace Helperland.Controllers
                 };
                 var link = uriBuilder.Uri.AbsoluteUri;
 
-                var getUser = (from s in ObjHelperlandContext.Users where s.Email == user.Email select s).FirstOrDefault();
+                var getUser = (from s in _helperlandContext.Users where s.Email == user.Email select s).FirstOrDefault();
                 if (getUser != null)
                 {
                     getUser.ResetPasswordCode = ResetCode;
-                    ObjHelperlandContext.SaveChanges();
+                    _helperlandContext.SaveChanges();
 
                     var subject = "Password Reset Request";
                     var body = "Hi " + getUser.FirstName + ", <br/> You recently requested to reset the password for your account. Click the link below to reset ." +
@@ -93,7 +91,7 @@ namespace Helperland.Controllers
                     return View();
                 }
                 return View();
-            }
+        
             
         }
 
@@ -178,8 +176,6 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Service_Provider(User signup)
         {
-            if (ModelState.IsValid)
-            {
                 if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 2;
@@ -196,7 +192,6 @@ namespace Helperland.Controllers
                 {
                     ViewBag.Message = "User already registed";
                 }
-            }
             return View();
         }
 

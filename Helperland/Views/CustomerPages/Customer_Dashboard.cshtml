@@ -184,6 +184,7 @@
 
             });
         }
+
         function schedule(dt) {
             var id = dt.getAttribute("data-id");
             $.ajax({
@@ -197,6 +198,7 @@
 
             });
         }
+
         function updateschedule() {
             debugger;
             var data = {};
@@ -291,9 +293,10 @@
             data.firstName = document.getElementById("firstname").value;
             data.lastName = document.getElementById("lastname").value;
             data.mobile = document.getElementById("mobile").value;
-            data.dateOfBirth = document.getElementById("dateofbirth").value;
-
-            console.log("get detailes new");
+            data.date = document.getElementById("date").value;
+            data.month = document.getElementById("month").value;
+            data.year = document.getElementById("year").value;
+            data.languageId = document.getElementById("language").value;
             $.ajax({
                 type: 'POST',
                 url: '/CustomerPages/UpdateUserDetailes',

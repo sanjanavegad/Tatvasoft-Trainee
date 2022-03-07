@@ -4,6 +4,10 @@
 @using Helperland.Models
 @model Helperland.Models.ServiceRequest
 
+@{ 
+    double time = Convert.ToDouble(@Model.ServiceHours + @Model.ExtraHours);
+}
+
 <div class="modal fade" id="ServiceDetailes" tabindex="-1" role="dialog" aria-labelledby="ServiceDetailes" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="width: 500px;">
         <div class="modal-content">
@@ -15,7 +19,7 @@
             <div class="modal-body" style="font-size: 15px;">
                 <div class="row">
                     <div class="col-12">
-                        <h6>@Model.ServiceStartDate.ToString("dd/MM/yyyy")  &nbsp; @Model.ServiceStartDate.ToString("HH:mm")</h6>
+                        <h6>@Model.ServiceStartDate.ToString("dd/MM/yyyy")  &nbsp; @Model.ServiceStartDate.ToString("HH:mm") - @Model.ServiceStartDate.AddHours(time).ToString("HH:mm")</h6>
                         <div><strong>Duration : </strong>@Model.SubTotal</div>
                         <hr class="hr-line">
                     </div>
@@ -41,7 +45,18 @@
                 <div class="row">
                     <div class="col-12">
                         <strong>Do you want to tell your helper somthing?</strong><br>
-                        I have no pets at home
+                        @if (@Model.HasPets == true)
+                        {
+                            <div>
+                                <img src="~/images/right-sign.jpg" /> I have pets at home
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <img src="~/images/cross-sign.jpg" /> I don't 'have pets at home
+                            </div>
+                        }
                     </div>
                 </div>
                 <hr class="hr-line">

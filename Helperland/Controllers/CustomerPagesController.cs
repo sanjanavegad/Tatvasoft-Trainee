@@ -63,7 +63,7 @@ namespace Helperland.Controllers
 
             List<UserAddress> Address = new List<UserAddress>();
             int? Id = HttpContext.Session.GetInt32("UserId");
-            var result = _helperlandContext.UserAddresses.Where(x => x.UserId == Id).ToList();
+            var result = _helperlandContext.UserAddresses.Where(x => x.UserId == Id && x.IsDeleted == false).ToList();
             foreach (var add in result)
             {
                 UserAddress useraddress = new UserAddress();
@@ -123,6 +123,7 @@ namespace Helperland.Controllers
             string time = Finalbooking.ServiceTime.ToString("HH:mm:ss");
             DateTime startDateTime = Convert.ToDateTime(date).Add(TimeSpan.Parse(time));
             add.ServiceStartDate = startDateTime;
+            add.Status = 3;
             var result = _helperlandContext.ServiceRequests.Add(add);
             _helperlandContext.SaveChanges();
             int id = add.ServiceRequestId;
@@ -182,26 +183,31 @@ namespace Helperland.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult CustomerDashboard(ServiceRequest data)
+
+        public User Getuser(int id)
         {
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
-                //ServiceRequest serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == dashboard.UserId).FirstOrDefault();
+                User name = ObjHelperlandContext.Users.Find(id);
+                return name;
+            }
+        }
+
+        [HttpGet]
+        public IActionResult CustomerDashboard()
+        {
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            {
                 int id = (int)HttpContext.Session.GetInt32("UserId");
-                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == id && x.Status == 3).ToList();
+                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.ToList();
                 //status=> 1=Complete, 2=Cancel, 3=Pending
 
                 List<User> user = new List<User>();
-                foreach (ServiceRequest users in serviceRequest)
+                foreach (ServiceRequest temp in serviceRequest)
                 {
-                    //User temp = new User();
-                    if (users.ServiceProviderId != null)
+                    if (temp.ServiceProviderId != null)
                     {
-                        User sp = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == users.UserId);
-                        user.Add(sp);
-                        //var temp = ObjHelperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
-
+                        user.Add(Getuser((int)temp.UserId));
                     }
                     else
                     {
@@ -209,7 +215,6 @@ namespace Helperland.Controllers
                     }
                 }
 
-                ViewBag.users = user;
                 ViewBag.services = serviceRequest;
                 return PartialView("CustomerDashboardPartial");
             }
@@ -314,8 +319,12 @@ namespace Helperland.Controllers
                 updated.FirstName = user.FirstName;
                 updated.LastName = user.LastName;
                 updated.Mobile = user.Mobile;
-                updated.Email = user.Email;
-                updated.DateOfBirth = user.DateOfBirth;
+                if (user.Date != null && user.Month != null && user.Year != null)
+                {
+                    var DateTime = user.Date + "-" + user.Month + "-" + user.Year;
+                    updated.DateOfBirth = Convert.ToDateTime(DateTime);
+                }
+                updated.LanguageId = user.LanguageId;
                 updated.ModifiedDate = DateTime.Now;
                 var result = _helperlandContext.Users.Update(updated);
                 _helperlandContext.SaveChanges();
@@ -421,13 +430,10 @@ namespace Helperland.Controllers
                 List<User> user = new List<User>();
                 foreach (ServiceRequest users in serviceRequest)
                 {
-                    //User temp = new User();
                     if (users.ServiceProviderId != null)
                     {
-                        User sp = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == users.UserId);
-                        user.Add(sp);
-                        //var temp = ObjHelperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
-
+                        var providername = _helperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
+                        users.FirstName = providername.FirstName;
                     }
                     else
                     {
@@ -435,7 +441,6 @@ namespace Helperland.Controllers
                     }
                 }
 
-                ViewBag.users = user;
                 ViewBag.services = serviceRequest;
                 return PartialView("CustomerHistoryPartial");
             }
