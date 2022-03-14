@@ -45,6 +45,12 @@ namespace Helperland.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
+        [NotMapped]
+        [Required]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+
         [Required(ErrorMessage = "Please enter your mobile number")]
         [MaxLength(20)]
         public string Mobile { get; set; }
@@ -55,19 +61,24 @@ namespace Helperland.Models
         public DateTime? DateOfBirth { get; set; }
 
         [NotMapped]
-        public DateTime? Date { get; set; }
+        public string Date { get; set; }
         [NotMapped]
-        public DateTime? Month { get; set; }
+        public string Month { get; set; }
         [NotMapped]
-        public DateTime? Year { get; set; }
-
+        public string Year { get; set; }
+        [NotMapped]
+        public string AddressLine1 { get; set; }
+        [NotMapped]
+        public string AddressLine2 { get; set; }
+        [NotMapped]
+        public string City { get; set; }
+        [NotMapped]
+        public string PostalCode { get; set; }
 
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }
         public string PaymentGatewayUserRef { get; set; }
 
-        [Required(ErrorMessage = "Please enter ZipCode")]
-        [MaxLength(10)]
         public string ZipCode { get; set; }
         public bool WorksWithPets { get; set; }
         public int? LanguageId { get; set; }

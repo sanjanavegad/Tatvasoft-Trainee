@@ -6,6 +6,33 @@
 
 @{ 
     double time = Convert.ToDouble(@Model.ServiceHours + @Model.ExtraHours);
+
+    var extras = Model.Extra.ToString("D5");
+    var array = extras.ToCharArray();
+    var extraservice = " ";
+
+    if (array[0] == '1')
+    {
+
+        extraservice += "Inside cabinets, ";
+    }
+    if (array[1] == '1')
+    {
+
+        extraservice += "Inside fridge, ";
+    }
+    if (array[2] == '1')
+    {
+        extraservice += "Inside oven, ";
+    }
+    if (array[3] == '1')
+    {
+        extraservice += "Laundry wash & dry, ";
+    }
+    if (array[4] == '1')
+    {
+        extraservice += "Interioir window, ";
+    }
 }
 
 <div class="modal fade" id="ServiceDetailes" tabindex="-1" role="dialog" aria-labelledby="ServiceDetailes" aria-hidden="true">
@@ -27,19 +54,19 @@
                 <div class="row">
                     <div class="col-12">
                         <div><strong>Service Id : </strong>@Model.ServiceRequestId</div>
-                        <div><strong>Extras : </strong>Cleaning the fridge, cleaning the oven, washing and drying </div>
+                        <div><strong>Extras : </strong>@extraservice</div>
                         <div><strong>Net Amount : </strong><p class="text-center payment-service-history">@Model.TotalCost</p></div>
                     </div>
                 </div>
                 <hr class="hr-line">
-                    <div class="row">
-                        <div class="col-12">
-                            <div><strong>Service Address : </strong>@Model.AddressLine2 , @Model.AddressLine1</div>
-                            <div><strong>Billing Address : </strong>Same as address</div>
-                            <div><strong>Phone : </strong>@Model.Mobile</div>
-                            <div><strong>Email : </strong>@Model.Email</div>
-                        </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div><strong>Service Address : </strong>@Model.AddressLine2 , @Model.AddressLine1</div>
+                        <div><strong>Billing Address : </strong>Same as address</div>
+                        <div><strong>Phone : </strong>@Model.Mobile</div>
+                        <div><strong>Email : </strong>@Model.Email</div>
                     </div>
+                </div>
 
                 <hr class="hr-line">
                 <div class="row">
@@ -60,8 +87,20 @@
                     </div>
                 </div>
                 <hr class="hr-line">
-                <button type="button" class="btn btn-reschedule" data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#Reschedule">Reschedule</button>
-                <button type="button" class="btn btn-reschedule-cancel" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cancel-request">Cancel</button>
+                @if (@Model.ServiceStartDate.AddHours(time) < DateTime.Now)
+                {
+                    <button type="button" class="btn btn-reschedule-cancel">Expired</button>
+                }
+                else if (Model.Status == 3)
+                {
+                    <button type="button" class="btn btn-reschedule" data-bs-toggle="modal" data-id="@Model.ServiceRequestId" onclick="schedule(this)" data-target="#Reschedule">Reschedule</button>
+
+                    <button type="button" class="btn btn-reschedule-cancel" data-bs-toggle="modal" data-bs-target="#cancel-request" data-id="@Model.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-rate-service-history" data-id="@Model.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
+                }
             </div>
         </div>
     </div>

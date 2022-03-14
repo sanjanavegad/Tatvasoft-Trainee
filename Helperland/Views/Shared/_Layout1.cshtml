@@ -423,6 +423,7 @@
 
     <script>
         function addresssubmit() {
+            debugger;
             var data = {};
             data.addressLine1 = document.getElementById("addstreetname").value;
             data.addressLine2 = document.getElementById("addhousenumber").value;
@@ -438,7 +439,6 @@
                 success: function (result) {
                     if (result.value == "true") {
                         getaddress();
-
                         alert("address is valid");
                     }
                     else {

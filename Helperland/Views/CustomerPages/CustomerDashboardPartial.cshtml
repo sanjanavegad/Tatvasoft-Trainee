@@ -31,7 +31,6 @@
                 <tr>
                     <td>
                         <button class="blank-button text-center ml-5" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="detailes(this)" data-bs-target="#ServiceDetailes">@dbs.ServiceRequestId</button>
-                        
                     </td>
                     <td scope="row" class="th-upcoming-service">
                         <button class="blank-button" data-toggle="modal" data-target="#ServiceDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
@@ -43,34 +42,51 @@
                         </button>
                     </td>
                     <td>
+                        @if (@dbs.Name != null)
+                        {
                             <div class="row">
                                 <div class="col-3">
                                     <img src="../images\cap.png" alt="" class="history-cap">
                                 </div>
                                 <div class="col-9">
-                                    @dbs.FirstName<br>
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\grey-small-star.png" alt="">
-                                    <img src="../images\grey-small-star.png" alt="">
-                                    3
+                                    @dbs.Name<br>
+                                    @{
+                                        int totalstars = Convert.ToInt32(dbs.ratings);
+                                        int stars = 5 - totalstars;
+                                        for (int i = 1; i <= totalstars; i++)
+                                        {
+                                            <span class="star">
+                                                <img src="../images/yellow-small-star.png" alt="">
+                                            </span>
+                                        }
+                                        for (int j = 1; j <= stars; j++)
+                                        {
+                                            <span class="star">
+                                                <img src="../images/star2.png" alt="">
+                                            </span>
+                                        }
+                                    }
+                                    @dbs.ratings
+
                                 </div>
                             </div>
-
-                    </td>
+                           }
+                        </td>
 
                     <td>
                         <p class="payment-service-history">€ @dbs.TotalCost</p>
                     </td>
                     <td>
                         <div class="row">
-                            <!-- Rescedule button Modal-->
+                            @if (@dbs.ServiceStartDate.AddHours(time) < DateTime.Now)
+                            {
+                                <button type="button" class="btn btn-reschedule-cancel">Expired</button>
+                            }
+                            else {
                             <button type="button" class="btn btn-reschedule" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="schedule(this)" data-target="#Reschedule">Reschedule</button>
-                            
-                            <!-- Cancel Button model -->
+
                             <button type="button" class="btn btn-reschedule-cancel" data-bs-toggle="modal" data-bs-target="#cancel-request" data-id="@dbs.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
-                            
+                            }
 
                         </div>
                     </td>

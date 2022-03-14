@@ -1,0 +1,37 @@
+﻿@model IEnumerable<User>
+@{
+    int i = 0;
+}
+
+<div id="blockcustomer" class="container tab-pane active">
+    <div class="row">
+        @foreach (User user in Model)
+        {
+            <div class="col-4">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-center mt-3">
+                            <img src="../images\cap.png" alt="" class="block-cap">
+                            <br>
+                            <h5 class="text-center">@user.FirstName @user.LastName</h5>
+                            <br>
+                            @if (ViewBag.blockedornot[i] == "yes")
+                            {
+                                <a class="btn btn-reschedule-cancel mr-4 mt-3" data-id="@user.UserId" onclick="unblockcustomer(this)" title="Unblock">Unblock</a>
+
+                            }
+                            @if (ViewBag.blockedornot[i] == "no")
+                            {
+                                <a class="btn btn-reschedule-cancel mr-4 mt-3" data-id="@user.UserId" onclick="blockcustomer(this)" title="Block">Block</a>
+
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            i = i + 1;
+        }
+    </div>
+</div>

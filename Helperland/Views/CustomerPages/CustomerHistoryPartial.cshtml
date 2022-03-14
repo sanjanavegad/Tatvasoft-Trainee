@@ -5,7 +5,7 @@
         service = ViewBag.services;
     }
 }
-@using Helperland.Models;
+@model Helperland.Models.Rating
 
 <div id="servicehistory" class="container tab-pane active">
     <!-- <div class="col-12"> -->
@@ -44,21 +44,36 @@
                         </button>
                     </td>
                     <td>
+                        @if (@dbs.Name != null)
+                        {
                             <div class="row">
                                 <div class="col-3">
                                     <img src="../images\cap.png" alt="" class="history-cap">
                                 </div>
                                 <div class="col-9">
-                                    @dbs.FirstName<br>
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\yellow-small-star.png" alt="">
-                                    <img src="../images\grey-small-star.png" alt="">
-                                    4
+                                    @dbs.Name<br>
+                                    @{
+                                        int totalstars = Convert.ToInt32(dbs.ratings);
+                                        int stars = 5 - totalstars;
+                                        for (int i = 1; i <= totalstars; i++)
+                                        {
+                                            <span class="star">
+                                                <img src="../images/yellow-small-star.png" alt="">
+                                            </span>
+                                        }
+                                        for (int j = 1; j <= stars; j++)
+                                        {
+                                            <span class="star">
+                                                <img src="../images/star2.png" alt="">
+                                            </span>
+                                        }
+
+                                        @dbs.ratings
+                                    }
+
                                 </div>
                             </div>
-
+                        }
                     </td>
                     <td>
                         <p class="payment-service-history">€ @dbs.TotalCost</p>

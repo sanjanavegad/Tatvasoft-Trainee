@@ -51,6 +51,10 @@ namespace Helperland.Models
         public string Mobile { get; set; }
         [NotMapped]
         public string Email { get; set; }
+        [NotMapped]
+        public string City { get; set; }
+
+
 
         [NotMapped]
         [DataType(DataType.Date)]
@@ -61,9 +65,14 @@ namespace Helperland.Models
         public DateTime ServiceTime { get; set; }
 
         [NotMapped]
-        public string FirstName { get; set; }
+        public string Name { get; set; }
         [NotMapped]
         public decimal? ratings { get; set; }
+        [NotMapped]
+        public bool IsBlocked { get; set; }
+
+        [NotMapped]
+        public int Extra { get; set; }
 
 
         public virtual User ServiceProvider { get; set; }

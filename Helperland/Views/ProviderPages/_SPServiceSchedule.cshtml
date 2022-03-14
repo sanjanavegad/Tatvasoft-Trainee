@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div id="serviceschedule" class="container tab-pane active">
+    <div class="calendar"  onload="renderDate()">
+        <div class="cal-month">
+            <div class="cal-prev" onclick="moveDate('prev')">
+                <span>&#10094;</span>
+            </div>
+            <div class="cal-next" onclick="moveDate('next')">
+                <span>&#10095;</span>
+            </div>
+            <h2 id="month"></h2>
+            <p id="date_str" class="mt-4"></p>
+        </div>
+        <div class="cal-weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+        </div>
+        <div class="cal-days"></div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Helperland.Models
+@model Helperland.Models.ServiceRequest
+
+@{
+    double time = Convert.ToDouble(@Model.ServiceHours + @Model.ExtraHours);
+
+    var extras = Model.Extra.ToString("D5");
+    var array = extras.ToCharArray();
+    var extraservice = " ";
+
+    if (array[0] == '1')
+    {
+
+        extraservice += "Inside cabinets, ";
+    }
+    if (array[1] == '1')
+    {
+
+        extraservice += "Inside fridge, ";
+    }
+    if (array[2] == '1')
+    {
+        extraservice += "Inside oven, ";
+    }
+    if (array[3] == '1')
+    {
+        extraservice += "Laundry wash & dry, ";
+    }
+    if (array[4] == '1')
+    {
+        extraservice += "Interioir window, ";
+    }
+}
+
+<div id="NewDetailes" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered" style="min-width: 700px !important;">
+        <div class="modal-content" style="font-size: 12px;">
+            <div class="modal-header">
+                <h6 class="modal-title">Service Detailes</h6>
+                <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="font-size: 14px;">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>@Model.ServiceStartDate.ToString("dd/MM/yyyy")  &nbsp; @Model.ServiceStartDate.ToString("HH:mm") - @Model.ServiceStartDate.AddHours(time).ToString("HH:mm")</h6>
+                                <div><strong>Duration : </strong>@Model.SubTotal</div>
+                                <hr class="hr-line">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div><strong>Service Id : </strong>@Model.ServiceRequestId</div>
+                                <div><strong>Extras : </strong>@extraservice</div>
+                                <div>
+                                    <strong>Total payment : </strong>
+                                    <span class="text-center payment-service-history">€ @Model.TotalCost</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+                        <div class="row">
+                            <div class="col-12">
+                                <div><strong>Customer Name : </strong>@Model.Name</div>
+                                <div><strong>Service Address : </strong>@Model.AddressLine1, @Model.AddressLine2</div>
+                                <div><strong>Distance : </strong>-</div>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Do you want to tell your helper somthing?</strong><br>
+                                @if (@Model.HasPets == true)
+                                {
+                                    <div>
+                                        <img src="~/images/right-sign.jpg" /> I have pets at home
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        <img src="~/images/cross-sign.jpg" /> I don't 'have pets at home
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+                        @if (@Model.Status == 4)
+                        {
+                            <button type="button" class="btn btn-rate-service-history" data-id="@Model.ServiceRequestId" onclick="acceptbtn(this)">Accept</button>
+                        }
+                        else if(Model.Status == 3)
+                        {
+                            <button type="button" class="btn btn-upcoming-service" data-id="@Model.ServiceRequestId" onclick="cancelservice(this)" data-bs-dismiss="modal">Cancle</button>
+                        }
+                        else
+                        {
+                            <p></p>
+                        }
+
+                    </div>
+                    <div class="col-6">
+                        <iframe allowfullscreen="" frameborder="0"
+                                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJxzZgCD_hvkcRTC-2Pt6bXt0&amp;key=AIzaSyAag-Mf1I5xbhdVHiJmgvBsPfw7mCqwBKU"
+                                width="100%" height="400"></iframe>
+                        <a href="https://123movies-to.org"></a><br>
+                        <a href="https://www.embedgooglemap.net"> </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

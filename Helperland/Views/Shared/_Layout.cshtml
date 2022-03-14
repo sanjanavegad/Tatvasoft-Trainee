@@ -210,8 +210,10 @@
                                                 Welcome,<br><strong>@Context.Session.GetString("Name")</strong>
                                             </li>
                                             <hr>
-                                            <li><a asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard">My Dashboard</a></li>
-                                            <li><a href="mysetting.html"> My settings</a></li>
+
+                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
+                                                <li><a href="mysetting.html"> My settings</a></li>
+                                            
                                             <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
                                         </ul>
                                     </li>

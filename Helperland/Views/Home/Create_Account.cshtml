@@ -40,17 +40,16 @@
                 <span asp-validation-for="Email" class="text-danger small"></span>
                 <input asp-for="Email" class="form-control" id="inputemail" placeholder="Email">
             </div>
-            <div class="col-6">
-                <span asp-validation-for="Password" class="text-danger small"></span>
-                <input asp-for="Password" type="Password" class="form-control" id="inputpassword" placeholder="Password">
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="inputpassword" asp-for="Password" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
-                    <input asp-for="ConfirmPassword" type="Password" class="form-control" id="inputconfirmpassword" placeholder="Conform Password">
-                </div>
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="inputconfirm-password" asp-for="ConfirmPassword"
+                       placeholder="Confirm Password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-             
+
             <div class="row px-3">
                 <div class="col-sm-12">
                     <div class="checkbox">

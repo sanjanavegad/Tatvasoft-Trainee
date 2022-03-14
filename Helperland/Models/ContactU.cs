@@ -37,9 +37,6 @@ namespace Helperland.Models
         public int? CreatedBy { get; set; }
         public string FileName { get; set; }
 
-        [Display(Name = "Attach The File")]
-        [required]
-        [NotMapped]
-        public IFormFile AttechmentFile { get; set; }
+        
     }
 }

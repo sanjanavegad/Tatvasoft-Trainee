@@ -1,79 +1,109 @@
-﻿@using Helperland.Models
-@model Helperland.Models.User
+﻿@using Helperland.Models;
+@model Helperland.Models.User;
 @{
-    List<UserAddress> Address = null;
-    if (ViewBag.addresses != null)
-    {
-        Address = ViewBag.addresses;
-    }
     var detailes = ViewBag.users;
-
+    var address = ViewBag.add;
 }
 
-<div id="settings" class="container tab-pane active">
+
+<div id="settings" class="container tab-pane active" style="width:1000px;">
     <div class="row row-btn">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified px-0" id="mysetting" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details"
-                        type="button" role="tab" aria-controls="details" aria-selected="true">
+                <button class="nav-link active" id="details-tab" data-bs-toggle="tab"
+                        data-bs-target="#details" type="button" role="tab" aria-controls="details"
+                        aria-selected="true">
                     My Details
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="adrress-tab" data-bs-toggle="tab" data-bs-target="#adrress" type="button"
-                        role="tab" aria-controls="adrress" aria-selected="false">
-                    My Addresses
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link " id="change-pwd-tab" data-bs-toggle="tab" data-bs-target="#change-pwd"
-                        type="button" role="tab" aria-controls="change-pwd" aria-selected="false">
+                <button class="nav-link " id="change-pwd-tab" data-bs-toggle="tab"
+                        data-bs-target="#change-pwd" type="button" role="tab" aria-controls="change-pwd"
+                        aria-selected="false">
                     Change Password
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="subscribe-notification-tab" data-bs-toggle="tab"
-                        data-bs-target="#subscribe-notification" type="button" role="tab"
-                        aria-controls="subscribe-notification" aria-selected="false">
-                    Subscribe Notifications
-                </button>
+            <li class="nav-item mt-4" role="presentation">
+
+            </li>
+            <li class="nav-item mt-4" role="presentation">
+
             </li>
 
         </ul>
         <!-- Tab panes -->
         <div class="tab-content px-0 mt-2">
-
-            <!-- Customer-Detailes -->
             <div class="tab-pane active text" id="details" role="tabpanel" aria-labelledby="details-tab">
-                <form method="post" class="mydetails-form pt-3">
+
+                <div class="row ">
+                    <div class="col-10 status-line">
+                        <h6 class="mb-4">
+                            Account Status : <span class="status">
+                            @if(detailes.UserProfilePicture != null)
+                            {
+                                <span>Active</span>
+                            }
+                            </span>
+                        </h6>
+                        <h5>Basic Detailes </h5>
+                    </div>
+                    <div style="margin-left:-30px;" class="col-2 mt-5">
+                        @if (detailes.UserProfilePicture == "1")
+                        {
+                            <img class="avatar active" style="float: right;" src="../images/avatar-car.png">
+                        }
+                        @if (detailes.UserProfilePicture == "2")
+                        {
+                            <img class="avatar" style="float: right;" src="../images/avatar-female.png">
+                        }
+                        @if (detailes.UserProfilePicture == "3")
+                        {
+                            <img class="avatar" style="float: right;" src="../images/avatar-hat.png">
+                        }
+                        @if (detailes.UserProfilePicture == "4")
+                        {
+                            <img class="avatar" style="float: right;" src="../images/avatar-iron.png">
+                        }
+                        @if (detailes.UserProfilePicture == "5")
+                        {
+                            <img class="avatar" style="float: right;" src="../images/avatar-male.png">
+                        }
+                        @if (detailes.UserProfilePicture == "6")
+                        {
+                            <img class="avatar" style="float: right;" src="../images/avatar-ship.png">
+                        }
+                    </div>
+                </div>
+                <form method="post" class="mydetails-form pt-3" asp-action="UpdateProviderDetailes" asp-controller="ProviderPages">
                     <div class="row">
                         <div class="col-4 all-lables">
                             <label for="">First Name</label>
-                            <input type="text" class="form-control" value="@detailes.FirstName" id="firstname">
+                            <input type="text" asp-for="FirstName" class="form-control" value="@detailes.FirstName" id="firstname">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-4 all-lables">
                             <label for="">Last Name</label>
-                            <input type="text" class="form-control" id="lastname" value="@detailes.LastName">
+                            <input type="text" asp-for="LastName" class="form-control" value="@detailes.LastName" id="lastname">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                         <div class="col-4 all-lables">
                             <label for="">E-mail Address</label>
-                            <input type="text" class="form-control" id="email" value="@detailes.Email" readonly>
+                            <input type="email" asp-for="Email" class="form-control" value="@detailes.Email" id="email">
                         </div>
 
                     </div>
                     <div class="row mt-3">
                         <div class="col-4 all-lables">
                             <label for="">Mobile number</label>
-                            <input class="form-control ng-pristine ng-valid ng-touched" formcontrolname="Mobile"
-                                   maxlength="10" name="Mobile" type="text" value="@detailes.Mobile" id="mobile">
+                            <input type="tel" asp-for="Mobile" class="form-control" maxlength="10" value="@detailes.Mobile" id="mobile">
                         </div>
                         <div class="col-4 all-lables">
-                            <label for="">Date of Birth</label>
+                            <label>Date of Birth</label>
                             <div class="row">
                                 <div class="col-4">
-                                    <select class="form-control " formcontrolname="DateOfBirthDay" id="date">
-                                        <option value="">Day</option>
+                                    <select class="form-control form-select" asp-for="Date">
+                                        <option>Day</option>
                                         <option value="1">01</option>
                                         <option value="2">02</option>
                                         <option value="3">03</option>
@@ -108,7 +138,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4" style="margin: 0px -15px;">
-                                    <select class="form-control ng-untouched ng-pristine ng-valid" id="month">
+                                    <select class="form-control form-select" asp-for="Month" >
                                         <option value="">Month</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
@@ -125,7 +155,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="DateOfBirthYear" id="year">
+                                    <select class="form-control form-select" asp-for="Year">
                                         <option value="">Year</option>
                                         <option value="2012">2012</option>
                                         <option value="2011">2011</option>
@@ -231,101 +261,116 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-4 all-lables">
+                            <label for="nationality">Nationality</label>
+                            <select class="form-control form-select" asp-for="NationalityId" id="nationality">
+                                <option value="1">German</option>
+                                <option value="2">Indian</option>
+                                <option value="3">American</option>
+                            </select>
+                        </div>
                     </div>
-                    <hr>
                     <div class="row">
-                        <div class="all-lables">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="language" class="control-label">My Preferred Language</label>
-                                <div class="col-2">
-                                    <select class="form-control " id="language">
-                                        <!---->
-                                        <option value="1">English</option>
-                                        <option value="2">German</option>
-                                    </select>
+                                <label>Gender</label>
+                                <label class="gender">
+                                    <input type="radio" asp-for="Gender" name="Gender" value="1"> Male  &nbsp;&nbsp;
+                                </label>
+                                <label class="gender">
+                                    <input type="radio" asp-for="Gender" name="Gender" value="2">Female &nbsp;&nbsp;
+                                </label>
+                                <label class="gender">
+                                    <input type="radio" asp-for="Gender" name="Gender" value="3"> No Information
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Choose an avatar</label>
+                                <br>
+                                <!---->
+                                <div class="columnAvatar">
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="1" class="d-none" />
+                                        <img src="../images/avatar-car.png" class="avatar" />
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="2" class="d-none" />
+                                        <img src="../images/avatar-female.png"/>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="3" class="d-none" />
+                                        <img src="../images/avatar-hat.png"/>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="4" class="d-none" />
+                                        <img src="../images/avatar-iron.png" />
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="5" class="d-none" />
+                                        <img src="../images/avatar-male.png"/>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="6" class="d-none" />
+                                        <img src="../images/avatar-ship.png"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="status-line">
+                            <h5>My Address </h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4 all-lables">
+                                    <label for="">Street Name</label>
+                                    <input type="text" asp-for="AddressLine1" value="@ViewBag.AddressLine1" class="form-control" id="streetname" >
+                                </div>
+                                <div class="col-4 all-lables">
+                                    <label for="">House Number</label>
+                                    <input type="number" asp-for="AddressLine2" value="@ViewBag.AddressLine2"  class="form-control" id="housenumber" >
+                                </div>
+                                <div class="col-4 all-lables">
+                                    <label for="">Postal Code</label>
+                                    <input type="number" asp-for="PostalCode" value="@ViewBag.PostalCode" class="form-control" id="postalcode" >
+                                </div>
+                            </div>
+
+
+                            <div class="row mt-3 mb-3">
+                                <div class="col-4 all-lables">
+                                    <label for="">City</label>
+                                    <input type="text" asp-for="City" value="@ViewBag.City" class="form-control" id="city">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 pt-2 mb-5">
-                        <button type="submit" class="btn save-btn" style="float: left;" onclick="savedetailes()">Save</button>
+                        <button type="submit" class="btn save-btn" style="float: left;">Save</button>
                     </div>
                 </form>
             </div>
 
-            <!-- CUstomer Address -->
-            <div class="tab-pane text fade" id="adrress" role="tabpanel" aria-labelledby="adrress-tab">
 
-                <table class="table address-setting mt-4">
-                    <thead class="table-light address-table-head-setting">
-                        <tr>
-                            <th scope="col" class="col-md-2 text-center tabale-heading">
-                                Invoicing
-                            </th>
-                            <th scope="col" class="col-md-8 tabale-heading">
-                                Addresses
-                            </th>
-                            <th scope="col" class="col-md-2 tabale-heading">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody style="font-weight: 50;">
-                        @foreach (UserAddress dbs in Address)
-                        {
-
-                            <tr>
-                                <td>
-                                    <input class="Redio-btn-gap" name="group1" type="radio" id="radio-button" checked />
-                                </td>
-                                <td class="contact">
-                                    <div>
-                                        <Strong>Address:</Strong> @dbs.AddressLine1
-                                        <br>
-                                    </div>
-                                    <div>
-                                        <strong>Telephone number:</strong> @dbs.Mobile
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="mt-2">
-                                        <a href="#" data-id="@dbs.AddressId" data-bs-toggle="modal" data-bs-target="#Modaleditaddress" onclick="addressmodel(this);"><i class="far fa-edit edit-icon-setting"></i></a>
-                                        <a href="#" data-id="@dbs.AddressId" data-bs-toggle="modal" data-bs-target="#Modaldeleteaddress" onclick="deletemodel(this);"><i class="far fa-trash-alt delete-icon-setting"></i> </a>
-                                    </div>
-
-                                    <!-- Edit Address Model -->
-                                    <div class="row mt-4">
-                                        <div class="col-md-3">
-
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-
-                        }
-                    </tbody>
-                </table>
-                <button type="button" class="btn add-new-address" data-bs-toggle="modal"
-                        data-bs-target="#myModalforaddress">
-                    Add new address
-                </button>
-            </div>
-
-
-            <!-- Customer-Change Password -->
-            <div class="tab-pane text" id="change-pwd" role="tabpanel" aria-labelledby="change-pwd-tab">
-                <form class="row g-4 mt-1 details-form-setting" asp-action="ChangePassword" asp-controller="CustomerPages">
+            <div class="tab-pane text" id="change-pwd" role="tabpanel"
+                 aria-labelledby="change-pwd-tab">
+                <form class="row g-4 mt-1 details-form-setting" asp-action="ChangePassword" asp-controller="ProviderPages">
                     <div class="row mt-3">
                         <div class="col-md-4 all-lables">
                             <label for="oldpassword" class="form-label">Old Password</label>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="Current password" required>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Current password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-4 all-lables">
                             <label for="newpassword" class="form-label">New Password </label>
                             <input asp-for="NewPassword" type="password" class="form-control" placeholder="New Password" required>
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -333,7 +378,8 @@
                             <label for="repeatpassword" class="form-label">
                                 Repeat Password
                             </label>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Repeat password" required>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Repeat password">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -345,24 +391,6 @@
                 </form>
             </div>
 
-
-            <div class="tab-pane text" id="subscribe-notification" role="tabpanel"
-                 aria-labelledby="subscribe-notification-tab">
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <div class="form-check newsletter-setting-p">
-                            <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
-                            <label class="form-check-label " for="myCheck">
-                                Yes, I would like to subscribe to the Helperland GmbH newsletter
-                                with vouchers, trends, promotions and individualized offers. I
-                                can unsubscribe from the newsletter at any time in the
-                                newsletter and in my customer account. If you no longer wish to
-                                receive our newsletter, remove the tick.
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

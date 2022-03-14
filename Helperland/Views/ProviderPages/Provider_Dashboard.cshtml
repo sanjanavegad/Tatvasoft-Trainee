@@ -1,0 +1,380 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+
+<!--Welcome heading-->
+<section class="first-heading">
+    <div class="welcome-heading">
+        <h6 class="Welcome ">Welcome,<b> Gaurang!</b></h6>
+    </div>
+</section>
+<!--Welcome heading-->
+<!--Main-section-->
+<section class="main-section-upcoming-services " id="main-customer-section">
+    <div class="row">
+        <div class="col-md-2  mb-2">
+            <div class="nav-upcoming-sevices">
+                <nav class="side-nav  nav-upcoming-sevices">
+                    <ul class="nav-menu nav nav-tabs flex-column" role="tablist">
+                        <li class=" nav-item-upcoming-service mt-3">
+                            <a class="active " data-bs-toggle="tab" href="#dashboard">Dashboard</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadnewservice();">New Service Request</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadupcomingservice();">Upcoming Service</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" @*onclick="loadserviceschedule()"*@ >Service Schedule</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadservicehistory();">Service history</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadmyretings();">My Retings</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+
+                        <li class="nav-item nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadblockcustomer();">Block Customer</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service">
+                            <a class="" data-bs-toggle="tab" href="#" onclick="mysettings();">My Settings</a>
+                        </li>
+                        <hr class="navbar-hr-line">
+                        <li class=" nav-item-upcoming-service pb-3">
+                            <a class="" data-bs-toggle="tab" href="#notification">Notification</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col">
+            <div class="tab-content" id="my-tab">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="model1"></section>
+<section id="model2"></section>
+<section id="model3"></section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+@section Scripts {
+
+<script>
+
+    var dt = new Date();
+    function renderDate() {
+        dt.setDate(1);
+        var day = dt.getDay();
+        var today = new Date();
+        var endDate = new Date(
+            dt.getFullYear(),
+            dt.getMonth() + 1,
+            0
+        ).getDate();
+        var prevDate = new Date(
+            dt.getFullYear(),
+            dt.getMonth(),
+            0
+        ).getDate();
+        var months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ]
+        document.getElementById("month").innerHTML =
+            months[dt.getMonth()];
+        document.getElementById("date_str").innerHTML =
+            dt.toDateString();
+        var cells = "";
+        for (x = day; x > 0; x--) {
+            cells += "<div class='cal-prev_date'>" + (prevDate - x +
+                1) + "</div>";
+        }
+        console.log(day);
+        for (i = 1; i <= endDate; i++) {
+            if (i == today.getDate() && dt.getMonth() ==
+                today.getMonth()) cells += "<div class='cal-today'>" + i + "</div>";
+            else
+                cells += "<div>" + i + "</div>";
+        }
+        document.getElementsByClassName("cal-days")[0].innerHTML =
+            cells;
+    }
+    function moveDate(para) {
+        if (para == "prev") {
+            dt.setMonth(dt.getMonth() - 1);
+        } else if (para == 'next') {
+            dt.setMonth(dt.getMonth() + 1);
+        }
+        renderDate();
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/ProviderPages/ProviderNewService',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+                $('#datatable1').DataTable({
+                    "searching": false,
+                    columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    }, {
+                        targets: [1],
+                        orderData: [1, 0]
+                    }, {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }]
+                });
+            }
+        });
+    });
+    function loadnewservice() {
+        $.ajax({
+            url: '/ProviderPages/ProviderNewService',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+                $('#datatable1').DataTable({
+                    "searching": false,
+                    columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    }, {
+                        targets: [1],
+                        orderData: [1, 0]
+                    }, {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }]
+                });
+            }
+        });
+    }
+    function loadupcomingservice() {
+        $.ajax({
+            url: '/ProviderPages/ProviderUpCommingService',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+                $('#datatable2').DataTable({
+                    "searching": false,
+                    columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    }, {
+                        targets: [1],
+                        orderData: [1, 0]
+                    }, {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }]
+                });
+            }
+        });
+    }
+    function loadserviceschedule() {
+        $.ajax({
+            url: '/ProviderPages/ProviderServiceSchedule',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+            }
+        });
+    }
+    function loadservicehistory() {
+        $.ajax({
+            url: '/ProviderPages/ProviderServiceHistory',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+                $('#datatable3').DataTable({
+                    "searching": false
+                });
+            }
+        });
+    }
+    function loadmyretings() {
+        $.ajax({
+            url: '/ProviderPages/ProviderRatings',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+            }
+        });
+    }
+    function loadblockcustomer() {
+        $.ajax({
+            url: '/ProviderPages/ProviderBlockCustomer',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+            }
+        });
+    }
+    function mysettings() {
+        $.ajax({
+            url: '/ProviderPages/ProviderSettings',
+            type: 'GET',
+            success: function (response) {
+                $('#my-tab').html(response);
+            }
+        });
+    }
+
+
+</script>
+<script>
+    function detailes(db) {
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            type: 'GET',
+            url: '/ProviderPages/NewServiceDetailes',
+            data: { "id": id },
+            success: function (responce) {
+                $("#model1").html(responce);
+                $("#NewDetailes").modal("show");
+            }
+
+        });
+    }
+    function acceptbtn(db) {
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            type: 'POST',
+            url: '/ProviderPages/AcceptServiceButton',
+            data: { "id": id },
+            success: function (responce) {
+                loadnewservice();
+            }
+
+        });
+    }
+    function cancelservice(db) {
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            type: 'POST',
+            url: '/ProviderPages/CancelServiceButton',
+            data: { "id": id },
+            success: function (responce) {
+                loadupcomingservice();
+            }
+
+        });
+    }
+    function complateservice(db) {
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            type: 'POST',
+            url: '/ProviderPages/CompaleteServiceButton',
+            data: { "id": id },
+            success: function (responce) {
+                loadupcomingservice();
+            }
+
+        });
+    }
+
+    function blockcustomer(db) {
+        debugger;
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            url: "/ProviderPages/BlockCustomer",
+            type: 'POST',
+            data: { "id": id },
+            success: function () {
+                loadblockcustomer();
+            }
+        });
+    }
+
+    function unblockcustomer(db) {
+        debugger;
+        var id = db.getAttribute("data-id");
+        $.ajax({
+            url: "/ProviderPages/UnBlockCustomer",
+            type: 'POST',
+            data: { "id": id },
+            success: function () {
+                loadblockcustomer();
+            }
+        });
+    }
+
+    function ExportToExcel(type, fn, dl) {
+        debugger;
+        var excel = document.getElementById('datatable3');
+        var wb = XLSX.utils.table_to_book(excel, { sheet: "sheet1" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+            XLSX.writeFile(wb, fn || ('ServiceHistory.' + (type || 'xlsx')));
+    }
+
+    //function saveprofile() {
+    //    debugger;
+    //    var data = {};
+    //    data.firstName = document.getElementById("firstname").value;
+    //    data.lastName = document.getElementById("lastname").value;
+    //    data.email = document.getElementById("email").value;
+    //    data.mobile = document.getElementById("mobile").value;
+    //    data.date = document.getElementById("date").value;
+    //    data.month = document.getElementById("month").value;
+    //    data.year = document.getElementById("year").value;
+    //    data.nationalityId = document.getElementById("nationality").value;
+    //    data.gender = document.getElementById("gender").value;
+    //    data.addressLine1 = document.getElementById("streetname").value;
+    //    data.addressLine2 = document.getElementById("housenumber").value;
+    //    data.postalCode = document.getElementById("postalcode").value;
+    //    data.city = document.getElementById("city").value;
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '/ProviderPages/UpdateProviderDetailes',
+    //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //        data: data,
+    //        success: function (result) {
+    //            if (result.value == "true") {
+    //                mysettings();
+    //            }
+    //            else {
+    //                alert("detailes is invalid");
+    //            }
+    //        }
+    //    })
+    //}
+    
+    
+</script>
+}

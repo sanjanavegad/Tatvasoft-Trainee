@@ -1,59 +1,142 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@using Helperland.Models
-@model Helperland.Models.ServiceRequest
+@model Helperland.Models.Rating;
 
 <div class="modal fade" id="RateSPModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
         <div class="modal-content">
             <div class="modal-header">
+
                 <div class="row pt-3">
                     <div class="col-1" style="margin-right: 25px;">
                         <img src="../images\cap.png" alt="" class="history-cap">
                     </div>
                     <div class="col-8">
-                        Sandip Patel<br>
-                        <img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\grey-small-star.png" alt="">
-                        4
+                        @ViewBag.Name<br>
+                        @{
+                            int totalstars = Convert.ToInt32(@ViewBag.rating);
+                            int stars = 5 - totalstars;
+                            for (int i = 1; i <= totalstars; i++)
+                            {
+                                <span class="star">
+                                    <img src="../images/yellow-small-star.png" alt="">
+                                </span>
+                            }
+                            for (int j = 1; j <= stars; j++)
+                            {
+                                <span class="star">
+                                    <img src="../images/star2.png" alt="">
+                                </span>
+                            }
+                        }
+                    <span>@ViewBag.rating</span>
                     </div>
                 </div>
+
                 <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <h6><strong>Rate your service provider</strong></h6>
                 <hr class="hr-line">
-                <form method="post">
-                    <table style="width:300px">
-                        <tr>
-                            <td>On time arrival</td>
-                            <td>
-                                <img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\grey-small-star.png" alt="">
-                                3.6
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Friendly</td>
-                            <td>
-                                <img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\grey-small-star.png" alt="">
-                                4
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Quality of service</td>
-                            <td>
-                                <img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt=""><img src="../images\yellow-small-star.png" alt="">
-                                5
-                            </td>
-                        </tr>
+                <form method="post" asp-action="AddRatings" asp-controller="CustomerPages">
+                    <input class="form-control" type="hidden" readonly value="@ViewBag.servicerequestid" asp-for="ServiceRequestId">
+                    <input class="form-control" type="hidden" readonly value="@ViewBag.serviceproviderid" asp-for="RatingTo">
+
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="rating-option">On time arrival</td>
+                                <td class="rate">
+
+                                    <fieldset class="rating">
+                                        <input type="radio" id="star5" asp-for="OnTimeArrival" value="5.0" />
+                                        <label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                                        <input type="radio" id="star4" asp-for="OnTimeArrival" value="4.0" />
+                                        <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+
+                                        <input type="radio" id="star3" asp-for="OnTimeArrival" value="3.0" />
+                                        <label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                                        <input type="radio" id="star2" asp-for="OnTimeArrival" value="2.0" />
+                                        <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                                        <input type="radio" id="star1" asp-for="OnTimeArrival" value="1.0" />
+                                        <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rating-option">Friendly</td>
+                                <td class="rate">
+
+                                    <fieldset class="ratingfr" asp-for="">
+                                        <input type="radio" asp-for="Friendly" id="starfr5" value="5.0" />
+                                        <label class="full" for="starfr5" title="Awesome - 5 stars"></label>
+
+                                        <input type="radio" asp-for="Friendly" id="starfr4" value="4.0" />
+                                        <label class="full" for="starfr4" title="Pretty good - 4 stars"></label>
+
+
+                                        <input type="radio" asp-for="Friendly" id="starfr3" value="3.0" />
+                                        <label class="full" for="starfr3" title="Meh - 3 stars"></label>
+
+
+                                        <input type="radio" asp-for="Friendly" id="starfr2" value="2.0" />
+                                        <label class="full" for="starfr2" title="Kinda bad - 2 stars"></label>
+
+
+                                        <input type="radio" asp-for="Friendly" id="starfr1" value="1.0" />
+                                        <label class="full" for="starfr1" title="Sucks big time - 1 star"></label>
+
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quality of service</td>
+                                <td class="rate">
+
+                                    <fieldset class="ratingqs">
+                                        <input type="radio" id="starqs5" asp-for="QualityOfService" value="5.0" />
+                                        <label class="full" for="starqs5" title="Awesome - 5 stars"></label>
+
+
+                                        <input type="radio" id="starqs4" asp-for="QualityOfService" value="4.0" />
+                                        <label class="full" for="starqs4" title="Pretty good - 4 stars"></label>
+
+
+                                        <input type="radio" id="starqs3" asp-for="QualityOfService" value="3.0" />
+                                        <label class="full" for="starqs3" title="Meh - 3 stars"></label>
+
+                                        <input type="radio" id="starqs2" asp-for="QualityOfService" value="2.0" />
+                                        <label class="full" for="starqs2" title="Kinda bad - 2 stars"></label>
+
+
+                                        <input type="radio" id="starqs1" asp-for="QualityOfService" value="1.0" />
+                                        <label class="full" for="starqs1" title="Sucks big time - 1 star"></label>
+
+                                    </fieldset>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
+
+
                     <div class="row mt-3 mb-3">
                         <div><strong>Feedback on sevice provider</strong></div>
                         <div>
-                            <textarea name="" id="" cols="10" rows="2" class="form-control"></textarea>
+                            <textarea asp-for="Comments" name="Comments" id="" cols="10" rows="2" class="form-control"></textarea>
                         </div>
                     </div>
+
+                    <button type="submit" class="btn  submit-button" data-bs-dismiss="modal">
+                        Submit
+                    </button>
                 </form>
             </div>
         </div>

@@ -1,5 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+@import url('https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css');
+
 * {
     margin: 0px;
     padding: 0px;
@@ -1788,6 +1790,7 @@ a {
 .nav-menu {
     list-style: none;
     background-color: #1d7a8c;
+    width:200px;
 }
 
 .nav-item-upcoming-service ul .active > a {
@@ -1799,10 +1802,10 @@ a {
 }
 
 .nav-item-upcoming-service a {
-    font-size: 18px;
+    font-size: 17px;
     margin-top: 18px;
     color: #FFFFFF;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .nav-item-upcoming-service :hover {
@@ -3028,4 +3031,270 @@ ul > a:hover {
     background-color: white;
     border: none;
     color:#646464;
+}
+
+
+
+/* rating modal */
+
+#RateSPModel table {
+    margin-bottom: 15px;
+}
+
+#RateSPModel .control-label {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+
+
+#RateSPModel .rate .rating {
+    border: none;
+    margin-right: 49px
+}
+
+#RateSPModel .rate .ratingfr {
+    border: none;
+    margin-right: 49px
+}
+
+#RateSPModel .rate .ratingqs {
+    border: none;
+    margin-right: 49px
+}
+
+#RateSPModel .rate .myratings {
+    font-size: 85px;
+    color: green
+}
+
+#RateSPModel .rate .rating > [id^="star"] {
+    display: none
+}
+
+#RateSPModel .rate .ratingfr > [id^="star"] {
+    display: none
+}
+
+#RateSPModel .rate .ratingqs > [id^="star"] {
+    display: none
+}
+
+#RateSPModel .rate .rating > label:before {
+    margin: 5px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"
+}
+
+#RateSPModel .rate .ratingqs > label:before {
+    margin: 5px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"
+}
+
+#RateSPModel .rate .ratingfr > label:before {
+    margin: 5px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"
+}
+
+#RateSPModel .rate .rating > .half:before {
+    content: "\f089";
+    position: absolute
+}
+
+#RateSPModel .rate .ratingfr > .half:before {
+    content: "\f089";
+    position: absolute
+}
+
+#RateSPModel .rate .ratingqs > .half:before {
+    content: "\f089";
+    position: absolute
+}
+
+#RateSPModel .rate .rating > label {
+    color: #ddd;
+    float: right
+}
+
+#RateSPModel .rate .ratingqs > label {
+    color: #ddd;
+    float: right
+}
+
+#RateSPModel .rate .ratingfr > label {
+    color: #ddd;
+    float: right
+}
+
+#RateSPModel .rate .rating > [id^="star"]:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #FFD700
+}
+
+#RateSPModel .rate .ratingfr > [id^="star"]:checked ~ label,
+.ratingfr:not(:checked) > label:hover,
+.ratingfr:not(:checked) > label:hover ~ label {
+    color: #FFD700
+}
+
+#RateSPModel .rate .ratingqs > [id^="star"]:checked ~ label,
+.ratingqs:not(:checked) > label:hover,
+.ratingqs:not(:checked) > label:hover ~ label {
+    color: #FFD700
+}
+
+#RateSPModel .rate .rating > [id^="star"]:checked + label:hover,
+.rating > [id^="star"]:checked ~ label:hover,
+.rating > label:hover [id^="star"]:checked label,
+.rating > [id^="star"]:checked label:hover label {
+    color: #FFED85
+}
+
+#RateSPModel .rate .ratingfr > [id^="star"]:checked + label:hover,
+.ratingfr > [id^="star"]:checked ~ label:hover,
+.ratingfr > label:hover [id^="star"]:checked label,
+.ratingfr > [id^="star"]:checked label:hover label {
+    color: #FFED85
+}
+
+#RateSPModel.rate .ratingqs > [id^="star"]:checked + label:hover,
+.ratingqs > [id^="star"]:checked ~ label:hover,
+.ratingqs > label:hover [id^="star"]:checked label,
+.ratingqs > [id^="star"]:checked label:hover label {
+    color: #FFED85
+}
+
+#RateSPModel .rate .reset-option {
+    display: none
+}
+
+#RateSPModel .rate .reset-button {
+    margin: 6px 12px;
+    background-color: rgb(255, 255, 255);
+    text-transform: uppercase
+}
+
+#RateSPModel .rate .mt-100 {
+    margin-top: 100px
+}
+
+#RateSPModel .rate .card {
+    position: relative;
+    display: flex;
+    width: 350px;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+}
+
+    #RateSPModel .rate .card .card-body {
+        padding: 1rem 1rem
+    }
+
+#RateSPModel .rate .card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+#RateSPModel .rate p {
+    font-size: 14px
+}
+
+#RateSPModel .rate h4 {
+    margin-top: 18px
+}
+
+#RateSPModel .rate .btn:focus {
+    outline: none
+}
+
+#RateSPModel .rate .btn {
+    border-radius: 22px;
+    text-transform: capitalize;
+    font-size: 13px;
+    padding: 8px 19px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #D50000
+}
+
+    #RateSPModel .rate .btn:hover {
+        background-color: #D32F2F !important
+    }
+
+#RateSPModel .sp .star img {
+    position: relative;
+}
+
+
+
+/* Service provider Setting tab */
+
+.status {
+    color: #67b644;
+    font-size: 18px;
+}
+
+.status-line {
+    line-height: 22px;
+    border-bottom: 1px solid #dcdcdc;
+    font-weight: 700;
+    margin: 0 0 15px;
+}
+
+.mydetails-form {
+    color: #646464;
+    font-size: 15px !important;
+}
+
+
+.gender {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.columnAvatar {
+    float: left;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+input[type=radio]:checked + img {
+    border: 2px solid #1d7a8c;
+    border-radius: 50%;
+}
+
+input[type=radio] + img {
+    width: 70px;
+    height: 70px;
+}
+
+.block-cap {
+    width: 66px;
+    height: 60px;
+    border: solid 1px #aaa;
+    border-radius: 50%;
+    padding: 15px 12px;
+    margin-bottom: 20px;
 }

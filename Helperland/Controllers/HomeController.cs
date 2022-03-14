@@ -2,6 +2,7 @@
 using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
@@ -23,23 +24,25 @@ namespace Helperland.Controllers
             _helperlandContext = helperlandContext;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
+            
             return View();
         }
         [HttpPost]
         public IActionResult Index(User user)
         {
-                string email = user.Email;
-                var p = _helperlandContext.Users.Where(c => c.Email == email && c.Password == user.Password).ToList();
+                var p = _helperlandContext.Users.Where(c => c.Email == user.Email && c.Password == user.Password).ToList();
                 ModelState.Clear();
                 if (p.Count == 1)
-                {
+            {
                     User userdetails = _helperlandContext.Users.Where(c => c.Email == user.Email && c.Password == user.Password).FirstOrDefault();
                     var Name = userdetails.FirstName + " " + userdetails.LastName;
                     ViewBag.userType = user.UserTypeId;
                     HttpContext.Session.SetString("isLoggedIn", "true");
                     HttpContext.Session.SetString("Name", Name);
+                    HttpContext.Session.SetInt32("UserTypeId", userdetails.UserTypeId);
                     HttpContext.Session.SetInt32("UserId", userdetails.UserId);
 
                      
@@ -51,7 +54,7 @@ namespace Helperland.Controllers
                     else if (p.FirstOrDefault().UserTypeId == 2)
                     {
                         HttpContext.Session.SetString("UserTypeId", user.UserTypeId.ToString());
-                        return RedirectToAction("Service_Provider", "Home");
+                        return RedirectToAction("Provider_Dashboard", "ProviderPages");
                     }
                 }
                 else
@@ -176,6 +179,8 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Service_Provider(User signup)
         {
+            if (ModelState.IsValid)
+            {
                 if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 2;
@@ -192,22 +197,21 @@ namespace Helperland.Controllers
                 {
                     ViewBag.Message = "User already registed";
                 }
+            }    
             return View();
         }
 
         [HttpGet]
         public IActionResult Create_Account()
         {
-            User signup = new User();
-            return View(signup);
+            return View();
         }
-
         [HttpPost]
         public IActionResult Create_Account(User signup)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
+                if (_helperlandContext.Users.Where(s => s.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(s => s.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 1;
                     signup.CreatedDate = DateTime.Now;
@@ -221,7 +225,7 @@ namespace Helperland.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "User already registed";
+                    ViewBag.Message = "This Email and Mobile are already registerd.";
                 }
             }
             return View();

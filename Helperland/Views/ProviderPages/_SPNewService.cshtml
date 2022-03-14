@@ -1,0 +1,75 @@
+﻿
+@{
+    List<ServiceRequest> service = null;
+    if (ViewBag.services != null)
+    {
+        service = ViewBag.services;
+    }
+
+}
+@using Helperland.Models;
+
+<div id="newservicerequest" class="container tab-pane active">
+    <div class="heading-service-history mt-3">
+        New Service Request
+        <button type="button" class="btn btn-export-service-history">Export</button>
+    </div>
+    <!-- </div> -->
+    <table class="table" id="datatable1">
+        <thead class="table-header-upcoming-services">
+            <tr>
+                <th scope="col">Service ID <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Service Date <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Customer Details <img src="../images\sort.png" alt=""> </th>
+                <th scope="col">Payment <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Time Conflict <img src="../images\sort.png" alt=""></th>
+                <th scope="col">Action<img src="../images\sort.png" alt=""></th>
+            </tr>
+        </thead>
+        <tbody class="tbody-upcoming-services">
+            @foreach (ServiceRequest dbs in service)
+            {
+                double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                <tr>
+                    <td>
+                        
+                        <button class="blank-button" data-toggle="modal" data-target="#NewDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
+                        <!-- service detailes model -->
+                       
+
+                    </td>
+                    <td scope="row" class="th-upcoming-service">
+                        <img src="../images\calendar2.png" alt="">
+                        @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                        <br>
+                        <img src="../images\layer-712.png" alt="">
+                        @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                    </td>
+
+
+                    <td>
+                        <div class="row">
+                            <div class="col-md-2 mt-3">
+                                <img src="../images/layer-15.png" alt="">
+                            </div>
+                            <div class="col-md-10">
+                                <div>@dbs.Name</div>
+                                <div>@dbs.AddressLine1 , @dbs.AddressLine2</div>
+                                    @dbs.City , @dbs.ZipCode
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="payment-service-history">€ @dbs.TotalCost</p>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" onclick="acceptbtn(this)" data-bs-dismiss="modal">Accept</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+    </table>
+
+</div>

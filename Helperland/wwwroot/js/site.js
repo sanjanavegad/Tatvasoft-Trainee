@@ -44,5 +44,3 @@ function scrollFunction() {
 }
 // Write your JavaScript code.
 
-
- 

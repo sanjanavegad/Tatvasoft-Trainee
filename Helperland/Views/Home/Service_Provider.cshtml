@@ -155,12 +155,14 @@
                         <span asp-validation-for="Mobile" class="text-danger small"></span>
                         <input asp-for="Mobile" class="form-control" id="inputnumber" placeholder="Phone number">
                     </div>
-
                     <div class="form-group">
-                        <input asp-for="Password" type="Password" class="form-control" id="inputpassword" placeholder="Password">
+                        <input type="password" class="form-control" id="inputpassword" asp-for="Password" placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Password" type="Password" class="form-control" id="inputconfirmpassword" placeholder="Conform Password">
+                        <input type="password" class="form-control" id="inputconfirm-password" asp-for="ConfirmPassword"
+                               placeholder="Confirm Password">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="send_me" value="1" style="margin-right: 7px;" tabindex="3" required />Send me newsletters from Helperland

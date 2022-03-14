@@ -177,20 +177,10 @@ namespace Helperland.Controllers
             return Ok(Json("False"));
         }
 
-
         [HttpGet]
         public IActionResult Customer_Dashboard()
         {
             return View();
-        }
-
-        public User Getuser(int id)
-        {
-            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
-            {
-                User name = ObjHelperlandContext.Users.Find(id);
-                return name;
-            }
         }
 
         [HttpGet]
@@ -199,15 +189,30 @@ namespace Helperland.Controllers
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
                 int id = (int)HttpContext.Session.GetInt32("UserId");
-                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.ToList();
+                List<ServiceRequest> serviceRequest = ObjHelperlandContext.ServiceRequests.Where(x => x.UserId == id && (x.Status == 3 || x.Status == 4)).ToList();
                 //status=> 1=Complete, 2=Cancel, 3=Pending
 
                 List<User> user = new List<User>();
-                foreach (ServiceRequest temp in serviceRequest)
+                foreach (ServiceRequest users in serviceRequest)
                 {
-                    if (temp.ServiceProviderId != null)
+                    if (users.ServiceProviderId != null)
                     {
-                        user.Add(Getuser((int)temp.UserId));
+                        var providername = _helperlandContext.Users.Where(x => x.UserId == users.ServiceProviderId).FirstOrDefault();
+                        users.Name = providername.FirstName + " " + providername.LastName;
+                        var rate = _helperlandContext.Ratings.Where(c => c.ServiceRequestId == users.ServiceRequestId).ToList();
+                        decimal temp = 0;
+                        foreach (Rating rating in rate)
+                        {
+                            if (rating.Ratings != 0)
+                            {
+                                temp += rating.Ratings;
+                            }
+                        }
+                        if (rate.Count() != 0)
+                        {
+                            temp /= rate.Count();
+                        }
+                        users.ratings = temp;
                     }
                     else
                     {
@@ -231,6 +236,9 @@ namespace Helperland.Controllers
                 servicerequest.Email = address.Email;
                 servicerequest.Mobile = address.Mobile;
 
+                var extraservice = _helperlandContext.ServiceRequestExtras.Where(c => c.ServiceRequestId == id).FirstOrDefault();
+                servicerequest.Extra = extraservice.ServiceExtraId;
+
                 return PartialView("_CustomerModelPartial", servicerequest);
             }
         }
@@ -238,8 +246,8 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult ServiceSchedule(int id)
         {
-                var schedulerequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
-                return PartialView("_CustomerSchedulePartial", schedulerequest);
+                var request = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+                return PartialView("_CustomerSchedulePartial", request);
         }
 
         [HttpPost]
@@ -291,8 +299,6 @@ namespace Helperland.Controllers
             return PartialView("CustomerDashboardPartial");
         }
 
-
-
         [HttpGet]
         public IActionResult CustomerSettings()
         {
@@ -312,29 +318,32 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult UpdateUserDetailes(User user)
         {
-            int? Id = HttpContext.Session.GetInt32("UserId");
-            if (Id != null)
+            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
-                User updated = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id);
-                updated.FirstName = user.FirstName;
-                updated.LastName = user.LastName;
-                updated.Mobile = user.Mobile;
-                if (user.Date != null && user.Month != null && user.Year != null)
+                int? Id = HttpContext.Session.GetInt32("UserId");
+                if (Id != null)
                 {
-                    var DateTime = user.Date + "-" + user.Month + "-" + user.Year;
-                    updated.DateOfBirth = Convert.ToDateTime(DateTime);
+                    User updated = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id);
+                    updated.FirstName = user.FirstName;
+                    updated.LastName = user.LastName;
+                    updated.Mobile = user.Mobile;
+                    if (user.Date != null && user.Month != null && user.Year != null)
+                    {
+                        var DateTime = user.Date + "-" + user.Month + "-" + user.Year;
+                        updated.DateOfBirth = Convert.ToDateTime(DateTime);
+                    }
+                    updated.LanguageId = user.LanguageId;
+                    updated.ModifiedDate = DateTime.Now;
+                    var result = _helperlandContext.Users.Update(updated);
+                    _helperlandContext.SaveChanges();
+                    if (result != null)
+                    {
+                        return Ok(Json("true"));
+                    }
+                    return Ok(Json("False"));
                 }
-                updated.LanguageId = user.LanguageId;
-                updated.ModifiedDate = DateTime.Now;
-                var result = _helperlandContext.Users.Update(updated);
-                _helperlandContext.SaveChanges();
-                if (result != null)
-                {
-                    return Ok(Json("true"));
-                }
-                return Ok(Json("False"));
+                return PartialView("CustomerSettingPartial");
             }
-            return PartialView("CustomerSettingPartial");
         }
 
         [HttpGet]
@@ -354,6 +363,7 @@ namespace Helperland.Controllers
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
                 UserAddress updated = ObjHelperlandContext.UserAddresses.FirstOrDefault(x => x.AddressId == data.AddressId);
+
                 updated.AddressLine1 = data.AddressLine1;
                 updated.AddressLine2 = data.AddressLine2;
                 updated.PostalCode = data.PostalCode;
@@ -401,25 +411,26 @@ namespace Helperland.Controllers
         }
 
         [HttpPost]
-        public IActionResult CustomerChangePassword(User u)
+        public IActionResult ChangePassword(User user)
         {
-            int? Id = HttpContext.Session.GetInt32("UserId");
-            if (Id != null)
+            var userid = (int)HttpContext.Session.GetInt32("UserId");
+
+            var cuser = _helperlandContext.Users.Where(c => c.UserId == userid).FirstOrDefault();
+
+            if (user.Password == cuser.Password)
             {
-                User updated = _helperlandContext.Users.FirstOrDefault(x => x.UserId == Id );
-                updated.Password = u.Password;
-                var result = _helperlandContext.Users.Update(updated);
+                cuser.Password = user.NewPassword;
+
                 _helperlandContext.SaveChanges();
-                if (result != null)
-                {
-                    return Ok(Json("true"));
-                }
-                return Ok(Json("False"));
+                return PartialView("_CustomerAddressPartial");
             }
-            return PartialView("_CustomerAddressPartial");
+            else
+            {
+                return StatusCode(500);
+            }
+
         }
 
-        
         public IActionResult CustomerHistory()
         {
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
@@ -432,8 +443,22 @@ namespace Helperland.Controllers
                 {
                     if (users.ServiceProviderId != null)
                     {
-                        var providername = _helperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
-                        users.FirstName = providername.FirstName;
+                        var providername = _helperlandContext.Users.Where(x => x.UserId == users.ServiceProviderId).FirstOrDefault();
+                        users.Name = providername.FirstName + " " + providername.LastName;
+                        var rate = _helperlandContext.Ratings.Where(c => c.ServiceRequestId == users.ServiceRequestId).ToList();
+                        decimal temp = 0;
+                        foreach (Rating rating in rate)
+                        {
+                            if (rating.Ratings != 0)
+                            {
+                                temp += rating.Ratings;
+                            }
+                        }
+                        if (rate.Count() != 0)
+                        {
+                            temp /= rate.Count();
+                        }
+                        users.ratings = temp;
                     }
                     else
                     {
@@ -449,10 +474,61 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult RateSPModal(int id)
         {
-            var raterequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
-            return PartialView("_CustomerRateingPartial", raterequest);
-        }
+            var p = _helperlandContext.ServiceRequests.Where(c => c.ServiceRequestId == id).FirstOrDefault();
+            var q = _helperlandContext.Users.Where(x => x.UserId == p.ServiceProviderId).FirstOrDefault();
 
+            var rate = _helperlandContext.Ratings.Where(c => c.ServiceRequestId == p.ServiceRequestId).ToList();
+
+            decimal temp = 0;
+
+            foreach (Rating rating in rate)
+            {
+                if (rating.Ratings != 0)
+                {
+                    temp += rating.Ratings;
+                }
+            }
+            if (rate.Count() != 0)
+            {
+                temp /= rate.Count();
+            }
+            ViewBag.servicerequestid = id;
+            ViewBag.serviceproviderid = p.ServiceProviderId;
+            ViewBag.rating = temp;
+            ViewBag.Name = q.FirstName + " " + q.LastName;
+
+            return View("_CustomerRateingPartial");
+        }
+        [HttpPost]
+        public IActionResult AddRatings(Rating rating)
+        {
+            var userid = (int)HttpContext.Session.GetInt32("UserId");
+            var p = _helperlandContext.Ratings.Where(c => c.ServiceRequestId == rating.ServiceRequestId).FirstOrDefault();
+            rating.Ratings = (rating.OnTimeArrival + rating.QualityOfService + rating.Friendly) / 3;
+            rating.RatingFrom = userid;
+            rating.RatingDate = DateTime.Now;
+
+            if (p != null)
+            {
+                p.OnTimeArrival = rating.OnTimeArrival;
+                p.QualityOfService = rating.QualityOfService;
+                p.Friendly = rating.Friendly;
+                p.Ratings = rating.Ratings;
+                p.RatingDate = rating.RatingDate;
+                p.RatingFrom = rating.RatingFrom;
+                p.RatingTo = rating.RatingTo;
+                _helperlandContext.SaveChanges();
+
+            }
+            else
+            {
+                p.Comments = rating.Comments;
+                _helperlandContext.Ratings.Add(rating);
+                _helperlandContext.SaveChanges();
+
+            }
+            return PartialView("CustomerHistoryPartial");
+        }
     }
 }
 

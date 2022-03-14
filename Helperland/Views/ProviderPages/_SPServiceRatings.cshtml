@@ -1,0 +1,77 @@
+﻿@{
+    List<ServiceRequest> service = null;
+    if (ViewBag.services != null)
+    {
+        service = ViewBag.services;
+    }
+}
+@using Helperland.Models;
+
+
+
+<div id="myretings" class="container tab-pane active">
+    <div class="heading-service-history mt-3">
+        My Ratings
+    </div>
+    @foreach (ServiceRequest dbs in service)
+    {
+        double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+        <div class="card mb-3" style="font-size: 15px;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <div>@dbs.ServiceRequestId</div>
+                        <div><strong>@dbs.Name</strong></div>
+                    </div>
+                    <div class="col-7" style="font-size: 14px;">
+                        <img src="../images\calendar2.png" alt="">
+                        <strong>@dbs.ServiceStartDate.ToString("dd/MM/yyyy")</strong>
+                        <br>
+                        <img src="../images\layer-712.png" alt="">
+                        @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                    </div>
+                    <div class="col-3">
+                        <div><strong>Ratings</strong></div>
+                        @{
+                            int totalstars = Convert.ToInt32(dbs.ratings);
+                            int stars = 5 - totalstars;
+                            for (int i = 1; i <= totalstars; i++)
+                            {
+                                <span class="star">
+                                    <img src="../images/yellow-small-star.png" alt="">
+                                </span>
+                            }
+                            for (int j = 1; j <= stars; j++)
+                            {
+                                <span class="star">
+                                    <img src="../images/star2.png" alt="">
+                                </span>
+                            }
+                        }
+                        @dbs.ratings  &nbsp;&nbsp;&nbsp;
+                        @if (@dbs.ratings >= 4)
+                        {
+                            <span>Very Good</span>
+                        }
+                        else if (@dbs.ratings >= 2 && @dbs.ratings <= 4)
+                        {
+                            <span>Good</span>
+                        }
+                        else
+                        {
+                            <span>Poor</span>
+                        }
+
+
+                    </div>
+                </div>
+                <hr>
+                <div><strong>Customer Comments :</strong></div>
+                <div>@dbs.Comments</div>
+            </div>
+        </div>
+    }
+
+    </div>
+
+
