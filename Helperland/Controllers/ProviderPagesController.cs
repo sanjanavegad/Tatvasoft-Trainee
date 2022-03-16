@@ -20,7 +20,9 @@ namespace Helperland.Controllers
 
         public IActionResult Provider_Dashboard()
         {
-            return View();
+            int id = (int)HttpContext.Session.GetInt32("UserId");
+            var user = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
+            return View(user);
         }
 
         [HttpGet]

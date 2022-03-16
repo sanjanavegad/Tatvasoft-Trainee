@@ -37,7 +37,9 @@ namespace Helperland.Controllers
         public ActionResult ValidZip(Zipcodeviewmodel ForZip)
         {
             HttpContext.Session.SetString("ZipcodeValue", ForZip.ZipcodeValue);
-            var Zipcode = _helperlandContext.Zipcodes.Where(z => z.ZipcodeValue == ForZip.ZipcodeValue);
+            //var Zipcode = _helperlandContext.Zipcodes.Where(z => z.ZipcodeValue == ForZip.ZipcodeValue);
+
+            var Zipcode = _helperlandContext.Users.Where(x => x.ZipCode == ForZip.ZipcodeValue && x.UserTypeId == 2);
             if (Zipcode.Count() > 0)
             {
                 return Ok(Json("true"));
@@ -180,7 +182,9 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult Customer_Dashboard()
         {
-            return View();
+            int id = (int)HttpContext.Session.GetInt32("UserId");
+            var user = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
+            return View(user);
         }
 
         [HttpGet]
@@ -369,7 +373,14 @@ namespace Helperland.Controllers
                 updated.PostalCode = data.PostalCode;
                 updated.State = data.State;
                 updated.Mobile = data.Mobile;
+                updated.IsDefault = true;
+
                 var result = _helperlandContext.UserAddresses.Update(updated);
+                _helperlandContext.SaveChanges();
+
+                User add = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == updated.UserId);
+                add.ZipCode = updated.PostalCode;
+                var result1 = _helperlandContext.Users.Update(add);
                 _helperlandContext.SaveChanges();
                 if (result != null)
                 {

@@ -35,19 +35,22 @@ namespace Helperland.Models
         [EmailAddress(ErrorMessage ="Please Enter valid email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please enter your password password")]
-        [Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
+        [Required(ErrorMessage = "Please enter your password")]
+        //[Compare("ConfirmPassword", ErrorMessage = "Password does not match")]
         [DataType(DataType.Password)]
+        [MaxLength(50)]
         public string Password { get; set; }
 
         [NotMapped]
-        [Required]
+        //[Required(ErrorMessage = "Please enter your confirm password")]
         [DataType(DataType.Password)]
+        [MaxLength(50)]
         public string ConfirmPassword { get; set; }
 
         [NotMapped]
         [Required]
         [DataType(DataType.Password)]
+        [MaxLength(50)]
         public string NewPassword { get; set; }
 
 
@@ -74,6 +77,8 @@ namespace Helperland.Models
         public string City { get; set; }
         [NotMapped]
         public string PostalCode { get; set; }
+        [NotMapped]
+        public string Name { get; set; }
 
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }

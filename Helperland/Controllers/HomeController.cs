@@ -56,6 +56,12 @@ namespace Helperland.Controllers
                         HttpContext.Session.SetString("UserTypeId", user.UserTypeId.ToString());
                         return RedirectToAction("Provider_Dashboard", "ProviderPages");
                     }
+                    else if (p.FirstOrDefault().UserTypeId == 3)
+                    {
+                        HttpContext.Session.SetString("UserTypeId", user.UserTypeId.ToString());
+                        return RedirectToAction("AdminIndex", "Admin");
+                    }
+
                 }
                 else
                 {
@@ -88,7 +94,7 @@ namespace Helperland.Controllers
 
                     ViewBag.Message2 = "Reset password link has been sent to your email id";
                 }
-                else
+                else 
                 {
                     ViewBag.Message3 = "user does not exists.";
                     return View();
@@ -170,17 +176,16 @@ namespace Helperland.Controllers
             return View(model);
         }
 
-
+        [HttpGet]
         public IActionResult Service_Provider()
         {
-            User signup = new User();
-            return View(signup);
+            return View();
         }
         [HttpPost]
         public IActionResult Service_Provider(User signup)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 2;
@@ -191,13 +196,14 @@ namespace Helperland.Controllers
 
                     _helperlandContext.Users.Add(signup);
                     _helperlandContext.SaveChanges();
+                    ModelState.Clear();
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ViewBag.Message = "User already registed";
                 }
-            }    
+            //}    
             return View();
         }
 
@@ -209,25 +215,29 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Create_Account(User signup)
         {
-            if(ModelState.IsValid)
-            {
+            //if(ModelState.IsValid)
+            //{
                 if (_helperlandContext.Users.Where(s => s.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(s => s.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 1;
                     signup.CreatedDate = DateTime.Now;
                     signup.ModifiedDate = DateTime.Now;
                     signup.IsRegisteredUser = true;
+                    signup.IsApproved = false;
+                    signup.Status = 1;
+                    signup.IsActive = true;
                     signup.ModifiedBy = 123;
 
                     _helperlandContext.Users.Add(signup);
                     _helperlandContext.SaveChanges();
+                    ModelState.Clear();
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ViewBag.Message = "This Email and Mobile are already registerd.";
                 }
-            }
+            //}
             return View();
         }
 

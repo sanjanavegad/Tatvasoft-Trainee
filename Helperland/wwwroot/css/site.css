@@ -1815,6 +1815,7 @@ a {
 .navbar-hr-line {
     color: #ffffff;
     margin-left: -30px;
+    width:400px !important;
 }
 
 .table {
@@ -1934,7 +1935,7 @@ a {
     font-weight: 500;
 }
 
-#mobile-card .mobile-card {
+/*#mobile-card .mobile-card {
     z-index: -1;
     margin: 15px;
     display: none;
@@ -1947,10 +1948,10 @@ a {
         margin-top: 40px;
     }
 }
-
-@media (max-width:922px) {
-    .col1, .col2 {
-        display: none;
+*/
+@media (max-width:400px) {
+    #main-customer-section .side-nav, .table {
+        width: 100%;
     }
 }
 
@@ -2025,7 +2026,7 @@ a {
     box-shadow: none;
 }
     /* ////////////////////////admin _ user management////////////////// */
-    .Rectangle-1 {
+.Rectangle-1 {
     height: 60px;
     background-color: #1fb6ff;
 }
@@ -2052,8 +2053,15 @@ a {
 
 .sidebar-menu {
     background-color: #FFFFFF;
-    width: 272px;
+    padding-left: 8px;
+    margin-left: -10px;
+    margin-right: -15px;
+    height: 90%;
 }
+
+    .sidebar-menu ul > li > a:hover {
+        color: #1FB6FF;
+    }
 
 .nav-item-user-management {
     font-size: 16px;
@@ -2208,7 +2216,6 @@ a {
     border: none;
     color: #FFFFFF;
     border-radius: 2px;
-    margin-left: 15px;
 }
 
 .inactive-btn {
@@ -2219,7 +2226,6 @@ a {
     border: none;
     color: #FFFFFF;
     border-radius: 2px;
-    margin-left: 15px;
 }
 
 .threedots {
@@ -2265,7 +2271,6 @@ a {
         margin-top: 20px;
     }
 }
-
 /*****************customer_service_history*********************/
 .heading-service-history {
     font-family: Roboto;
@@ -2870,9 +2875,9 @@ a {
     padding: 10px 15px;
 }
 
-.dropdown-menu a {
-    margin-left: -10px;
-}
+.user-dropdown .dropdown-menu a {
+        margin-left: -10px;
+    }
 
 .dropdown-link a {
     padding: 20px;
@@ -3297,4 +3302,20 @@ input[type=radio] + img {
     border-radius: 50%;
     padding: 15px 12px;
     margin-bottom: 20px;
+}
+
+.btn-approved {
+    width: 130px;
+    height: 50px;
+    background-color: rgb(80, 142, 155);
+    font-size: 18px;
+    color: white;
+    border-radius: 30px;
+    margin-left: 36% !important;
+    margin-bottom: 20px;
+}
+.approve-text{
+    font-size:18px;
+    text-align:center;
+    margin:auto;
 }

@@ -1,0 +1,146 @@
+﻿@using Helperland.Models
+@model Helperland.Models.User
+@{
+    var details = ViewBag.data;
+}
+
+
+<div id="UserRequest">
+    <div class="row pt-4 mb-2">
+        <div class="col-md-8">
+            <h4 class="pl-4" style="display: inline;">User Management</h4>
+        </div>
+        <div class="col-md-4">
+            <button class="add-new-user-btn justify-content-end">
+                <img src="../images/add.png" alt="" style="padding-right: 7px;">
+                Add New User
+            </button>
+        </div>
+    </div>
+    <div id="accordionFlushExample">
+        <div class="accordion-item mt-3">
+            <div id="flush-collapseOne" class="mt-4">
+                <div class="container">
+                    <form class="form-inline form1">
+                        <div class="form-group" style="margin-left: -16px;">
+                            <select class="form-select form2" aria-label="Default select example">
+                                <option>User Name</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-select form2" aria-label="Default select example">
+                                <option>User Role</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">+91</div>
+                                </div>
+                                <input type="number" class="form-control form2" id="phonenumber" placeholder="Phone number">
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <input type="number" class="form-control form2" id="phonenumber"
+                                   placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form2" id="zipcode"
+                                   placeholder="Zipcode" style="width: 120px ;">
+                        </div>
+                        <button class="user-search-btn">Search</button>
+                        <button class="user-clear-btn" style="margin-right: -20px;">Clear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="table-user-management">
+        <table class="table" id="datatable1">
+            <thead class="table-header-admin-usermanagement">
+                <tr>
+                    <th scope="col">User Name <img src="../images\sort.png" alt=""></th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Date Of Registration</th>
+                    <th scope="col">User Type </th>
+                    <th scope="col">Phone </th>
+                    <th scope="col">Post Code <img src="../images\sort.png" alt=""></th>
+                    <th scope="col">Status <img src="../images\sort.png" alt=""></th>
+                    <th scope="col">Action </th>
+                </tr>
+            </thead>
+            <tbody class="tbody-user-management">
+                @foreach (User dbs in details)
+                {
+                    <tr style="border-bottom: 0.5px solid #c5c5c5">
+                        <th scope="row">@dbs.FirstName  @dbs.LastName</th>
+                        <td></td>
+                        <td>
+                            <img src="../images/calendar2.png" alt=""> @dbs.CreatedDate.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @if(dbs.UserTypeId == 1)
+                            {
+                            <span>Customer</span>
+                            }
+                            else
+                            {
+                            <span>Service Provider</span>
+                            }
+                        </td>
+                        <td>@dbs.Mobile</td>
+                        <td>@dbs.ZipCode </td>
+                        <td>
+                            @if(dbs.IsActive == true)
+                            {
+                                <button type="button" class="active-btn">Active</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="inactive-btn">Inactive</button>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <a class="btn threedots" href="#" role="button" id="dropdownMenuLink"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../images/group-38.png" alt="" style="margin-top: -10px;">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Edit </a></li>
+
+                                    @if (dbs.IsApproved == false)
+                                    {
+                                        <li><a class="dropdown-item" onclick="Approveuser(this);" data-id="@dbs.UserId" style="color: black;">Approve</a></li>
+                                        <li><a class="dropdown-item" onclick="Deleteuser();" data-id="@dbs.UserId" style="color: black;">Deactivate</a></li>
+
+                                    }
+                                    else if (dbs.IsActive == false && dbs.UserTypeId == 1 && dbs.IsApproved == true)
+                                    {
+                                        <li><a class="dropdown-item" onclick="Activeuser(this);" data-id="@dbs.UserId" style="color: black;">Active</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="dropdown-item" onclick="Deleteuser(this);" data-id="@dbs.UserId" style="color: black;">Deactivate</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            @**@
+
+
+
+                </tbody>
+        </table>
+    </div>
+</div>

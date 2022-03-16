@@ -201,9 +201,10 @@
                                                     <div class="modal-body p-3">
                                                         <div class="popup-heading">Forget Password</div>
                                                         <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        <span class="text-danger">@ViewBag.Message2</span>
-                                                        <span class="text-danger">@ViewBag.Message3</span>
+                                                        
                                                         <form method="post">
+                                                            <span class="text-danger">@ViewBag.Message2</span>
+                                                            <span class="text-danger">@ViewBag.Message3</span>
                                                             <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
                                                             <button type="submit" class="btn send-button">Send</button>
                                                         </form>

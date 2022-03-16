@@ -41,13 +41,13 @@
                 <input asp-for="Email" class="form-control" id="inputemail" placeholder="Email">
             </div>
             <div class="col-md-6">
-                <input type="password" class="form-control" id="inputpassword" asp-for="Password" placeholder="Password">
                 <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" type="password" class="form-control" id="inputpassword" placeholder="Password">
             </div>
             <div class="col-md-6">
-                <input type="password" class="form-control" id="inputconfirm-password" asp-for="ConfirmPassword"
+                @*<span asp-validation-for="ConfirmPassword" class="text-danger"></span>*@
+                <input asp-for="ConfirmPassword" type="password" class="form-control" id="inputconfirm-password"
                        placeholder="Confirm Password">
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
 
             <div class="row px-3">
