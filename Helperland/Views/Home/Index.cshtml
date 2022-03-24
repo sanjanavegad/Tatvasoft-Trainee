@@ -24,6 +24,41 @@
 
 <body>
     <!-- home Section -->
+    <div class="modal fade" id="logout-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body container">
+                    <div class="row justify-content-center text-center">
+                        <span>
+                            <img src="~/Images/correct-white-medium.png" height="26" width="26" alt="">
+                        </span>
+                        @if (TempData.ContainsKey("Message"))
+                        {
+                            @if (TempData["ModalName"].ToString() == "#logout-Modal")
+                            {
+                                <p>
+                                    @TempData["Message"]
+                                </p>
+                            }
+
+                        }
+                        <p class="p-0 m-0" id="text-message">
+                            @if (TempData.ContainsKey("Message2"))
+                            {
+                                @if (TempData["ModalName"].ToString() == "#logout-Modal")
+                                {
+                                    @TempData["Message2"]
+
+                                }
+
+                            }
+                        </p>
+                        <button class="btn" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <section id="home-section" class="main">
         <div class="wrapper" id="navbar-provider">
             <nav id="sidebar">
@@ -160,7 +195,7 @@
                                                         <div class="popup-heading">Login to your account</div>
                                                         <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         <form method="post" asp-controller="Home">
-                                                            <span class="text-danger text-center " >@ViewBag.Message1</span>
+                                                            <span class="text-danger text-center ">@ViewBag.Message1</span>
                                                             <div class="input-group mt-3">
                                                                 <input asp-for="Email" type="Email" class="form-control" placeholder="username or email" />
                                                                 <div class="input-group-prepend">
@@ -201,7 +236,7 @@
                                                     <div class="modal-body p-3">
                                                         <div class="popup-heading">Forget Password</div>
                                                         <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        
+
                                                         <form method="post">
                                                             <span class="text-danger">@ViewBag.Message2</span>
                                                             <span class="text-danger">@ViewBag.Message3</span>
@@ -690,6 +725,11 @@
             var x = document.getElementById("cookie");
             x.style.display = "none";
         }
+
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
     </script>
 
 </body>

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Helperland.Controllers
@@ -78,7 +80,7 @@ namespace Helperland.Controllers
             }
         }
         [HttpPost]
-        public IActionResult AcceptServiceButton(int id)
+        public IActionResult AcceptServiceButton(int id, User data)
         {
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
@@ -88,6 +90,14 @@ namespace Helperland.Controllers
                 servicerequest.ServiceProviderId = spid;
                 var result = _helperlandContext.ServiceRequests.Update(servicerequest);
                 _helperlandContext.SaveChanges();
+
+                List<User> providerlist = _helperlandContext.Users.Where(x => x.UserTypeId == 2 && x.UserId != spid && x.ZipCode == servicerequest.ZipCode).ToList();
+                foreach (User sps in providerlist)
+                {
+                    var subject = "Service request no more available";
+                    var body = "Service Request " + servicerequest.ServiceRequestId + " has already been accepted by someone and is no more available to you.";
+                    SendEmail(sps.Email, body, subject);
+                }
                 if (result != null)
                 {
                     return Ok(Json("true"));
@@ -95,7 +105,26 @@ namespace Helperland.Controllers
                 return Ok(Json("False"));
             }
         }
-        
+        private void SendEmail(string emailaddress, string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("sanjanavegad123@gmail.com", emailaddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true
+                };
+                NetworkCredential NetworkCred = new NetworkCredential("sanjanavegad123@gmail.com", "s@sanju123");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+                ViewBag.message = "Email send to admin successfully";
+            }
+        }
         [HttpGet]
         public IActionResult ProviderUpCommingService()
         {
@@ -218,12 +247,14 @@ namespace Helperland.Controllers
                         var u = _helperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
                         users.Name = u.FirstName + " " + u.LastName;
                         var rate = _helperlandContext.Ratings.Where(c => c.ServiceRequestId == users.ServiceRequestId).ToList();
+                        
                         decimal temp = 0;
                         foreach (Rating rating in rate)
                         {
                             if (rating.Ratings != 0)
                             {
                                 temp += rating.Ratings;
+                                users.Comments = rating.Comments;
                             }
                         }
                         if (rate.Count() != 0)
@@ -403,9 +434,8 @@ namespace Helperland.Controllers
                 cuser.Password = user.NewPassword;
 
                 await _helperlandContext.SaveChangesAsync();
-                //ModelState.Clear();
-
-
+                ModelState.Clear();
+                ViewBag.msg = "Reset password successfully";
                 return PartialView("_SPSettings");
             }
             else

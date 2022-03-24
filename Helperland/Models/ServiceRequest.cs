@@ -67,6 +67,8 @@ namespace Helperland.Models
         [NotMapped]
         public string Name { get; set; }
         [NotMapped]
+        public string UserName { get; set; }
+        [NotMapped]
         public decimal? ratings { get; set; }
         [NotMapped]
         public bool IsBlocked { get; set; }

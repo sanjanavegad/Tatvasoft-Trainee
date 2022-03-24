@@ -33,7 +33,7 @@
                         </li>
                         <hr class="navbar-hr-line">
                         <li class="nav-item nav-item-upcoming-service">
-                            <a class="" data-bs-toggle="tab" href="#favouritepros">Favourite pros</a>
+                            <a class="" data-bs-toggle="tab" href="#" onclick="loadfavoritepros()">Favourite pros</a>
                         </li>
                         <hr class="navbar-hr-line">
                         <li class=" nav-item-upcoming-service">
@@ -164,6 +164,15 @@
         function loadsettings() {
             $.ajax({
                 url: '/CustomerPages/CustomerSettings',
+                type: 'GET',
+                success: function (response) {
+                    $('#my-tab').html(response);
+                }
+            });
+        }
+        function loadfavoritepros() {
+            $.ajax({
+                url: '/CustomerPages/FavoriteAndPros',
                 type: 'GET',
                 success: function (response) {
                     $('#my-tab').html(response);
@@ -375,6 +384,7 @@
                 }
             })
         }
+
 
 
     </script>

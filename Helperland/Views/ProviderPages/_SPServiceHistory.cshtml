@@ -28,7 +28,7 @@
                 double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
                 <tr>
                     <td>
-                        <button class="blank-button" data-toggle="modal" data-target="#NewDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
+                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
                     </td>
                     <td scope="row" class="th-upcoming-service">
                         <img src="../images\calendar2.png" alt="">

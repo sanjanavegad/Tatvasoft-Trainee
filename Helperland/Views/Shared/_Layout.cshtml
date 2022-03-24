@@ -211,10 +211,13 @@
                                             </li>
                                             <hr>
 
-                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
-                                                <li><a href="mysetting.html"> My settings</a></li>
-                                            
-                                            <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                                            <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
+                                            <li><a href="mysetting.html"> My settings</a></li>
+
+                                            <li>
+                                                <a asp-controller="Home" asp-action="Logout" onclick="preventBack()">Logout</a>
+
+                                            </li>
                                         </ul>
                                     </li>
 
@@ -231,7 +234,7 @@
 
 
                                     <li class="nav-item">
-                                        <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;">
+                                        <a  asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;">
                                             Become a Helper
                                         </a>
                                     </li>
@@ -239,6 +242,8 @@
                             </ul>
                         </div>
                     </nav>
+                    
+
                     @if (TempData["Msg"] != null)
                     {
                         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -258,7 +263,7 @@
     <div>
         @RenderBody()
     </div>
-    <footer class="site-footer">
+    <footer class="site-footer mt-3">
         <div class="footer-top">
             <div class="container">
                 <div class="row align-items-center">
@@ -353,6 +358,12 @@
                 }]
             });
         });
+
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
     </script>
     @RenderSection("Scripts", required: false)
 </body>

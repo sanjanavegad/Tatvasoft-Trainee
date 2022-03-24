@@ -97,7 +97,7 @@
 
                     <button type="button" class="btn btn-reschedule-cancel" data-bs-toggle="modal" data-bs-target="#cancel-request" data-id="@Model.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
                 }
-                else
+                else if(Model.Status == 1)
                 {
                     <button type="button" class="btn btn-rate-service-history" data-id="@Model.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
                 }

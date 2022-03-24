@@ -1,11 +1,15 @@
-﻿using Helperland.Data;
+﻿using Helperland.Core;
+using Helperland.Data;
 using Helperland.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Helperland.Controllers
@@ -125,7 +129,7 @@ namespace Helperland.Controllers
             string time = Finalbooking.ServiceTime.ToString("HH:mm:ss");
             DateTime startDateTime = Convert.ToDateTime(date).Add(TimeSpan.Parse(time));
             add.ServiceStartDate = startDateTime;
-            add.Status = 3;
+            add.Status = 4;
             var result = _helperlandContext.ServiceRequests.Add(add);
             _helperlandContext.SaveChanges();
             int id = add.ServiceRequestId;
@@ -172,17 +176,51 @@ namespace Helperland.Controllers
             extraservice.ServiceExtraId = extraids;
             _helperlandContext.ServiceRequestExtras.Add(extraservice);
             _helperlandContext.SaveChanges();
-            if (result != null && serviceaddResult != null)
+
+            List<User> availableSPsInGivenZipcode = (from u in _helperlandContext.Users
+                                                     join fb in _helperlandContext.FavoriteAndBlockeds on u.UserId equals fb.UserId into fb1
+                                                     from fb in fb1.DefaultIfEmpty()
+                                                     where u.ZipCode == add.ZipCode && u.IsApproved == true && u.UserTypeId == 2 && Convert.ToInt32(add.UserId) != fb.TargetUserId
+                                                     select u).ToList();
+
+            foreach (User sps in availableSPsInGivenZipcode)
             {
-                return Ok(Json(result.Entity.ServiceRequestId));
+                var subject = "New Service Request Available!!";
+                var body = "Hi " + sps.FirstName + " " +sps.LastName + "<br/> A service request Id : " + add.ServiceRequestId + " has been directly assigned to you.";
+                SendEmail(sps.Email, body, subject);
             }
-            return Ok(Json("False"));
+            if (result != null && serviceaddResult != null)
+                {
+                    return Ok(Json(result.Entity.ServiceRequestId));
+                }
+                return Ok(Json("False"));
+           
+        }
+        private void SendEmail(string emailaddress,string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("sanjanavegad123@gmail.com", emailaddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true
+                };
+                NetworkCredential NetworkCred = new NetworkCredential("sanjanavegad123@gmail.com", "s@sanju123");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+                ViewBag.message = "Email send to admin successfully";
+            }
         }
 
         [HttpGet]
         public IActionResult Customer_Dashboard()
         {
-            int id = (int)HttpContext.Session.GetInt32("UserId");
+              int id = (int)HttpContext.Session.GetInt32("UserId");
             var user = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
             return View(user);
         }
@@ -433,6 +471,7 @@ namespace Helperland.Controllers
                 cuser.Password = user.NewPassword;
 
                 _helperlandContext.SaveChanges();
+                ModelState.Clear();
                 return PartialView("_CustomerAddressPartial");
             }
             else
@@ -528,17 +567,68 @@ namespace Helperland.Controllers
                 p.RatingDate = rating.RatingDate;
                 p.RatingFrom = rating.RatingFrom;
                 p.RatingTo = rating.RatingTo;
+                p.Comments = rating.Comments;
                 _helperlandContext.SaveChanges();
 
             }
             else
             {
-                p.Comments = rating.Comments;
                 _helperlandContext.Ratings.Add(rating);
                 _helperlandContext.SaveChanges();
 
             }
             return PartialView("CustomerHistoryPartial");
+        }
+
+        public IActionResult FavoriteAndPros()
+        {
+            var userid = (int)HttpContext.Session.GetInt32("UserId");
+
+            var serviceRequests = _helperlandContext.ServiceRequests.Where(c => c.UserId == userid && c.Status == 1 && c.ServiceProviderId != null).AsEnumerable().GroupBy(x => x.ServiceProviderId).ToList();
+
+            List<int> ids = new List<int>();
+            List<int> counts = new List<int>();
+
+            foreach (var i in serviceRequests)
+            {
+                counts.Add(i.Count());
+                ids.Add(Convert.ToInt32(i.Key));
+            }
+
+            List<FavoriteAndBlocked> favoriteAndBlockeds = new List<FavoriteAndBlocked>();
+            List<bool> hasEntry = new List<bool>();
+
+            foreach (var i in ids)
+            {
+                FavoriteAndBlocked temp = _helperlandContext.FavoriteAndBlockeds.Where(x => x.UserId.Equals(userid) && x.TargetUserId.Equals(i)).FirstOrDefault();
+                if (temp != null)
+                {
+                    favoriteAndBlockeds.Add(temp);
+                    hasEntry.Add(true);
+                }
+                else
+                {
+                    favoriteAndBlockeds.Add(temp);
+                    hasEntry.Add(false);
+                }
+            }
+
+            ViewBag.favs = favoriteAndBlockeds;
+            ViewBag.hasEntry = hasEntry;
+            ViewBag.counts = counts;
+
+
+
+            List<User> SPs = new List<User>();
+
+            foreach (var i in ids)
+            {
+                var sp = _helperlandContext.Users.Find(i);
+                SPs.Add(sp);
+            }
+
+            ViewBag.serviceProviders = SPs;
+            return PartialView("CustomerFavoriteAndProsPartial");
         }
     }
 }

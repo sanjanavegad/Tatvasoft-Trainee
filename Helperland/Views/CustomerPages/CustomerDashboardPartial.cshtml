@@ -30,10 +30,10 @@
 
                 <tr>
                     <td>
-                        <button class="blank-button text-center ml-5" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="detailes(this)" data-bs-target="#ServiceDetailes">@dbs.ServiceRequestId</button>
+                        <button class="blank-button text-center ml-5"data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
                     </td>
                     <td scope="row" class="th-upcoming-service">
-                        <button class="blank-button" data-toggle="modal" data-target="#ServiceDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
+                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
                             <img src="../images\calendar2.png" alt="">
                             @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
                             <br />
@@ -97,6 +97,192 @@
         </tbody>
     </table>
 </div>
+
+
+
+<!--<div class="col col3" id="mobile-card">
+    <div class="tab-content">
+        <div id="dashboard-sid" class="container tab-pane active">
+            <div class="mobile-card">
+                <h2>Dashboard</h2>
+                <div class="card upcoming-service-card">
+                    <ul class="list-group ">
+                        <li class="list-group-item">
+                            <img src="images\calendar2.png" alt=""> 09/04/2018
+                            <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="images\cap.png" alt="" class="history-cap">
+                                </div>
+                                <div class="col-10">
+                                    Lyum Watson <br>
+                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                                                        alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png"
+                                                                                                                                                                                                  alt="">
+                                    4
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <p class="payment-service-history">€ 63</p>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule2">Reschedule</button>
+                            <div class="modal fade" id="Reschedule2" tabindex="-1" role="dialog" aria-labelledby="Reschedule" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 350px;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Modal title</h4>
+                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="">
+                                                <div id="Reschedule-model">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div style="font-size: 20px;"><strong>Select New Date & Time</strong></div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-7 col-12">
+                                                                    <input type="date" class="form-control mb-3" placeholder="date"
+                                                                           aria-label="Postal code" id="currentDate">
+                                                                </div>
+                                                                <div class="col-md-5 col-12">
+                                                                    <input type="time" class="form-control" name="time" id="currentTime">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="model-action-button mt-4">Update</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!-- Cancel Button model -->
+                            <!--<button type="button" class="btn btn-reschedule-cancel" data-toggle="modal"
+                                    data-target="#cancel-request2">
+                                Cancel
+                            </button>
+                            <div class="modal fade" id="cancel-request2" tabindex="-1" role="dialog" aria-labelledby="cancel-request"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 350px;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Cancel Service Request</h5>
+                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="">
+                                                <div id="Reschedule-model">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div style="font-size: 16px;">Why you want to cancel the service request?</div>
+                                                            <textarea name="" id="" cols="50" rows="2" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="model-action-button mt-4">Cancel now</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card upcoming-service-card">
+                    <ul class="list-group ">
+                        <li class="list-group-item">
+                            <img src="images\calendar2.png" alt=""> 09/04/2018
+                            <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="images\cap.png" alt="" class="history-cap">
+                                </div>
+                                <div class="col-10">
+                                    Lyum Watson <br>
+                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
+                                                                                        alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png"
+                                                                                                                                                                                                  alt="">
+                                    4
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <p class="payment-service-history">€ 63</p>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule2">Reschedule</button>
+                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal"
+                                    data-target="#cancel-request2">
+                                Cancel
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="row pagination-1">
+                    <div class="col-12">
+                        <h5 class="h4-service-history" style="margin-left:20%;">
+                            Show
+                            <button class="p-service-history">
+                                10 <img src="images\keyboard-right-arrow-button.png"
+                                        alt="">
+                            </button>
+                            entries | Total Record: 55
+                        </h5>
+                    </div>
+                    <div class="col-12 nav-service-history " style="margin: auto;">
+                        <nav class="nav-service-history">
+                            <ul class="pagination">
+                                <li class="page-item disabled" title="next">
+                                    <a href="homepage.html" class="page-link rounded-circle m-1">
+                                        <img src="images\first-page.png" alt="">
+                                    </a>
+                                </li>
+                                <li class="page-item disabled " title="previous">
+                                    <a href="homepage.html" class="page-link rounded-circle m-1">
+                                        <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                    </a>
+                                </li>
+                                <li class="page-item active" title=" ">
+                                    <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
+                                </li>
+                                <li class="page-item disabled" title=" ">
+                                    <a href="" class="page-link rounded-circle m-1">2</a>
+                                </li>
+                                <li class="page-item disabled" title=" ">
+                                    <a href="" class="page-link rounded-circle m-1">3</a>
+                                </li>
+                                <li class="page-item disabled" title=" ">
+                                    <a href="" class="page-link rounded-circle m-1">4</a>
+                                </li>
+                                <li class="page-item disabled" title="next">
+                                    <a href="homepage.html" class="page-link rounded-circle m-1">
+                                        <img src="images\first-page.png" alt="">
+                                    </a>
+                                </li>
+                                <li class="page-item disabled" title="next">
+                                    <a href="homepage.html" class="page-link rounded-circle m-1">
+                                        <img src="images\keyboard-right-arrow-button-copy.png" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 

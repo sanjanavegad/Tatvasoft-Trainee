@@ -32,10 +32,10 @@
                 double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
                 <tr>
                     <td>
-                        <button class="blank-button text-center ml-5" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="detailes(this)" data-bs-target="#ServiceDetailes">@dbs.ServiceRequestId</button>
+                        <button class="blank-button text-center ml-5" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
                     </td>
                     <td scope="row" class="th-upcoming-service">
-                        <button class="blank-button" data-bs-toggle="modal" data-bs-target="#ServiceDetailes" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
+                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
                             <img src="../images\calendar2.png" alt="">
                             @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
                             <br />
@@ -89,9 +89,10 @@
                         }
                     </td>
                     <td>
-                        <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
-                        <!-- Modal -->
-
+                        @if (dbs.Status == 1)
+                        {
+                            <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
+                        }
 
                     </td>
                 </tr>

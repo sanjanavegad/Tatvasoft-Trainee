@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown" style="margin: 2px 10px 0px -10px">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Logout">
                             <img src="../images/logout.png" alt="Flag">
                         </a>
                     </li>
@@ -75,6 +75,8 @@
     </section>
     <section id="Model1">
     </section>
+    <section id="Model2">
+    </section>
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -82,13 +84,12 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
     <script>
 
         $(document).ready(function () {
-            debugger;
             $.ajax({
                 url: '/Admin/User_Rquest',
                 type: 'GET',
@@ -112,12 +113,25 @@
             });
         });
         function userrequest() {
-            debugger;
             $.ajax({
                 url: '/Admin/User_Rquest',
                 type: 'GET',
                 success: function (response) {
                     $('#my-tab').html(response);
+                    $('#datatable1').DataTable({
+
+                        "searching": false,
+                        columnDefs: [{
+                            targets: [0],
+                            orderData: [0, 1]
+                        }, {
+                            targets: [1],
+                            orderData: [1, 0]
+                        }, {
+                            targets: [4],
+                            orderData: [4, 0]
+                        }]
+                    });
                 }
             });
         }
@@ -127,6 +141,21 @@
                 type: 'GET',
                 success: function (response) {
                     $('#my-tab').html(response);
+                    /*var table = $('datatable3').DataTable();*/
+                    $('#datatable2').DataTable({
+
+                        "searching": false,
+                        columnDefs: [{
+                            targets: [0],
+                            orderData: [0, 1]
+                        }, {
+                            targets: [1],
+                            orderData: [1, 0]
+                        }, {
+                            targets: [4],
+                            orderData: [4, 0]
+                        }]
+                    });
                 }
             });
         }
@@ -194,8 +223,86 @@
                 }
             });
         }
+        function editservice(dt) {
+            debugger;
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                url: '/Admin/EditServiceModel',
+                type: 'GET',
+                data: { "id": id },
+                success: function (response) {
+                    $('#Model2').html(response);
+                    $('#EditService').modal("show");
+                }
+            });
+        }
+        function cancelSP(dt) {
+            debugger;
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                url: '/Admin/CancelSPbyCust',
+                type: 'GET',
+                data: { "id": id },
+                success: function (response) {
+                    if (result.value == "true") {
+                        userrequest();
+                    }
+                    else {
+                        alert("Invalid");
+                    }
+                }
+            });
+        }
+        
+        function searchservice() {
+            debugger;
+            var data = {};
+            data.name = document.getElementById("Name").value;
+            data.mobile = document.getElementById("Mobile").value;
+            data.zipCode = document.getElementById("PostalCode").value;
+            data.userTypeId = document.getElementById("UserRole").value;
+            $.ajax({
+                type: 'GET',
+                url: '/Admin/AdminDashboard',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (response) {
+                    $('#my-tab').html(response); 
+                }
+            });
+        } function searchrequest() {
+            debugger;
+            var data = {};
+            data.serviceRequestId = document.getElementById("ServiceID").value;
+            data.userName = document.getElementById("username").value;
+            data.name = document.getElementById("spname").value;
+            data.status = document.getElementById("status").value;
+            data.serviceStartDate = document.getElementById("startdate").value;
+            
+            $.ajax({
+                type: 'GET',
+                url: '/Admin/User_Rquest',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (response) {
+                    $('#my-tab').html(response); 
+                }
+            });
+        }
+
+       
+
+        function ExportToExcel(type, fn, dl) {
+            debugger;
+            var excel = document.getElementById('datatable3');
+            var wb = XLSX.utils.table_to_book(excel, { sheet: "sheet1" });
+            return dl ?
+                XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                XLSX.writeFile(wb, fn || ('UserManagement.' + (type || 'xlsx')));
+        }
 
     </script>
+
 
 </body>
 

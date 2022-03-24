@@ -61,13 +61,16 @@
                         {
                             <span>Poor</span>
                         }
-
-
                     </div>
                 </div>
                 <hr>
-                <div><strong>Customer Comments :</strong></div>
-                <div>@dbs.Comments</div>
+                <div>
+                    <strong>Customer Comments :</strong>
+                    @if (dbs.Comments != null)
+                    {
+                        @dbs.Comments
+                    }
+                </div>
             </div>
         </div>
     }

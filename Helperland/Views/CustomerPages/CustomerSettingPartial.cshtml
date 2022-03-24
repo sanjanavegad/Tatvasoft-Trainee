@@ -259,10 +259,7 @@
                 <table class="table address-setting mt-4">
                     <thead class="table-light address-table-head-setting">
                         <tr>
-                            <th scope="col" class="col-md-2 text-center tabale-heading">
-                                Invoicing
-                            </th>
-                            <th scope="col" class="col-md-8 tabale-heading">
+                            <th scope="col" class="col-md-8 tabale-heading pl-5">
                                 Addresses
                             </th>
                             <th scope="col" class="col-md-2 tabale-heading">
@@ -275,10 +272,7 @@
                         {
 
                             <tr>
-                                <td>
-                                    <input class="Redio-btn-gap" name="group1" type="radio" id="radio-button" checked />
-                                </td>
-                                <td class="contact">
+                                <td class="contact pl-5">
                                     <div>
                                         <Strong>Address:</Strong> @dbs.AddressLine1
                                         <br>
@@ -289,8 +283,8 @@
                                 </td>
                                 <td>
                                     <div class="mt-2">
-                                        <a href="#" data-id="@dbs.AddressId" data-bs-toggle="modal" data-bs-target="#Modaleditaddress" onclick="addressmodel(this);"><i class="far fa-edit edit-icon-setting"></i></a>
-                                        <a href="#" data-id="@dbs.AddressId" data-bs-toggle="modal" data-bs-target="#Modaldeleteaddress" onclick="deletemodel(this);"><i class="far fa-trash-alt delete-icon-setting"></i> </a>
+                                        <a href="#" data-id="@dbs.AddressId" onclick="addressmodel(this);"><i class="far fa-edit edit-icon-setting"></i></a>
+                                        <a href="#" data-id="@dbs.AddressId" onclick="deletemodel(this);"><i class="far fa-trash-alt delete-icon-setting"></i> </a>
                                     </div>
 
                                     <!-- Edit Address Model -->
@@ -306,40 +300,89 @@
                         }
                     </tbody>
                 </table>
-                <button type="button" class="btn add-new-address" data-bs-toggle="modal"
-                        data-bs-target="#myModalforaddress">
-                    Add new address
-                </button>
+                <button id="button11" class="btn add-new-address mb-3" type="button"> + Add New Address </button>
+                <div id="box" style="display:none;">
+                    <div class="col-12 card add-new-address-card p-3 mb-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-1">
+                                <label for="streetname">
+                                    <strong>Street Name</strong>
+                                    <input type="text" class="form-control" id="addstreetname" placeholder="Street Name">
+                                </label>
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <label for="housenumber">
+                                    <strong>House Number</strong>
+                                    <input type="number" class="form-control" id="addhousenumber" placeholder="House Number">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-1">
+                                <label for="postalcode">
+                                    <strong>Postal Code</strong>
+                                    <input class="form-control" id="addpostalcode" placeholder="Postal Code" value="">
+                                </label>
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <label for="city">
+                                    <strong>City</strong>
+                                    <input type="text" class="form-control" id="addcity" placeholder="City" value="">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-1">
+                                <label for="phonenumber">
+                                    <strong>Phone Number</strong>
+                                    <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" value="">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="button" class="col-md-2 col-sm-5 continue-button" id="addsave" onclick="addresssubmit();" value="Save" />
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="button" name="Cancel" class="col-md-2 col-sm-5  continue-button cancel" value="Cancel" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
             <!-- Customer-Change Password -->
             <div class="tab-pane text" id="change-pwd" role="tabpanel" aria-labelledby="change-pwd-tab">
-                <form class="row g-4 mt-1 details-form-setting" asp-action="ChangePassword" asp-controller="CustomerPages">
-                    <div class="row mt-3">
-                        <div class="col-md-4 all-lables">
-                            <label for="oldpassword" class="form-label">Old Password</label>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="Current password" required>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-4 all-lables">
-                            <label for="newpassword" class="form-label">New Password </label>
-                            <input asp-for="NewPassword" type="password" class="form-control" placeholder="New Password" required>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-4 all-lables">
-                            <label for="repeatpassword" class="form-label">
-                                Repeat Password
-                            </label>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Repeat password" required>
-                        </div>
-                    </div>
+                <form class="row g-4 mt-1 details-form-setting">
+                    <input type="hidden" class="form-control" value="@detailes.Password" name="Password" id="storepassword" style="border-right: none;" required>
 
-                    <div class="row mt-4 ">
+                    <div class="row mt-3">
+                        <div class="col-md-4 all-lables">
+                            <label for="oldpassword">Old password</label>
+                            <input type="password" class="form-control" id="oldpassword" placeholder="Current password" onblur="fnRemoveValidationOnChange(this);">
+                            <span style="display:none;" id="oldPwdValidation" class="">   </span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 all-lables">
+                            <label for="newpassword">New password </label>
+                            <input type="password" class="form-control" id="newPassword" placeholder=" password" onblur="fnRemoveValidationOnChange(this);">
+                            <span style="display:none;" id="newPwdValidation" class="">  </span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 all-lables">
+                            <label for="repeatpassword">
+                                Repeat password
+                            </label>
+                            <input type="password" class="form-control" id="repeatpassword" placeholder="Repeat password" onblur="fnRemoveValidationOnChange(this);">
+                            <span style="display:none;" id="confirmPwdValidation"> </span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
                         <div class="col-md-3">
-                            <button type="submit" class="btn save-btn">Save</button>
+                            <button type="button" class="btn save-btn" onclick="updatepwdcust()">
+                                Save
+                            </button>
                         </div>
                     </div>
                 </form>

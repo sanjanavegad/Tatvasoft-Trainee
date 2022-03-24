@@ -1,0 +1,88 @@
+﻿@using Helperland.Models
+@model Helperland.Models.ServiceRequest
+
+<div class="modal fade" id="EditService">
+    <div class="modal-dialog modal-dialog-centered" style="width: 700px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Service Request</h5>
+                <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="font-size: 15px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label asp-for="ServiceStartDate">
+                                Date <br>
+                                <input type="date" asp-for="ServiceStartDate" class="form-control" value="@Model.ServiceStartDate.ToString("dd/MM/yyyy")" name="" id="">
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ServiceTime">
+                                Time <br>
+                                <select class="form-select form-control" asp-for="ServiceTime">
+                                    <option value="01:00" selected>01:00</option>
+                                    <option value="02:00">02:00</option>
+                                    <option value="03:00">03:00</option>
+                                    <option value="04:00">04:00</option>
+                                    <option value="05:00">05:00</option>
+                                    <option value="06:00">06:00</option>
+                                    <option value="07:00">07:00</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <h6>
+                                Service Address
+                            </h6>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AddressLine1">
+                                Street Name <br>
+                                <input type="text" asp-for="AddressLine1" class="form-control" placeholder="Street Name" value="@Model.AddressLine1">
+                            </label>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="AddressLine2">
+                                House Number <br>
+                                <input type="text" asp-for="AddressLine2" class="form-control" placeholder="House Number" value="@Model.AddressLine2">
+                            </label>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ZipCode">
+                                Postal Code <br>
+                                <input type="text" asp-for="ZipCode" class="form-control" placeholder="Postal Code" value="@Model.ZipCode">
+                            </label>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="City">
+                                City<br>
+                                <input type="text" asp-for="City" class="form-control" placeholder="City" value="@Model.City">
+                            </label>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label>
+                                Why do you want to reschedule service request?<br>
+                                <textarea type="text" class="form-control" cols="48" rows="2" placeholder="Why do you want to reschedule service request?"></textarea>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label for="">
+                                Call Center EMP Notes<br>
+                                <textarea class="form-control" cols="48" rows="2" placeholder="Enter Notes"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="ServiceRequestId" id="id" value="@Model.ServiceRequestId" />
+                    <button type="submit" class="Update-admin-address-btn mt-4" asp-controller="Admin" asp-action="UpdateServiceRequest">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3319,3 +3319,48 @@ input[type=radio] + img {
     text-align:center;
     margin:auto;
 }
+
+.Update-admin-address-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #1FB6FF;
+    font-size: 16px;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+
+label {
+    display: inline;
+}
+
+
+.form-control.hasError, * .form-control.hasError {
+    border: solid 1px #E85222 !important;
+}
+
+.colourValidation {
+    color: red;
+}
+
+.favorit-avtar {
+    width: 110px;
+    height: 80px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.favorite-button {
+    width: 130px;
+    background-color: rgb(80, 142, 155);
+    font-size: 16px;
+    color: white;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+
+    .favorite-button:hover {
+        color: #FFFFFF;
+        background-color: #1e6574;
+    }

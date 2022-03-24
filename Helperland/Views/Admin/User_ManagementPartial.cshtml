@@ -17,53 +17,48 @@
             </button>
         </div>
     </div>
+
     <div id="accordionFlushExample">
         <div class="accordion-item mt-3">
             <div id="flush-collapseOne" class="mt-4">
                 <div class="container">
-                    <form class="form-inline form1">
-                        <div class="form-group" style="margin-left: -16px;">
-                            <select class="form-select form2" aria-label="Default select example">
-                                <option>User Name</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                    <form method="post" class="form-inline form1" >
+                        <div class="form-group">
+                            <label>
+                                <input type="text" id="Name" class="form-control form2" placeholder="User Name" style="width: 120px ;">
+                            </label>
                         </div>
                         <div class="form-group">
-                            <select class="form-select form2" aria-label="Default select example">
-                                <option>User Role</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <!-- <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">+91</div>
-                                </div>
-                                <input type="number" class="form-control form2" id="phonenumber" placeholder="Phone number">
-                            </div>
-                        </div> -->
-                        <div class="form-group">
-                            <input type="number" class="form-control form2" id="phonenumber"
-                                   placeholder="Phone Number">
+                            <label>
+                                <select class="form-select form2-request-history" aria-label="Default select example" id="UserRole">
+                                    <option>Role</option>
+                                    <option value="1">Customer</option>
+                                    <option value="2">Service Provider</option>
+                                </select>
+                            </label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form2" id="zipcode"
-                                   placeholder="Zipcode" style="width: 120px ;">
+                            <label>
+                                <input type="number" id="Mobile" class="form-control form2" placeholder="Phone Number">
+                            </label>
                         </div>
-                        <button class="user-search-btn">Search</button>
-                        <button class="user-clear-btn" style="margin-right: -20px;">Clear</button>
+                        <div class="form-group">
+                            <label>
+                                <input type="number" id="PostalCode" class="form-control form2" placeholder="Zipcode" style="width: 120px ;">
+                            </label>
+                        </div>
+                        <button type="button" class="user-search-btn" onclick="searchservice(this)">Search</button>
+                        <button type="submit" class="user-clear-btn" style="margin-right: -20px;">Clear</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <br>
+
+    <button type="button" class="btn user-search-btn m-3" style="float:right;" onclick="ExportToExcel('xlsx')">Export</button>
+
     <div class="table-user-management">
-        <table class="table" id="datatable1">
+        <table class="table" id="datatable2">
             <thead class="table-header-admin-usermanagement">
                 <tr>
                     <th scope="col">User Name <img src="../images\sort.png" alt=""></th>
@@ -86,19 +81,19 @@
                             <img src="../images/calendar2.png" alt=""> @dbs.CreatedDate.ToString("dd/MM/yyyy")
                         </td>
                         <td>
-                            @if(dbs.UserTypeId == 1)
+                            @if (dbs.UserTypeId == 1)
                             {
-                            <span>Customer</span>
+                                <span>Customer</span>
                             }
                             else
                             {
-                            <span>Service Provider</span>
+                                <span>Service Provider</span>
                             }
                         </td>
                         <td>@dbs.Mobile</td>
                         <td>@dbs.ZipCode </td>
                         <td>
-                            @if(dbs.IsActive == true)
+                            @if (dbs.IsActive == true)
                             {
                                 <button type="button" class="active-btn">Active</button>
                             }
@@ -114,8 +109,6 @@
                                     <img src="../images/group-38.png" alt="" style="margin-top: -10px;">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Edit </a></li>
-
                                     @if (dbs.IsApproved == false)
                                     {
                                         <li><a class="dropdown-item" onclick="Approveuser(this);" data-id="@dbs.UserId" style="color: black;">Approve</a></li>
@@ -136,11 +129,11 @@
                     </tr>
                 }
 
-            @**@
+                @**@
 
 
 
-                </tbody>
+            </tbody>
         </table>
     </div>
 </div>

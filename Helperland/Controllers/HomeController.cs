@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Helperland.Controllers
 {
@@ -23,7 +24,6 @@ namespace Helperland.Controllers
         {
             _helperlandContext = helperlandContext;
         }
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -184,8 +184,8 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Service_Provider(User signup)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 if (_helperlandContext.Users.Where(x => x.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(x => x.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 2;
@@ -203,7 +203,7 @@ namespace Helperland.Controllers
                 {
                     ViewBag.Message = "User already registed";
                 }
-            //}    
+            }    
             return View();
         }
 
@@ -215,8 +215,8 @@ namespace Helperland.Controllers
         [HttpPost]
         public IActionResult Create_Account(User signup)
         {
-            //if(ModelState.IsValid)
-            //{
+            if(ModelState.IsValid)
+            {
                 if (_helperlandContext.Users.Where(s => s.Email == signup.Email).Count() == 0 && _helperlandContext.Users.Where(s => s.Mobile == signup.Mobile).Count() == 0)
                 {
                     signup.UserTypeId = 1;
@@ -237,7 +237,7 @@ namespace Helperland.Controllers
                 {
                     ViewBag.Message = "This Email and Mobile are already registerd.";
                 }
-            //}
+           }
             return View();
         }
 
@@ -250,6 +250,7 @@ namespace Helperland.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+
             TempData["Msg"] = "You have succesfully logged out";
             return RedirectToAction("Index", "Home");
         }
