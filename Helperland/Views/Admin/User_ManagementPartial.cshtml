@@ -113,12 +113,12 @@
                                     {
                                         <li><a class="dropdown-item" onclick="Approveuser(this);" data-id="@dbs.UserId" style="color: black;">Approve</a></li>
                                         <li><a class="dropdown-item" onclick="Deleteuser();" data-id="@dbs.UserId" style="color: black;">Deactivate</a></li>
-
                                     }
-                                    else if (dbs.IsActive == false && dbs.UserTypeId == 1 && dbs.IsApproved == true)
+                                    else if (dbs.IsActive == false  && dbs.IsApproved == true)
                                     {
                                         <li><a class="dropdown-item" onclick="Activeuser(this);" data-id="@dbs.UserId" style="color: black;">Active</a></li>
                                     }
+
                                     else
                                     {
                                         <li><a class="dropdown-item" onclick="Deleteuser(this);" data-id="@dbs.UserId" style="color: black;">Deactivate</a></li>

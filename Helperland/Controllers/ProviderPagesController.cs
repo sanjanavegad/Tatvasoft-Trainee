@@ -42,6 +42,7 @@ namespace Helperland.Controllers
                 {
                     var u = _helperlandContext.Users.Where(x => x.UserId == users.UserId).FirstOrDefault();
                     users.Name = u.FirstName + " " + u.LastName;
+
                 }
 
                 List<ServiceRequestAddress> add = new List<ServiceRequestAddress>();
@@ -59,6 +60,7 @@ namespace Helperland.Controllers
             }
             
         }
+        
         [HttpGet]
         public IActionResult NewServiceDetailes(int id)
         {
@@ -79,6 +81,7 @@ namespace Helperland.Controllers
                 return PartialView("_ProviderModelPartial", servicerequest);
             }
         }
+        
         [HttpPost]
         public IActionResult AcceptServiceButton(int id, User data)
         {
@@ -86,6 +89,20 @@ namespace Helperland.Controllers
             {
                 int spid = (int)HttpContext.Session.GetInt32("UserId");
                 var servicerequest = ObjHelperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+
+                List<ServiceRequest> accept = _helperlandContext.ServiceRequests.Where(x => x.ServiceProviderId == spid && x.Status == 3 && DateTime.Compare(x.ServiceStartDate.Date , servicerequest.ServiceStartDate.Date) == 0).ToList();
+                foreach (var test in accept)
+                {
+                    TimeSpan start = test.ServiceStartDate.TimeOfDay;
+                    TimeSpan end = test.ServiceStartDate.AddHours(Convert.ToDouble(test.SubTotal)).TimeOfDay;
+                    TimeSpan now = servicerequest.ServiceStartDate.TimeOfDay;
+
+                    if ((now >= start) && (now <= end))
+                    {
+                        return Ok(Json("false"));
+                    }
+                }
+
                 servicerequest.Status = 3;
                 servicerequest.ServiceProviderId = spid;
                 var result = _helperlandContext.ServiceRequests.Update(servicerequest);
@@ -105,6 +122,7 @@ namespace Helperland.Controllers
                 return Ok(Json("False"));
             }
         }
+        
         private void SendEmail(string emailaddress, string body, string subject)
         {
             using (MailMessage mm = new MailMessage("sanjanavegad123@gmail.com", emailaddress))
@@ -125,6 +143,7 @@ namespace Helperland.Controllers
                 ViewBag.message = "Email send to admin successfully";
             }
         }
+        
         [HttpGet]
         public IActionResult ProviderUpCommingService()
         {
@@ -157,17 +176,23 @@ namespace Helperland.Controllers
             }
 
         }
-        
+
+        [HttpGet]
+        public IActionResult CancelServiceModel(int id)
+        {
+            var schedulerequest = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
+            return PartialView("_SPServiceCancelPartial", schedulerequest);
+        }
+
         [HttpPost]
-        public IActionResult CancelServiceButton(int id)
+        public IActionResult CancelServiceButton(ServiceRequest cancel)
         {
             using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
             {
-                int spid = (int)HttpContext.Session.GetInt32("UserId");
-                var servicerequest = ObjHelperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == id).FirstOrDefault();
-                servicerequest.Status = 4;
-                servicerequest.ServiceProviderId = null;
-                var result = _helperlandContext.ServiceRequests.Update(servicerequest);
+                ServiceRequest cancelrequest = _helperlandContext.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
+                cancelrequest.Status = 4;
+                cancelrequest.ServiceProviderId = null;
+                var result = _helperlandContext.ServiceRequests.Update(cancelrequest);
                 _helperlandContext.SaveChanges();
                 if (result != null)
                 {
@@ -326,15 +351,17 @@ namespace Helperland.Controllers
                     IsBlocked = true,
                     IsFavorite = false
                 };
-                _helperlandContext.FavoriteAndBlockeds.Add(block);
+                var result = _helperlandContext.FavoriteAndBlockeds.Add(block);
                 _helperlandContext.SaveChanges();
+                 return Ok(Json("true"));
             }
             else
             {
                 p.IsBlocked = true;
-                _helperlandContext.SaveChanges();
+                var result1 = _helperlandContext.SaveChanges();
+                return Ok(Json("true"));
             }
-            return PartialView("_SPServiceBlockCustomer");
+
         }
 
         public IActionResult UnBlockCustomer(int id)
@@ -344,7 +371,8 @@ namespace Helperland.Controllers
             if (p != null)
             {
                 p.IsBlocked = false;
-                _helperlandContext.SaveChanges();
+                var result = _helperlandContext.SaveChanges();
+                return Ok(Json("true"));
             }
             return PartialView("_SPServiceBlockCustomer");
         }
@@ -352,22 +380,25 @@ namespace Helperland.Controllers
         [HttpGet]
         public IActionResult ProviderSettings()
         {
-            using (HelperlandContext ObjHelperlandContext = new HelperlandContext())
+            int id = (int)HttpContext.Session.GetInt32("UserId");
+            User user = _helperlandContext.Users.FirstOrDefault(x => x.UserId == id);
+            UserAddress addsressrequest = _helperlandContext.UserAddresses.Where(x => x.UserId == id).FirstOrDefault();
+            if (addsressrequest != null)
             {
-                int id = (int)HttpContext.Session.GetInt32("UserId");
-                User user = ObjHelperlandContext.Users.FirstOrDefault(x => x.UserId == id);
-
-                UserAddress addsressrequest = ObjHelperlandContext.UserAddresses.Where(x => x.UserId == id).FirstOrDefault();
-                if (addsressrequest != null)
-                {
-                    ViewBag.AddressLine1 = addsressrequest.AddressLine1;
-                    ViewBag.AddressLine2 = addsressrequest.AddressLine2;
-                    ViewBag.City = addsressrequest.City;
-                    ViewBag.PostalCode = addsressrequest.PostalCode;
-                }
-                ViewBag.users = user;
+                ViewBag.AddressLine1 = addsressrequest.AddressLine1;
+                ViewBag.AddressLine2 = addsressrequest.AddressLine2;
+                ViewBag.City = addsressrequest.City;
+                ViewBag.PostalCode = addsressrequest.PostalCode;
             }
-            return PartialView("_SPSettings");
+            if(user.DateOfBirth != null)
+            {
+                DateTime Finaldob = Convert.ToDateTime(user.DateOfBirth.ToString());
+                user.Day = Finaldob.Day.ToString();
+                user.Month = Finaldob.Month.ToString();
+                user.Year = Finaldob.Year.ToString();
+            }
+            ViewBag.users = user;
+            return PartialView("_SPSettings", user);
         }
 
         [HttpPost]
@@ -384,9 +415,9 @@ namespace Helperland.Controllers
                 updated.Gender = user.Gender;
                 updated.UserProfilePicture = user.UserProfilePicture;
                 updated.ZipCode = user.PostalCode;
-                if (user.Date != null && user.Month != null && user.Year != null)
+                if (user.Day != null && user.Month != null && user.Year != null)
                 {
-                    var dob = user.Date + "-" + user.Month + "-" + user.Year;
+                    var dob = user.Day + "-" + user.Month + "-" + user.Year;
                     updated.DateOfBirth = Convert.ToDateTime(dob);
                 }
                 updated.ModifiedDate = DateTime.Now;
@@ -417,9 +448,8 @@ namespace Helperland.Controllers
                     var serviceaddResult = _helperlandContext.UserAddresses.Add(serviceadd);
                     _helperlandContext.SaveChanges();
                 }
-                
             }
-            return PartialView("_SPSettings");
+            return Ok(Json("true"));
         }
 
         [HttpPost]
@@ -436,7 +466,7 @@ namespace Helperland.Controllers
                 await _helperlandContext.SaveChangesAsync();
                 ModelState.Clear();
                 ViewBag.msg = "Reset password successfully";
-                return PartialView("_SPSettings");
+                return Ok(Json("true"));
             }
             else
             {

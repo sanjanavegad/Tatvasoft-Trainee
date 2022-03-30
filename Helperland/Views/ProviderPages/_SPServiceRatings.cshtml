@@ -16,21 +16,21 @@
     @foreach (ServiceRequest dbs in service)
     {
         double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
-        <div class="card mb-3" style="font-size: 15px;">
+        <div class="card mb-3 upcoming-service-card" style="font-size: 15px;">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-2">
-                        <div>@dbs.ServiceRequestId</div>
+                    <div class="col-md-2 col-6">
+                        <div>Service Id : @dbs.ServiceRequestId</div>
                         <div><strong>@dbs.Name</strong></div>
                     </div>
-                    <div class="col-7" style="font-size: 14px;">
+                    <div class="col-md-7 col-6" style="font-size: 14px;">
                         <img src="../images\calendar2.png" alt="">
                         <strong>@dbs.ServiceStartDate.ToString("dd/MM/yyyy")</strong>
                         <br>
                         <img src="../images\layer-712.png" alt="">
                         @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <div><strong>Ratings</strong></div>
                         @{
                             int totalstars = Convert.ToInt32(dbs.ratings);

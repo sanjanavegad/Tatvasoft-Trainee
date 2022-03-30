@@ -93,13 +93,13 @@
                 }
                 else if (Model.Status == 3)
                 {
-                    <button type="button" class="btn btn-reschedule" data-bs-toggle="modal" data-id="@Model.ServiceRequestId" onclick="schedule(this)" data-target="#Reschedule">Reschedule</button>
+                    <button type="button" class="btn btn-reschedule" data-id="@Model.ServiceRequestId" onclick="schedule(this)">Reschedule</button>
 
-                    <button type="button" class="btn btn-reschedule-cancel" data-bs-toggle="modal" data-bs-target="#cancel-request" data-id="@Model.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
+                    <button type="button" class="btn btn-reschedule-cancel" data-id="@Model.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
                 }
                 else if(Model.Status == 1)
                 {
-                    <button type="button" class="btn btn-rate-service-history" data-id="@Model.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
+                    <button type="button" class="btn btn-rate-service-history" data-id="@Model.ServiceRequestId" onclick="ratingmodal(this)">Rate SP</button>
                 }
             </div>
         </div>

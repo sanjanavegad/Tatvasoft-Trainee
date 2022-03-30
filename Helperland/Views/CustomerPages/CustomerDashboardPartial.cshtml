@@ -10,7 +10,6 @@
 <div id="dashboard" class="container tab-pane active" >
     <div class="heading-service-history mb-3">
         Dashboard
-        <button type="button" class="btn btn-export-service-history">Export</button>
     </div>
     <!-- </div> -->
     <table class="table" id="datatable1">
@@ -27,7 +26,6 @@
             @foreach (ServiceRequest dbs in service)
             {
                 double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
-
                 <tr>
                     <td>
                         <button class="blank-button text-center ml-5"data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
@@ -46,7 +44,37 @@
                         {
                             <div class="row">
                                 <div class="col-3">
-                                    <img src="../images\cap.png" alt="" class="history-cap">
+                                    @if (dbs.UserProfilePicture != null)
+                                    {
+                                        if (dbs.UserProfilePicture == "1")
+                                        {
+                                            <img src="../images/avatar-car.png" alt="" class="favorit-avtar-small">
+                                        }
+                                        if (dbs.UserProfilePicture == "2")
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-female.png" alt="">
+                                        }
+                                        if (dbs.UserProfilePicture == "3")
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-hat.png" alt="">
+                                        }
+                                        if (dbs.UserProfilePicture == "4")
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-iron.png" alt="">
+                                        }
+                                        if (dbs.UserProfilePicture == "5")
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-male.png" alt="">
+                                        }
+                                        if (dbs.UserProfilePicture == "6")
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-ship.png" alt="">
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <img class="favorit-avtar-small" src="../images/avatar-car.png" alt="">
+                                    }
                                 </div>
                                 <div class="col-9">
                                     @dbs.Name<br>
@@ -83,9 +111,9 @@
                                 <button type="button" class="btn btn-reschedule-cancel">Expired</button>
                             }
                             else {
-                            <button type="button" class="btn btn-reschedule" data-bs-toggle="modal" data-id="@dbs.ServiceRequestId" onclick="schedule(this)" data-target="#Reschedule">Reschedule</button>
+                            <button type="button" class="btn btn-reschedule" data-id="@dbs.ServiceRequestId" onclick="schedule(this)">Reschedule</button>
 
-                            <button type="button" class="btn btn-reschedule-cancel" data-bs-toggle="modal" data-bs-target="#cancel-request" data-id="@dbs.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
+                            <button type="button" class="btn btn-reschedule-cancel" data-id="@dbs.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
                             }
 
                         </div>
@@ -99,190 +127,137 @@
 </div>
 
 
+<div class="modal fade" id="NotRescheduleModal" aria-hidden="true"
+     aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-body">
+                <p class="mt-2 px-3 pt-3" style="font-size:18px; color:red;">Another service request has been assigned to the service provider on this date and time.Either choose another date or pick up a different time slot.</p>
+                <br>
+                <button class="ok-button" data-bs-dismiss="modal">
+                    OK
+                </button>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!--<div class="col col3" id="mobile-card">
+@* --------------------------------Mobile card ----------------------------------- *@
+
+<div class="col col3" id="mobile-card">
     <div class="tab-content">
         <div id="dashboard-sid" class="container tab-pane active">
             <div class="mobile-card">
                 <h2>Dashboard</h2>
-                <div class="card upcoming-service-card">
-                    <ul class="list-group ">
-                        <li class="list-group-item">
-                            <img src="images\calendar2.png" alt=""> 09/04/2018
-                            <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="images\cap.png" alt="" class="history-cap">
+
+                @foreach (ServiceRequest dbs in service)
+                {
+                    double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <b>Service Request Id : <button class="blank-button text-center ml-1" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button></b>
+                            </li>
+                            <div class="line-botom"></div>
+                            @*<li>Service Provider is not assigned yet</li>*@
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img src="../images\calendar2.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="../images\layer-712.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                                    </div>
+                                    
                                 </div>
-                                <div class="col-10">
-                                    Lyum Watson <br>
-                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
-                                                                                        alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png"
-                                                                                                                                                                                                  alt="">
-                                    4
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <p class="payment-service-history">€ 63</p>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule2">Reschedule</button>
-                            <div class="modal fade" id="Reschedule2" tabindex="-1" role="dialog" aria-labelledby="Reschedule" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 350px;">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Modal title</h4>
-                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                
+                            </li>
+                            <li class="list-group-item">
+                                @if (@dbs.Name != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-2">
+                                            @if (dbs.UserProfilePicture != null)
+                                            {
+                                                if (dbs.UserProfilePicture == "1")
+                                                {
+                                                    <img src="../images/avatar-car.png" alt="" class="favorit-avtar-small">
+                                                }
+                                                if (dbs.UserProfilePicture == "2")
+                                                {
+                                                    <img class="favorit-avtar-small" src="../images/avatar-female.png" alt="">
+                                                }
+                                                if (dbs.UserProfilePicture == "3")
+                                                {
+                                                    <img class="favorit-avtar-small" src="../images/avatar-hat.png" alt="">
+                                                }
+                                                if (dbs.UserProfilePicture == "4")
+                                                {
+                                                    <img class="favorit-avtar-small" src="../images/avatar-iron.png" alt="">
+                                                }
+                                                if (dbs.UserProfilePicture == "5")
+                                                {
+                                                    <img class="favorit-avtar-small" src="../images/avatar-male.png" alt="">
+                                                }
+                                                if (dbs.UserProfilePicture == "6")
+                                                {
+                                                    <img class="favorit-avtar-small" src="../images/avatar-ship.png" alt="">
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-car.png" alt="">
+                                            }
                                         </div>
-                                        <div class="modal-body">
-                                            <form action="">
-                                                <div id="Reschedule-model">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div style="font-size: 20px;"><strong>Select New Date & Time</strong></div>
-                                                            <div class="row mt-2">
-                                                                <div class="col-md-7 col-12">
-                                                                    <input type="date" class="form-control mb-3" placeholder="date"
-                                                                           aria-label="Postal code" id="currentDate">
-                                                                </div>
-                                                                <div class="col-md-5 col-12">
-                                                                    <input type="time" class="form-control" name="time" id="currentTime">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="model-action-button mt-4">Update</button>
-                                            </form>
+                                        <div class="col-10">
+                                            @dbs.Name<br>
+                                            @{
+                                                int totalstars = Convert.ToInt32(dbs.ratings);
+                                                int stars = 5 - totalstars;
+                                                for (int i = 1; i <= totalstars; i++)
+                                                {
+                                                    <span class="star">
+                                                        <img src="../images/yellow-small-star.png" alt="">
+                                                    </span>
+                                                }
+                                                for (int j = 1; j <= stars; j++)
+                                                {
+                                                    <span class="star">
+                                                        <img src="../images/star2.png" alt="">
+                                                    </span>
+                                                }
+                                            }
                                         </div>
                                     </div>
-                                </div>
-                            </div>-->
-                            <!-- Cancel Button model -->
-                            <!--<button type="button" class="btn btn-reschedule-cancel" data-toggle="modal"
-                                    data-target="#cancel-request2">
-                                Cancel
-                            </button>
-                            <div class="modal fade" id="cancel-request2" tabindex="-1" role="dialog" aria-labelledby="cancel-request"
-                                 aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document" style="width: 350px;">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Cancel Service Request</h5>
-                                            <button type="button" class="btn-close" style="float: right;" data-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="">
-                                                <div id="Reschedule-model">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div style="font-size: 16px;">Why you want to cancel the service request?</div>
-                                                            <textarea name="" id="" cols="50" rows="2" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="model-action-button mt-4">Cancel now</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card upcoming-service-card">
-                    <ul class="list-group ">
-                        <li class="list-group-item">
-                            <img src="images\calendar2.png" alt=""> 09/04/2018
-                            <img src="images\layer-712.png" alt="" style="margin-left: 30px;"> 12:00 - 18:00
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="images\cap.png" alt="" class="history-cap">
-                                </div>
-                                <div class="col-10">
-                                    Lyum Watson <br>
-                                    <img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png"
-                                                                                        alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\yellow-small-star.png" alt=""><img src="images\grey-small-star.png"
-                                                                                                                                                                                                  alt="">
-                                    4
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <p class="payment-service-history">€ 63</p>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="button" class="btn btn-reschedule" data-toggle="modal" data-target="#Reschedule2">Reschedule</button>
-                            <button type="button" class="btn btn-reschedule-cancel" data-toggle="modal"
-                                    data-target="#cancel-request2">
-                                Cancel
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                                }
+                                </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ @dbs.TotalCost</p>
+                            </li>
+                            <li class="list-group-item">
+                                @if (@dbs.ServiceStartDate.AddHours(time) < DateTime.Now)
+                                {
+                                    <button type="button" class="btn btn-reschedule-cancel">Expired</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-reschedule"data-id="@dbs.ServiceRequestId" onclick="schedule(this)">Reschedule</button>
 
+                                    <button type="button" class="btn btn-reschedule-cancel" data-id="@dbs.ServiceRequestId" onclick="cancelservicemodel(this)">Cancel</button>
+                                }
 
-                <div class="row pagination-1">
-                    <div class="col-12">
-                        <h5 class="h4-service-history" style="margin-left:20%;">
-                            Show
-                            <button class="p-service-history">
-                                10 <img src="images\keyboard-right-arrow-button.png"
-                                        alt="">
-                            </button>
-                            entries | Total Record: 55
-                        </h5>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-12 nav-service-history " style="margin: auto;">
-                        <nav class="nav-service-history">
-                            <ul class="pagination">
-                                <li class="page-item disabled" title="next">
-                                    <a href="homepage.html" class="page-link rounded-circle m-1">
-                                        <img src="images\first-page.png" alt="">
-                                    </a>
-                                </li>
-                                <li class="page-item disabled " title="previous">
-                                    <a href="homepage.html" class="page-link rounded-circle m-1">
-                                        <img src="images\keyboard-right-arrow-button-copy.png" alt="">
-                                    </a>
-                                </li>
-                                <li class="page-item active" title=" ">
-                                    <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
-                                </li>
-                                <li class="page-item disabled" title=" ">
-                                    <a href="" class="page-link rounded-circle m-1">2</a>
-                                </li>
-                                <li class="page-item disabled" title=" ">
-                                    <a href="" class="page-link rounded-circle m-1">3</a>
-                                </li>
-                                <li class="page-item disabled" title=" ">
-                                    <a href="" class="page-link rounded-circle m-1">4</a>
-                                </li>
-                                <li class="page-item disabled" title="next">
-                                    <a href="homepage.html" class="page-link rounded-circle m-1">
-                                        <img src="images\first-page.png" alt="">
-                                    </a>
-                                </li>
-                                <li class="page-item disabled" title="next">
-                                    <a href="homepage.html" class="page-link rounded-circle m-1">
-                                        <img src="images\keyboard-right-arrow-button-copy.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                }
+
                 </div>
-            </div>
         </div>
     </div>
-</div>-->
+</div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 

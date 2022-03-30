@@ -1,32 +1,97 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
+@{
+    var ids = ViewBag.counts;
+    var serviceProviders = ViewBag.serviceProviders;
+    int i = 0;
+    var hasEntry = ViewBag.hasEntry;
+    var favs = ViewBag.favs;
+}
 
 <div id="favouritepros" class="container tab-pane text-center active">
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row justify-content-center mt-3">
-                        <img src="../images/avatar-female.png" alt="" class="favorit-avtar">
-                        <br>
-                        <h5 class="text-center">Gaurav Patel</h5>
-                        <div style="margin-top: -10px;">
-                            <img src="../images\yellow-small-star.png" alt="">
-                            <img src="../images\yellow-small-star.png" alt="">
-                            <img src="../images\yellow-small-star.png" alt="">
-                            <img src="../images\yellow-small-star.png" alt="">
-                            <img src="../images\grey-small-star.png" alt="">
-                        </div>
-                        <div class="mt-4">1 Cleanings</div>
-                        <button class="btn favorite-button mt-3 mb-3"> Favorite</button>
-                        <button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3"> Block</button>
+        @foreach (User sp in serviceProviders)
+        {
+            <div class="col-md-4 col-sm-12">
+                <div class="card upcoming-service-card">
+                    <div class="card-body">
+                        <div class="row justify-content-center mt-3">
+                            @if (sp.UserProfilePicture != null)
+                            {
+                                if (sp.UserProfilePicture == "1")
+                                {
+                                    <img src="../images/avatar-car.png" alt="" class="favorit-avtar">
+                                }
+                                if (sp.UserProfilePicture == "2")
+                                {
+                                    <img class="favorit-avtar" src="../images/avatar-female.png" alt="">
+                                }
+                                if (sp.UserProfilePicture == "3")
+                                {
+                                    <img class="favorit-avtar" src="../images/avatar-hat.png" alt="">
+                                }
+                                if (sp.UserProfilePicture == "4")
+                                {
+                                    <img class="favorit-avtar" src="../images/avatar-iron.png" alt="">
+                                }
+                                if (sp.UserProfilePicture == "5")
+                                {
+                                    <img class="favorit-avtar" src="../images/avatar-male.png" alt="">
+                                }
+                                if (sp.UserProfilePicture == "6")
+                                {
+                                    <img class="favorit-avtar" src="../images/avatar-ship.png" alt="">
+                                }
+                            }
+                            else
+                            {
+                                <img class="favorit-avtar" src="../images/avatar-car.png" alt="">
+                            }
 
+                            <br>
+                            <h5 class="text-center">@sp.FirstName  @sp.LastName</h5>
+                            <div style="margin-top: -10px;">
+                                <img src="../images\yellow-small-star.png" alt="">
+                                <img src="../images\yellow-small-star.png" alt="">
+                                <img src="../images\yellow-small-star.png" alt="">
+                                <img src="../images\yellow-small-star.png" alt="">
+                                <img src="../images\grey-small-star.png" alt="">
+                            </div>
+                            <div class="mt-4">@ids[i] Cleanings</div>
+                            @if (hasEntry[i] != false)
+                            {
+                                if (favs[i].IsFavorite == true)
+                                {
+                                    <button class="btn favorite-button mt-3 mb-3" data-id="@sp.UserId" onclick="unfavoritecustomer(this)">Unfavourite</button>
+                                    <button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3" disabled>Block</button>
+                                }
+                                else if (favs[i].IsBlocked == true)
+                                {
+                                    <button class="btn favorite-button mt-3 mb-3">Favourite</button>
+                                    <button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3" data-id="@sp.UserId" onclick="unblockcustomer(this)">Unblock</button>
+                                }
+                                else if (favs[i].IsFavorite == false)
+                                {
+                                    <button class="btn favorite-button mt-3 mb-3" data-id="@sp.UserId" onclick="favoritecustomer(this)">Favourite</button>
+                                    <button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3" data-id="@sp.UserId" onclick="blockcustomer(this)">Block</button>
+                                }
+                            }
+                            else
+                            {
+                                <button class="btn favorite-button mt-3 mb-3" data-id="@sp.UserId" onclick="favoritecustomer(this)" >Favourite</button>
+                                <button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3" data-id="@sp.UserId" onclick="blockcustomer(this)">Block</button>
+                            }
+
+                            @*<button class="btn favorite-button mt-3 mb-3"> Favorite</button>*@
+                            @*<button class="btn btn-reschedule-cancel mt-3 mb-3 mr-3"> Block</button>*@
+
+                        </div>
                     </div>
                 </div>
             </div>
+            i = i + 1;
+        }
         </div>
-    </div>
 </div>
+

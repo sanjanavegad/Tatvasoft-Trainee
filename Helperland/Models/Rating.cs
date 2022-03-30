@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -18,8 +19,15 @@ namespace Helperland.Models
         public decimal Friendly { get; set; }
         public decimal QualityOfService { get; set; }
 
+
+
         public virtual User RatingFromNavigation { get; set; }
         public virtual User RatingToNavigation { get; set; }
         public virtual ServiceRequest ServiceRequest { get; set; }
+
+        [NotMapped]
+        public int? ServiceProviderId { get; set; }
+        [NotMapped]
+        public string Name { get; set; }
     }
 }

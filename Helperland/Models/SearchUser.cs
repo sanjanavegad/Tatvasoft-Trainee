@@ -22,5 +22,7 @@ namespace Helperland.Models
         public string ZipCode { get; set; }
 
         public int? Status { get; set; }
+
+        public DateTime? ServiceEndDate { get; set; }
     }
 }

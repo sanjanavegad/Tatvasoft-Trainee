@@ -1,13 +1,12 @@
-﻿@using Helperland.Models;
-@model Helperland.Models.User;
+﻿@using Helperland.Models
+@model Helperland.Models.User
 @{
     var detailes = ViewBag.users;
-    var address = ViewBag.add;
 }
 
 
-<div id="settings" class="container tab-pane active" style="width:1000px;">
-    <div class="row row-btn">
+<div id="settings" class="container tab-pane active">
+    <div class="row row-btn p-3">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified px-0" id="mysetting" role="tablist">
             <li class="nav-item" role="presentation">
@@ -37,73 +36,76 @@
             <div class="tab-pane active text" id="details" role="tabpanel" aria-labelledby="details-tab">
 
                 <div class="row ">
-                    <div class="col-10 status-line">
+                    <div class="col-md-10 col-8  status-line">
                         <h6 class="mb-4">
                             Account Status : <span class="status">
-                            @if(detailes.UserProfilePicture != null)
-                            {
+
                                 <span>Active</span>
-                            }
+
                             </span>
                         </h6>
                         <h5>Basic Detailes </h5>
                     </div>
-                    <div style="margin-left:-30px;" class="col-2 mt-5">
-                        @if (detailes.UserProfilePicture == "1")
+                    <div style="margin-left:-30px;" class="col-md-2 col-4 mt-5">
+                        @if (detailes != null && !String.IsNullOrEmpty(detailes.UserProfilePicture))
                         {
-                            <img class="avatar active" style="float: right;" src="../images/avatar-car.png">
+                            @if (detailes.UserProfilePicture == "1")
+                            {
+                                <img src="../images/avatar-car.png">
+                            }
+                            @if (detailes.UserProfilePicture == "2")
+                            {
+                                <img style="float: right;" src="../images/avatar-female.png">
+                            }
+                            @if (detailes.UserProfilePicture == "3")
+                            {
+                                <img style="float: right;" src="../images/avatar-hat.png">
+                            }
+                            @if (detailes.UserProfilePicture == "4")
+                            {
+                                <img style="float: right;" src="../images/avatar-iron.png">
+                            }
+                            @if (detailes.UserProfilePicture == "5")
+                            {
+                                <img style="float: right;" src="../images/avatar-male.png">
+                            }
+                            @if (detailes.UserProfilePicture == "6")
+                            {
+                                <img style="float: right;" src="../images/avatar-ship.png">
+                            }
                         }
-                        @if (detailes.UserProfilePicture == "2")
-                        {
-                            <img class="avatar" style="float: right;" src="../images/avatar-female.png">
-                        }
-                        @if (detailes.UserProfilePicture == "3")
-                        {
-                            <img class="avatar" style="float: right;" src="../images/avatar-hat.png">
-                        }
-                        @if (detailes.UserProfilePicture == "4")
-                        {
-                            <img class="avatar" style="float: right;" src="../images/avatar-iron.png">
-                        }
-                        @if (detailes.UserProfilePicture == "5")
-                        {
-                            <img class="avatar" style="float: right;" src="../images/avatar-male.png">
-                        }
-                        @if (detailes.UserProfilePicture == "6")
-                        {
-                            <img class="avatar" style="float: right;" src="../images/avatar-ship.png">
-                        }
+
                     </div>
                 </div>
-                <form method="post" class="mydetails-form pt-3" asp-action="UpdateProviderDetailes" asp-controller="ProviderPages">
+                <form method="post" class="mydetails-form pt-3">
                     <div class="row">
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label for="">First Name</label>
-                            <input type="text" asp-for="FirstName" class="form-control" value="@detailes.FirstName" id="firstname">
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                            <input type="text" class="form-control" value="@detailes.FirstName" id="firstname">
+                            
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label for="">Last Name</label>
-                            <input type="text" asp-for="LastName" class="form-control" value="@detailes.LastName" id="lastname">
-                            <span asp-validation-for="LastName" class="text-danger"></span>
+                            <input type="text"class="form-control" value="@detailes.LastName" id="lastname">
+                            
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label for="">E-mail Address</label>
-                            <input type="email" asp-for="Email" class="form-control" value="@detailes.Email" id="email">
+                            <input type="email"class="form-control" value="@detailes.Email" id="email">
                         </div>
 
                     </div>
                     <div class="row mt-3">
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label for="">Mobile number</label>
-                            <input type="tel" asp-for="Mobile" class="form-control" maxlength="10" value="@detailes.Mobile" id="mobile">
+                            <input type="tel"class="form-control" maxlength="10" value="@detailes.Mobile" id="mobile">
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label>Date of Birth</label>
                             <div class="row">
                                 <div class="col-4">
-                                    <select class="form-control form-select" asp-for="Date">
-                                        <option>Day</option>
+                                    <select class="form-control form-select" id="date" >
+                                        <option value="none" selected disabled hidden>Day</option>
                                         <option value="1">01</option>
                                         <option value="2">02</option>
                                         <option value="3">03</option>
@@ -138,7 +140,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4" style="margin: 0px -15px;">
-                                    <select class="form-control form-select" asp-for="Month" >
+                                    <select class="form-control form-select" id="month">
                                         <option value="">Month</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
@@ -155,7 +157,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control form-select" asp-for="Year">
+                                    <select class="form-control form-select" id="year">
                                         <option value="">Year</option>
                                         <option value="2012">2012</option>
                                         <option value="2011">2011</option>
@@ -261,9 +263,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-12 all-lables">
                             <label for="nationality">Nationality</label>
-                            <select class="form-control form-select" asp-for="NationalityId" id="nationality">
+                            <select class="form-control form-select" id="nationality" >
                                 <option value="1">German</option>
                                 <option value="2">Indian</option>
                                 <option value="3">American</option>
@@ -275,47 +277,47 @@
                             <div class="form-group">
                                 <label>Gender</label>
                                 <label class="gender">
-                                    <input type="radio" asp-for="Gender" name="Gender" value="1"> Male  &nbsp;&nbsp;
+                                    <input type="radio" id="Gender1" name="Gender" value="1" checked> Male  &nbsp;&nbsp;
                                 </label>
                                 <label class="gender">
-                                    <input type="radio" asp-for="Gender" name="Gender" value="2">Female &nbsp;&nbsp;
+                                    <input type="radio" id="Gender2" name="Gender" value="2">Female &nbsp;&nbsp;
                                 </label>
                                 <label class="gender">
-                                    <input type="radio" asp-for="Gender" name="Gender" value="3"> No Information
+                                    <input type="radio" id="Gender3" name="Gender" value="3"> No Information
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-md-12 ">
                             <div class="form-group">
                                 <label class="control-label">Choose an avatar</label>
                                 <br>
                                 <!---->
                                 <div class="columnAvatar">
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="1" class="d-none" />
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture1" value="1" class="d-none" />
                                         <img src="../images/avatar-car.png" class="avatar" />
                                     </label>
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="2" class="d-none" />
-                                        <img src="../images/avatar-female.png"/>
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture2" value="2" class="d-none" />
+                                        <img src="../images/avatar-female.png" />
                                     </label>
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="3" class="d-none" />
-                                        <img src="../images/avatar-hat.png"/>
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture3" value="3" class="d-none" />
+                                        <img src="../images/avatar-hat.png" />
                                     </label>
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="4" class="d-none" />
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture4" value="4" class="d-none" />
                                         <img src="../images/avatar-iron.png" />
                                     </label>
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="5" class="d-none" />
-                                        <img src="../images/avatar-male.png"/>
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture5" value="5" class="d-none" />
+                                        <img src="../images/avatar-male.png" />
                                     </label>
                                     <label>
-                                        <input type="radio" name="UserProfilePicture" asp-for="UserProfilePicture" value="6" class="d-none" />
-                                        <img src="../images/avatar-ship.png"/>
+                                        <input type="radio" name="UserProfilePicture" id="UserProfilePicture6" value="6" class="d-none" />
+                                        <img src="../images/avatar-ship.png" />
                                     </label>
                                 </div>
                             </div>
@@ -326,31 +328,31 @@
                             <h5>My Address </h5>
                             <hr>
                             <div class="row">
-                                <div class="col-4 all-lables">
+                                <div class="col-md-4 col-12 all-lables">
                                     <label for="">Street Name</label>
-                                    <input type="text" asp-for="AddressLine1" value="@ViewBag.AddressLine1" class="form-control" id="streetname" >
+                                    <input type="text"  value="@ViewBag.AddressLine1" class="form-control" id="streetname">
                                 </div>
-                                <div class="col-4 all-lables">
+                                <div class="col-md-4 col-12 all-lables">
                                     <label for="">House Number</label>
-                                    <input type="number" asp-for="AddressLine2" value="@ViewBag.AddressLine2"  class="form-control" id="housenumber" >
+                                    <input type="number" value="@ViewBag.AddressLine2" class="form-control" id="housenumber">
                                 </div>
-                                <div class="col-4 all-lables">
+                                <div class="col-md-4 col-6 all-lables">
                                     <label for="">Postal Code</label>
-                                    <input type="number" asp-for="PostalCode" value="@ViewBag.PostalCode" class="form-control" id="postalcode" >
+                                    <input type="number"  value="@ViewBag.PostalCode" class="form-control" id="postalcode">
                                 </div>
                             </div>
 
 
                             <div class="row mt-3 mb-3">
-                                <div class="col-4 all-lables">
+                                <div class="col-md-4 col-6 all-lables">
                                     <label for="">City</label>
-                                    <input type="text" asp-for="City" value="@ViewBag.City" class="form-control" id="city">
+                                    <input type="text"  value="@ViewBag.City" class="form-control" id="city">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 pt-2 mb-5">
-                        <button type="submit" class="btn save-btn" style="float: left;">Save</button>
+                        <button type="submit" class="btn save-btn" style="float: left;" onclick="Saveprofile()">Save</button>
                     </div>
                 </form>
             </div>

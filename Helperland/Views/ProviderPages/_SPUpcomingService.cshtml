@@ -11,7 +11,6 @@
 <div id="upcomingservice" class="container tab-pane active">
     <div class="heading-service-history mt-3">
         Upcoming Service Request
-        <button type="button" class="btn btn-export-service-history">Export</button>
     </div>
     <!-- </div> -->
     <table class="table" id="datatable2">
@@ -70,14 +69,84 @@
                         }
                         else
                         {
-                            <button type="button" class="btn btn-upcoming-service" data-id="@dbs.ServiceRequestId" onclick="cancelservice(this)" data-bs-dismiss="modal">Cancle</button>
-
+                            <button type="button" class="btn btn-upcoming-service" data-id="@dbs.ServiceRequestId" onclick="cancelservicemodel(this)" data-bs-dismiss="modal">Cancle</button>
                         }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    
-    
+
+
+</div>
+
+
+
+
+@* \\\\\\\\\\\\\\\\\\\\\\\\Mobile Card \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *@
+
+<div class="col col3" id="mobile-card">
+    <div class="tab-content">
+        <div id="dashboard-sid" class="container tab-pane active">
+            <div class="mobile-card">
+                <h2>UpComing Service </h2>
+
+                @foreach (ServiceRequest dbs in service)
+                {
+                    double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <b>Service Request ID : <button class="blank-button text-center " data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button></b>
+                            </li>
+                            <div class="line-botom"></div>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img src="../images\calendar2.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="../images\layer-712.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                @if (@dbs.Name != null)
+                                {
+                                <div class="row">
+                                    <div class="col-1">
+                                        <img src="../images/layer-15.png" alt="">
+                                    </div>
+                                    <div class="col-10" style="font-size:16px;">
+                                        <div>@dbs.Name</div>
+                                        <div>@dbs.AddressLine1 , @dbs.AddressLine2</div>
+                                        @dbs.City , @dbs.ZipCode
+                                    </div>
+                                </div>
+                                }
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ @dbs.TotalCost</p>
+                            </li>
+                            <li class="list-group-item">
+                                @if (@dbs.ServiceStartDate.AddHours(time) < DateTime.Now)
+                                {
+                                    <button type="button" class="btn btn-upcoming-service" data-id="@dbs.ServiceRequestId" onclick="complateservice(this)" data-bs-dismiss="modal">Complated</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-upcoming-service" data-id="@dbs.ServiceRequestId" onclick="cancelservice(this)" data-bs-dismiss="modal">Cancle</button>
+
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
 </div>

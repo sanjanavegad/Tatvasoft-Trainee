@@ -9,7 +9,7 @@
 <!--Welcome heading-->
 <section class="first-heading">
     <div class="welcome-heading">
-        <h6 class="Welcome ">Welcome,<b> @Model.FirstName</b></h6>
+        <h6 class="Welcome">Welcome, @Model.FirstName</h6>
     </div>
 </section>
 <!--Welcome heading-->
@@ -71,6 +71,8 @@
 <section id="model1"></section>
 <section id="model2"></section>
 <section id="model3"></section>
+<section id="model4"></section>
+<section id="model5"></section>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -82,8 +84,8 @@
 @section Scripts {
 
     <script>
-
         var dt = new Date();
+
         function renderDate() {
             dt.setDate(1);
             var day = dt.getDay();
@@ -131,6 +133,7 @@
             document.getElementsByClassName("cal-days")[0].innerHTML =
                 cells;
         }
+
         function moveDate(para) {
             if (para == "prev") {
                 dt.setMonth(dt.getMonth() - 1);
@@ -162,6 +165,7 @@
                 }
             });
         });
+
         function loadnewservice() {
             $.ajax({
                 url: '/ProviderPages/ProviderNewService',
@@ -184,6 +188,7 @@
                 }
             });
         }
+
         function loadupcomingservice() {
             $.ajax({
                 url: '/ProviderPages/ProviderUpCommingService',
@@ -206,6 +211,7 @@
                 }
             });
         }
+
         function loadserviceschedule() {
             $.ajax({
                 url: '/ProviderPages/ProviderServiceSchedule',
@@ -215,6 +221,7 @@
                 }
             });
         }
+
         function loadservicehistory() {
             $.ajax({
                 url: '/ProviderPages/ProviderServiceHistory',
@@ -227,6 +234,7 @@
                 }
             });
         }
+
         function loadmyretings() {
             $.ajax({
                 url: '/ProviderPages/ProviderRatings',
@@ -236,6 +244,7 @@
                 }
             });
         }
+
         function loadblockcustomer() {
             $.ajax({
                 url: '/ProviderPages/ProviderBlockCustomer',
@@ -245,6 +254,7 @@
                 }
             });
         }
+
         function mysettings() {
             $.ajax({
                 url: '/ProviderPages/ProviderSettings',
@@ -254,8 +264,6 @@
                 }
             });
         }
-
-
     </script>
     <script>
         function detailes(db) {
@@ -271,30 +279,61 @@
 
             });
         }
+
         function acceptbtn(db) {
             var id = db.getAttribute("data-id");
             $.ajax({
                 type: 'POST',
                 url: '/ProviderPages/AcceptServiceButton',
                 data: { "id": id },
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadnewservice();
+                    }
+                    else {
+                        loadnewservice();
+                        $("#model4").html(result);
+                        $("#NotAcceptButton").modal("show");
+                    }
+                }
+               
+
+            });
+        }
+
+        function cancelservicemodel(dt) {
+            var id = dt.getAttribute("data-id");
+            $.ajax({
+                type: 'GET',
+                url: '/CustomerPages/CancelServiceModel',
+                data: { "id": id },
                 success: function (responce) {
-                    loadnewservice();
+                    $("#model5").html(responce);
+                    $("#CancelRequest").modal("show");
                 }
 
             });
         }
-        function cancelservice(db) {
-            var id = db.getAttribute("data-id");
+
+        function cancelservice() {
+            var data = {};
+            data.serviceRequestId = document.getElementById("id").value;
             $.ajax({
                 type: 'POST',
                 url: '/ProviderPages/CancelServiceButton',
-                data: { "id": id },
-                success: function (responce) {
-                    loadupcomingservice();
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        loadupcomingservice();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
                 }
-
             });
         }
+
         function complateservice(db) {
             var id = db.getAttribute("data-id");
             $.ajax({
@@ -309,20 +348,18 @@
         }
 
         function blockcustomer(db) {
-            debugger;
             var id = db.getAttribute("data-id");
             $.ajax({
                 url: "/ProviderPages/BlockCustomer",
                 type: 'POST',
                 data: { "id": id },
-                success: function () {
+                success: function (responce) {
                     loadblockcustomer();
                 }
             });
         }
 
         function unblockcustomer(db) {
-            debugger;
             var id = db.getAttribute("data-id");
             $.ajax({
                 url: "/ProviderPages/UnBlockCustomer",
@@ -335,7 +372,6 @@
         }
 
         function ExportToExcel(type, fn, dl) {
-            debugger;
             var excel = document.getElementById('datatable3');
             var wb = XLSX.utils.table_to_book(excel, { sheet: "sheet1" });
             return dl ?
@@ -343,38 +379,41 @@
                 XLSX.writeFile(wb, fn || ('ServiceHistory.' + (type || 'xlsx')));
         }
 
-        //function saveprofile() {
-        //    debugger;
-        //    var data = {};
-        //    data.firstName = document.getElementById("firstname").value;
-        //    data.lastName = document.getElementById("lastname").value;
-        //    data.email = document.getElementById("email").value;
-        //    data.mobile = document.getElementById("mobile").value;
-        //    data.date = document.getElementById("date").value;
-        //    data.month = document.getElementById("month").value;
-        //    data.year = document.getElementById("year").value;
-        //    data.nationalityId = document.getElementById("nationality").value;
-        //    data.gender = document.getElementById("gender").value;
-        //    data.addressLine1 = document.getElementById("streetname").value;
-        //    data.addressLine2 = document.getElementById("housenumber").value;
-        //    data.postalCode = document.getElementById("postalcode").value;
-        //    data.city = document.getElementById("city").value;
-        //    $.ajax({
-        //        type: 'POST',
-        //        url: '/ProviderPages/UpdateProviderDetailes',
-        //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        //        data: data,
-        //        success: function (result) {
-        //            if (result.value == "true") {
-        //                mysettings();
-        //            }
-        //            else {
-        //                alert("detailes is invalid");
-        //            }
-        //        }
-        //    })
-        //}
+        function Saveprofile() {
+            var data = {};
+            data.firstName = document.getElementById("firstname").value;
+            data.lastName = document.getElementById("lastname").value;
+            data.email = document.getElementById("email").value;
+            data.mobile = document.getElementById("mobile").value;
+            data.day = document.getElementById("date").value;
+            data.month = document.getElementById("month").value;
+            data.year = document.getElementById("year").value;
+            data.nationalityId = document.getElementById("nationality").value;
+            data.gender = $('input[name="Gender"]:checked').val();
+            data.userProfilePicture = $('input[name="UserProfilePicture"]:checked').val();
+            data.addressLine1 = document.getElementById("streetname").value;
+            data.addressLine2 = document.getElementById("housenumber").value;
+            data.postalCode = document.getElementById("postalcode").value;
+            data.city = document.getElementById("city").value;
 
+            $.ajax({
+                type: 'POST',
+                url: '/ProviderPages/UpdateProviderDetailes',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        var data = result.options[result.selectedIndex].value;
+                        document.getElementById("day").value = data;
+                        mysettings();
+                    }
+                    else {
+                        alert("detailes is invalid");
+                    }
+                }
+            })
+        }
 
     </script>
+
 }

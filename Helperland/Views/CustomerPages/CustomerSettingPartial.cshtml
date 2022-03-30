@@ -42,33 +42,33 @@
 
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content px-0 mt-2">
+        <div class="tab-content p-4 mt-2">
 
             <!-- Customer-Detailes -->
             <div class="tab-pane active text" id="details" role="tabpanel" aria-labelledby="details-tab">
                 <form method="post" class="mydetails-form pt-3">
                     <div class="row">
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-sm-12 all-lables">
                             <label for="">First Name</label>
                             <input type="text" class="form-control" value="@detailes.FirstName" id="firstname">
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-sm-12 all-lables">
                             <label for="">Last Name</label>
                             <input type="text" class="form-control" id="lastname" value="@detailes.LastName">
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-sm-12 all-lables">
                             <label for="">E-mail Address</label>
                             <input type="text" class="form-control" id="email" value="@detailes.Email" readonly>
                         </div>
 
                     </div>
                     <div class="row mt-3">
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-sm-12 all-lables">
                             <label for="">Mobile number</label>
                             <input class="form-control ng-pristine ng-valid ng-touched" formcontrolname="Mobile"
                                    maxlength="10" name="Mobile" type="text" value="@detailes.Mobile" id="mobile">
                         </div>
-                        <div class="col-4 all-lables">
+                        <div class="col-md-4 col-sm-12 all-lables">
                             <label for="">Date of Birth</label>
                             <div class="row">
                                 <div class="col-4">
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="col-4" style="margin: 0px -15px;">
                                     <select class="form-control ng-untouched ng-pristine ng-valid" id="month">
-                                        <option value="">Month</option>
+                                        <option value="Month">Month</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -237,7 +237,7 @@
                         <div class="all-lables">
                             <div class="form-group">
                                 <label for="language" class="control-label">My Preferred Language</label>
-                                <div class="col-2">
+                                <div class="col-md-2">
                                     <select class="form-control " id="language">
                                         <!---->
                                         <option value="1">English</option>
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 pt-2 mb-5">
+                    <div class="col-md-12 pt-2 mb-5">
                         <button type="submit" class="btn save-btn" style="float: left;" onclick="savedetailes()">Save</button>
                     </div>
                 </form>
@@ -259,10 +259,10 @@
                 <table class="table address-setting mt-4">
                     <thead class="table-light address-table-head-setting">
                         <tr>
-                            <th scope="col" class="col-md-8 tabale-heading pl-5">
+                            <th scope="col" class="col-md-10 col-9 tabale-heading pl-5">
                                 Addresses
                             </th>
-                            <th scope="col" class="col-md-2 tabale-heading">
+                            <th scope="col" class="col-md-2 col-3 tabale-heading">
                                 Action
                             </th>
                         </tr>
@@ -272,7 +272,7 @@
                         {
 
                             <tr>
-                                <td class="contact pl-5">
+                                <td class="contact pl-3">
                                     <div>
                                         <Strong>Address:</Strong> @dbs.AddressLine1
                                         <br>
@@ -282,9 +282,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="mt-2">
-                                        <a href="#" data-id="@dbs.AddressId" onclick="addressmodel(this);"><i class="far fa-edit edit-icon-setting"></i></a>
-                                        <a href="#" data-id="@dbs.AddressId" onclick="deletemodel(this);"><i class="far fa-trash-alt delete-icon-setting"></i> </a>
+                                    <div class="row">
+                                        <div class="mt-2">
+                                            <a href="#" data-id="@dbs.AddressId" onclick="addressmodel(this);"><i class="far fa-edit edit-icon-setting"></i></a>
+                                            <a href="#" data-id="@dbs.AddressId" onclick="deletemodel(this);"><i class="far fa-trash-alt delete-icon-setting"></i> </a>
+                                        </div>
                                     </div>
 
                                     <!-- Edit Address Model -->
@@ -300,52 +302,56 @@
                         }
                     </tbody>
                 </table>
-                <button id="button11" class="btn add-new-address mb-3" type="button"> + Add New Address </button>
-                <div id="box" style="display:none;">
-                    <div class="col-12 card add-new-address-card p-3 mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-1">
-                                <label for="streetname">
-                                    <strong>Street Name</strong>
-                                    <input type="text" class="form-control" id="addstreetname" placeholder="Street Name">
-                                </label>
+                <button type="button" class="btn add-new-address mb-3" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> 
+                + Add New Address </button>
+                <div class="collapse" id="collapseExample">
+                    <div id="book-now">
+                        <div class="col-8 card add-new-address-card p-3 mb-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <label for="streetname">
+                                        <strong>Street Name</strong>
+                                        <input type="text" class="form-control" id="addstreetname" placeholder="Street Name">
+                                    </label>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <label for="housenumber">
+                                        <strong>House Number</strong>
+                                        <input type="number" class="form-control" id="addhousenumber" placeholder="House Number">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-1">
-                                <label for="housenumber">
-                                    <strong>House Number</strong>
-                                    <input type="number" class="form-control" id="addhousenumber" placeholder="House Number">
-                                </label>
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <label for="postalcode">
+                                        <strong>Postal Code</strong>
+                                        <input class="form-control" id="addpostalcode" placeholder="Postal Code" value="">
+                                    </label>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <label for="city">
+                                        <strong>City</strong>
+                                        <input type="text" class="form-control" id="addcity" placeholder="City" value="">
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-1">
-                                <label for="postalcode">
-                                    <strong>Postal Code</strong>
-                                    <input class="form-control" id="addpostalcode" placeholder="Postal Code" value="">
-                                </label>
+                            <div class="row">
+                                <div class="col-md-6 mb-1">
+                                    <label for="phonenumber">
+                                        <strong>Phone Number</strong>
+                                        <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" value="">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-1">
-                                <label for="city">
-                                    <strong>City</strong>
-                                    <input type="text" class="form-control" id="addcity" placeholder="City" value="">
-                                </label>
+                            <div class="row">
+                                &nbsp;&nbsp;&nbsp;
+                                <input type="button" class="col-md-2 col-sm-5 continue-button" onclick="newaddresssubmit();" value="Save" />
+                                &nbsp;&nbsp;&nbsp;
+                                <input type="button" name="Cancel" class="col-md-2 col-sm-5  continue-button cancel" value="Cancel" />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-1">
-                                <label for="phonenumber">
-                                    <strong>Phone Number</strong>
-                                    <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" value="">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            &nbsp;&nbsp;&nbsp;
-                            <input type="button" class="col-md-2 col-sm-5 continue-button" id="addsave" onclick="addresssubmit();" value="Save" />
-                            &nbsp;&nbsp;&nbsp;
-                            <input type="button" name="Cancel" class="col-md-2 col-sm-5  continue-button cancel" value="Cancel" />
                         </div>
                     </div>
+                   
                 </div>
             </div>
 

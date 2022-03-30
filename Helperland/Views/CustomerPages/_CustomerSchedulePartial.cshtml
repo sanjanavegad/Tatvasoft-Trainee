@@ -23,7 +23,7 @@
                                         <input type="date" class="form-control" placeholder="@Model.ServiceStartDate.ToString("dd/MM/yyyy")" id="CurrentDate">
                                     </div>
                                     <div class="col-md-5 col-12">
-                                        <select class="form-select form-control" placeholder="@Model.ServiceStartDate.ToString("HH:mm")" id="CurrentTime" name="Time">
+                                        <select class="form-select form-control" placeholder="@Model.ServiceStartDate.ToString("HH:mm")" id="CurrentTime">
                                             <option value="01:00">01:00</option>
                                             <option value="02:00">02:00</option>
                                             <option value="03:00">03:00</option>
@@ -43,9 +43,11 @@
                         </div>
                     </div>
                     <input type="hidden" class="form-control" id="id" value="@Model.ServiceRequestId">
-                    <button type="button"  class="model-action-button mt-4" onclick="updateschedule()" data-bs-dismiss="modal">Update</button>
+                    <button type="button"  class="model-action-button mt-4" onclick="updateschedule(this);" data-bs-dismiss="modal">Update</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+

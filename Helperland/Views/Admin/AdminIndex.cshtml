@@ -43,6 +43,7 @@
                     <li class="nav-item dropdown" style="margin: 2px 10px 0px -10px">
                         <a class="nav-link" asp-controller="Admin" asp-action="Logout">
                             <img src="../images/logout.png" alt="Flag">
+
                         </a>
                     </li>
                 </ul>
@@ -112,6 +113,7 @@
                 }
             });
         });
+
         function userrequest() {
             $.ajax({
                 url: '/Admin/User_Rquest',
@@ -135,6 +137,7 @@
                 }
             });
         }
+
         function usermanagement() {
             $.ajax({
                 url: '/Admin/AdminDashboard',
@@ -159,6 +162,7 @@
                 }
             });
         }
+
         function Approveuser(or) {
             debugger;
             var id = or.getAttribute("data-id");
@@ -172,17 +176,17 @@
                 }
             });
         }
+
         function finalapprove(or) {
-            debugger;
             var data = {};
             data.userId = document.getElementById("id").value;
             $.ajax({
                 url: '/Admin/FinalApproveUser',
                 type: 'POST',
                 data: data,
-                success: function (response) {
+                success: function (result) {
                     if (result.value == "true") {
-                        loadusermanage();
+                        usermanagement();
                     }
                     else {
                         alert("Invalid");
@@ -190,16 +194,16 @@
                 }
             });
         }
+
         function Deleteuser(or) {
-            debugger;
             var id = or.getAttribute("data-id");
             $.ajax({
                 url: '/Admin/DeactivateUser',
                 type: 'POST',
                 data: { "id": id },
-                success: function (response) {
+                success: function (result) {
                     if (result.value == "true") {
-                        loadusermanage();
+                        usermanagement();
                     }
                     else {
                         alert("Invalid");
@@ -207,15 +211,16 @@
                 }
             });
         }
+
         function Activeuser(or) {
             var id = or.getAttribute("data-id");
             $.ajax({
                 url: '/Admin/ActivateUser',
                 type: 'POST',
                 data: { "id": id },
-                success: function (response) {
+                success: function (result) {
                     if (result.value == "true") {
-                        loadusermanage();
+                        usermanagement();
                     }
                     else {
                         alert("Invalid");
@@ -223,8 +228,8 @@
                 }
             });
         }
+
         function editservice(dt) {
-            debugger;
             var id = dt.getAttribute("data-id");
             $.ajax({
                 url: '/Admin/EditServiceModel',
@@ -236,14 +241,14 @@
                 }
             });
         }
+
         function cancelSP(dt) {
-            debugger;
             var id = dt.getAttribute("data-id");
             $.ajax({
                 url: '/Admin/CancelSPbyCust',
                 type: 'GET',
                 data: { "id": id },
-                success: function (response) {
+                success: function (result) {
                     if (result.value == "true") {
                         userrequest();
                     }
@@ -255,7 +260,6 @@
         }
         
         function searchservice() {
-            debugger;
             var data = {};
             data.name = document.getElementById("Name").value;
             data.mobile = document.getElementById("Mobile").value;
@@ -270,14 +274,16 @@
                     $('#my-tab').html(response); 
                 }
             });
-        } function searchrequest() {
-            debugger;
+        }
+
+        function searchrequest() {
             var data = {};
             data.serviceRequestId = document.getElementById("ServiceID").value;
             data.userName = document.getElementById("username").value;
             data.name = document.getElementById("spname").value;
             data.status = document.getElementById("status").value;
             data.serviceStartDate = document.getElementById("startdate").value;
+            data.serviceEndDate = document.getElementById("enddate").value;
             
             $.ajax({
                 type: 'GET',
@@ -290,10 +296,33 @@
             });
         }
 
-       
+        function editeservicerequest() {
+            var data = {};
+            data.serviceRequestId = document.getElementById("id").value;
+            data.serviceDate = document.getElementById("ServiceStartDate").value;
+            data.serviceTime = document.getElementById("ServiceTime").value;
+            data.addressLine1 = document.getElementById("AddressLine1").value;
+            data.addressLine2 = document.getElementById("AddressLine2").value;
+            data.zipCode = document.getElementById("ZipCode").value;
+            data.city = document.getElementById("City").value;
+            data.comments = document.getElementById("Comments").value;
+            $.ajax({
+                url: '/Admin/UpdateServiceRequest',
+                type: 'POST',
+                data: data,
+                success: function (result) {
+                    if (result.value == "true") {
+                        alert("Service has been reshceduled");
+                        loaduserrequest();
+                    }
+                    else {
+                        alert("Invalid");
+                    }
+                }
+            });
+        }
 
         function ExportToExcel(type, fn, dl) {
-            debugger;
             var excel = document.getElementById('datatable3');
             var wb = XLSX.utils.table_to_book(excel, { sheet: "sheet1" });
             return dl ?

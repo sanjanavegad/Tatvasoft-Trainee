@@ -11,7 +11,6 @@
 <div id="newservicerequest" class="container tab-pane active">
     <div class="heading-service-history mt-3">
         New Service Request
-        <button type="button" class="btn btn-export-service-history">Export</button>
     </div>
     <!-- </div> -->
     <table class="table" id="datatable1">
@@ -31,11 +30,8 @@
                 double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
                 <tr>
                     <td>
-                        
-                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
-                        <!-- service detailes model -->
-                       
 
+                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
                     </td>
                     <td scope="row" class="th-upcoming-service">
                         <img src="../images\calendar2.png" alt="">
@@ -44,8 +40,6 @@
                         <img src="../images\layer-712.png" alt="">
                         @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
                     </td>
-
-
                     <td>
                         <div class="row">
                             <div class="col-md-2 mt-3">
@@ -54,7 +48,7 @@
                             <div class="col-md-10">
                                 <div>@dbs.Name</div>
                                 <div>@dbs.AddressLine1 , @dbs.AddressLine2</div>
-                                    @dbs.City , @dbs.ZipCode
+                                @dbs.City , @dbs.ZipCode
                             </div>
                         </div>
                     </td>
@@ -68,7 +62,83 @@
                     </td>
                 </tr>
             }
-            </tbody>
+        </tbody>
     </table>
+</div>
 
+
+
+<div class="modal fade" id="NotAcceptButton" aria-hidden="true"
+     aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-body">
+                <p class="mt-2 px-3 pt-3" style="font-size:17px; color:red;">Another service request has already been assigned which has time overlap with this service request. You can’t pick this one!</p>
+                <br>
+                <button class="ok-button" data-bs-dismiss="modal">
+                    OK
+                </button>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</div>
+@* \\\\\\\\\\\\\\\\\\\\\\\\Mobile Card \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *@
+
+<div class="col col3" id="mobile-card">
+    <div class="tab-content">
+        <div id="dashboard-sid" class="container tab-pane active">
+            <div class="mobile-card">
+                <h2>Dashboard</h2>
+
+                @foreach (ServiceRequest dbs in service)
+                {
+                    double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                    <div class="card upcoming-service-card">
+                        <ul class="list-group ">
+                            <li class="list-group-item">
+                                <b>Service Request ID : <button class="blank-button text-center " data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button></b>
+                            </li>
+                            <div class="line-botom"></div>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img src="../images\calendar2.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="../images\layer-712.png" alt="">
+                                        @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                @if (@dbs.Name != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <img src="../images/layer-15.png" alt="">
+                                        </div>
+                                        <div class="col-10" style="font-size:16px;">
+                                            <div>@dbs.Name</div>
+                                            <div>@dbs.AddressLine1 , @dbs.AddressLine2</div>
+                                            @dbs.City , @dbs.ZipCode
+                                        </div>
+                                    </div>
+                                }
+                            </li>
+                            <li class="list-group-item">
+                                <p class="payment-service-history">€ @dbs.TotalCost</p>
+                            </li>
+                            <li class="list-group-item">
+                                <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" onclick="acceptbtn(this)" data-bs-dismiss="modal">Accept</button>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
 </div>

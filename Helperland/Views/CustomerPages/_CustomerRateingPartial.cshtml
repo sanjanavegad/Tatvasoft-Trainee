@@ -40,9 +40,9 @@
             <div class="modal-body">
                 <h6><strong>Rate your service provider</strong></h6>
                 <hr class="hr-line">
-                <form method="post" asp-action="AddRatings" asp-controller="CustomerPages">
-                    <input class="form-control" type="hidden" readonly value="@ViewBag.servicerequestid" asp-for="ServiceRequestId">
-                    <input class="form-control" type="hidden" readonly value="@ViewBag.serviceproviderid" asp-for="RatingTo">
+                <form>
+                    <input class="form-control" type="hidden" id="servicerequestid" value="@ViewBag.servicerequestid">
+                    <input class="form-control" type="hidden" id="serviceproviderid" value="@ViewBag.serviceproviderid">
 
 
                     <table>
@@ -52,20 +52,20 @@
                                 <td class="rate">
 
                                     <fieldset class="rating">
-                                        <input type="radio" id="star5" asp-for="OnTimeArrival" value="5.0" />
+                                        <input type="radio" id="star5" name="OnTimeArrival" value="5.0" />
                                         <label class="full" for="star5" title="Awesome - 5 stars"></label>
 
-                                        <input type="radio" id="star4" asp-for="OnTimeArrival" value="4.0" />
+                                        <input type="radio" id="star4" name="OnTimeArrival" value="4.0" />
                                         <label class="full" for="star4" title="Pretty good - 4 stars"></label>
 
 
-                                        <input type="radio" id="star3" asp-for="OnTimeArrival" value="3.0" />
+                                        <input type="radio" id="star3" name="OnTimeArrival" value="3.0" />
                                         <label class="full" for="star3" title="Meh - 3 stars"></label>
 
-                                        <input type="radio" id="star2" asp-for="OnTimeArrival" value="2.0" />
+                                        <input type="radio" id="star2" name="OnTimeArrival" value="2.0" />
                                         <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
 
-                                        <input type="radio" id="star1" asp-for="OnTimeArrival" value="1.0" />
+                                        <input type="radio" id="star1" name="OnTimeArrival" value="1.0" />
                                         <label class="full" for="star1" title="Sucks big time - 1 star"></label>
 
                                     </fieldset>
@@ -75,23 +75,23 @@
                                 <td class="rating-option">Friendly</td>
                                 <td class="rate">
 
-                                    <fieldset class="ratingfr" asp-for="">
-                                        <input type="radio" asp-for="Friendly" id="starfr5" value="5.0" />
+                                    <fieldset class="ratingfr" name="">
+                                        <input type="radio" name="Friendly" id="starfr5" value="5.0" />
                                         <label class="full" for="starfr5" title="Awesome - 5 stars"></label>
 
-                                        <input type="radio" asp-for="Friendly" id="starfr4" value="4.0" />
+                                        <input type="radio" name="Friendly" id="starfr4" value="4.0" />
                                         <label class="full" for="starfr4" title="Pretty good - 4 stars"></label>
 
 
-                                        <input type="radio" asp-for="Friendly" id="starfr3" value="3.0" />
+                                        <input type="radio" name="Friendly" id="starfr3" value="3.0" />
                                         <label class="full" for="starfr3" title="Meh - 3 stars"></label>
 
 
-                                        <input type="radio" asp-for="Friendly" id="starfr2" value="2.0" />
+                                        <input type="radio" name="Friendly" id="starfr2" value="2.0" />
                                         <label class="full" for="starfr2" title="Kinda bad - 2 stars"></label>
 
 
-                                        <input type="radio" asp-for="Friendly" id="starfr1" value="1.0" />
+                                        <input type="radio" name="Friendly" id="starfr1" value="1.0" />
                                         <label class="full" for="starfr1" title="Sucks big time - 1 star"></label>
 
                                     </fieldset>
@@ -102,22 +102,22 @@
                                 <td class="rate">
 
                                     <fieldset class="ratingqs">
-                                        <input type="radio" id="starqs5" asp-for="QualityOfService" value="5.0" />
+                                        <input type="radio" id="starqs5" name="QualityOfService" value="5.0" />
                                         <label class="full" for="starqs5" title="Awesome - 5 stars"></label>
 
 
-                                        <input type="radio" id="starqs4" asp-for="QualityOfService" value="4.0" />
+                                        <input type="radio" id="starqs4" name="QualityOfService" value="4.0" />
                                         <label class="full" for="starqs4" title="Pretty good - 4 stars"></label>
 
 
-                                        <input type="radio" id="starqs3" asp-for="QualityOfService" value="3.0" />
+                                        <input type="radio" id="starqs3" name="QualityOfService" value="3.0" />
                                         <label class="full" for="starqs3" title="Meh - 3 stars"></label>
 
-                                        <input type="radio" id="starqs2" asp-for="QualityOfService" value="2.0" />
+                                        <input type="radio" id="starqs2" name="QualityOfService" value="2.0" />
                                         <label class="full" for="starqs2" title="Kinda bad - 2 stars"></label>
 
 
-                                        <input type="radio" id="starqs1" asp-for="QualityOfService" value="1.0" />
+                                        <input type="radio" id="starqs1" name="QualityOfService" value="1.0" />
                                         <label class="full" for="starqs1" title="Sucks big time - 1 star"></label>
 
                                     </fieldset>
@@ -130,11 +130,11 @@
                     <div class="row mt-3 mb-3">
                         <div><strong>Feedback on sevice provider</strong></div>
                         <div>
-                            <textarea type="text" asp-for="Comments" id="" cols="10" rows="2" class="form-control" value="@ViewBag.Comments"></textarea>
+                            <textarea type="text" name="Comments" id="comments" cols="10" rows="2" class="form-control" value="@ViewBag.Comments"></textarea>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn  submit-button" data-bs-dismiss="modal">
+                    <button type="submit" class="btn  submit-button" data-bs-dismiss="modal" onclick="fnsaveratings(this)">
                         Submit
                     </button>
                 </form>

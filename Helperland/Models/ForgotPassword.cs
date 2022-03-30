@@ -9,12 +9,13 @@ namespace Helperland.Models
 {
     public class ForgotPassword
     {
-        [Required(ErrorMessage = "New password is required", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "New password is required")]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessage = "Both password does not match")]
+        [Required(ErrorMessage = "Confirm password is required")]
+        [Compare("NewPassword", ErrorMessage = "Password does not match")]
         public string ConfirmNewPassword { get; set; }
 
         [Required]

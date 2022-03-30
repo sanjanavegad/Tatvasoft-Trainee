@@ -24,6 +24,7 @@ namespace Helperland.Controllers
             user.Name = user.FirstName + " " + user.LastName;
             return View(user);
         }
+
         [HttpGet]
         public IActionResult AdminDashboard(SearchUser data)
         {
@@ -35,22 +36,13 @@ namespace Helperland.Controllers
             ViewBag.data = userdetailes;
             return PartialView("User_ManagementPartial");
         }
-        //[HttpPost]
-        //public IActionResult AdminDashboard(SearchUser data)
-        //{
-        //        List<User> userdetailes = _helperlandContext.Users.Where(x => x.UserTypeId != 3).ToList();
-        //        userdetailes = userdetailes.Where(x => (string.IsNullOrEmpty(data.Name) || x.FirstName.ToLower().Contains(data.Name.ToLower())) &&
-        //                                           (string.IsNullOrEmpty(data.Mobile) || x.Mobile.ToLower().Contains(data.Mobile.ToLower())) &&
-        //                                           (string.IsNullOrEmpty(data.PostalCode) || x.PostalCode.ToLower().Contains(data.PostalCode.ToLower())) &&
-        //                                           (!data.UserTypeId.HasValue || x.UserTypeId == data.UserTypeId)).ToList();
-        //        ViewBag.data = userdetailes;
-        //    return PartialView("User_ManagementPartial");
-        //}
+
         public IActionResult ApproveUser(int id)
         {
             User user = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
             return PartialView("ApprovedModelPartial", user);
         }
+
         public IActionResult FinalApproveUser(User user)
         {
             User users = _helperlandContext.Users.Where(x => x.UserId == user.UserId).FirstOrDefault();
@@ -65,6 +57,7 @@ namespace Helperland.Controllers
             }
             return Ok(Json("false"));
         }
+        
         public IActionResult DeactivateUser(int id)
         {
             User users = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
@@ -78,6 +71,7 @@ namespace Helperland.Controllers
             }
             return Ok(Json("false"));
         }
+        
         public IActionResult ActivateUser(int id)
         {
             User users = _helperlandContext.Users.Where(x => x.UserId == id).FirstOrDefault();
@@ -91,6 +85,7 @@ namespace Helperland.Controllers
             }
             return Ok(Json("false"));
         }
+        
         [HttpGet]
         public IActionResult User_Rquest(SearchUser data)
         {
@@ -147,14 +142,20 @@ namespace Helperland.Controllers
                                                   (string.IsNullOrEmpty(data.UserName) || x.UserName.ToLower().Contains(data.UserName.ToLower())) &&
                                                   (string.IsNullOrEmpty(data.Name) || (!string.IsNullOrEmpty(x.Name) ? x.Name.ToLower().Contains(data.Name.ToLower()) : false)) &&
                                                   //(string.IsNullOrEmpty(data.PostalCode) || x.PostalCode.ToLower().Contains(data.PostalCode.ToLower())) &&
-                                                  (!data.Status.HasValue || x.Status == data.Status)&&
-                                                  (!data.ServiceStartDate.HasValue || x.ServiceStartDate.Date == data.ServiceStartDate.Value.Date)).ToList();
+                                                  (!data.Status.HasValue || x.Status == data.Status) &&
+                                                  //(!data.ServiceStartDate.HasValue || x.ServiceStartDate.Date == data.ServiceStartDate.Value.Date))
+                                                  (
+                                                  (data.ServiceStartDate.HasValue && data.ServiceEndDate.HasValue) ? x.ServiceStartDate.Date >= data.ServiceStartDate.Value.Date && x.ServiceStartDate.Date <= data.ServiceEndDate : false ||
+                                                  (data.ServiceStartDate.HasValue && !data.ServiceEndDate.HasValue) ? x.ServiceStartDate.Date >= data.ServiceStartDate.Value.Date : false ||
+                                                  (!data.ServiceStartDate.HasValue && data.ServiceEndDate.HasValue) ? x.ServiceStartDate.Date <= data.ServiceEndDate : false ||
+                                                  (!data.ServiceStartDate.HasValue && !data.ServiceEndDate.HasValue) ? true : true )).ToList();
             }
            
 
             ViewBag.services = serviceRequest;
             return PartialView("User_RequestPartial");
         }
+        
         [HttpPost]
         public IActionResult SearchRequest(ServiceRequest data)
         {
@@ -163,6 +164,7 @@ namespace Helperland.Controllers
             ViewBag.data = serviceRequest;
             return PartialView("User_RequestPartial");
         }
+        
         [HttpGet]
         public IActionResult EditServiceModel(int id)
         {
@@ -174,17 +176,19 @@ namespace Helperland.Controllers
             user.City = address.City;
             return PartialView("EditServiceModelPartial", user);
         }
+        
         [HttpPost]
         public IActionResult UpdateServiceRequest(ServiceRequest data)
         {
             ServiceRequest update = _helperlandContext.ServiceRequests.Where(x => x.ServiceRequestId == data.ServiceRequestId).FirstOrDefault();
-            //string date = data.ServiceStartDate.ToString("yyyy-MM-dd");
-            //string time = data.ServiceTime.ToString("HH:mm:ss");
-            //DateTime startDateTime = Convert.ToDateTime(date).Add(TimeSpan.Parse(time));
-            //update.ServiceStartDate = startDateTime;
-            //update.ModifiedDate = DateTime.Now;
-            //var result = _helperlandContext.ServiceRequests.Update(update);
-            //_helperlandContext.SaveChanges();
+            string date = data.ServiceDate.ToString("yyyy-MM-dd");
+            string time = data.ServiceTime.ToString("HH:mm:ss");
+            DateTime startDateTime = Convert.ToDateTime(date).Add(TimeSpan.Parse(time));
+            update.ServiceStartDate = startDateTime;
+            update.ModifiedDate = DateTime.Now;
+            update.Comments = data.Comments;
+            var result = _helperlandContext.ServiceRequests.Update(update);
+            _helperlandContext.SaveChanges();
 
             ServiceRequestAddress updateadd = _helperlandContext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == data.ServiceRequestId).FirstOrDefault();
             updateadd.AddressLine1 = data.AddressLine1;
@@ -193,7 +197,7 @@ namespace Helperland.Controllers
             updateadd.City = data.City;
             var result1 = _helperlandContext.ServiceRequestAddresses.Update(updateadd);
             _helperlandContext.SaveChanges();
-            return PartialView("User_RequestPartial");
+            return Ok(Json("true"));
         }
 
         [HttpGet]
@@ -213,8 +217,9 @@ namespace Helperland.Controllers
 
         public IActionResult Logout()
         {
+            HttpContext.Session.SetString("isLoggedIn", false.ToString());
             HttpContext.Session.Clear();
-            TempData["Msg"] = "You have succesfully logged out";
+            TempData["LogOutMsg"] = "Logged out";
             return RedirectToAction("Index", "Home");
         }
     }

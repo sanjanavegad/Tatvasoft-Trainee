@@ -31,6 +31,7 @@ namespace Helperland.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public IActionResult Contact(ContactU c, String Lastname)
         {
@@ -78,6 +79,7 @@ namespace Helperland.Controllers
         {
             return View();
         }
+        
         public IActionResult Prices()
         {
             return View();

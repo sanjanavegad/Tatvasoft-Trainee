@@ -63,7 +63,7 @@ namespace Helperland.Models
         public DateTime? DateOfBirth { get; set; }
 
         [NotMapped]
-        public string Date { get; set; }
+        public string Day { get; set; }
         [NotMapped]
         public string Month { get; set; }
         [NotMapped]
@@ -80,6 +80,8 @@ namespace Helperland.Models
         public string Name { get; set; }
         [NotMapped]
         public string UserName { get; set; }
+        [NotMapped]
+        public string ForgotEmail { get; set; }
 
         public string UserProfilePicture { get; set; }
         public bool IsRegisteredUser { get; set; }

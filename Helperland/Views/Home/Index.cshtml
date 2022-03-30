@@ -24,97 +24,97 @@
 
 <body>
     <!-- home Section -->
-    <div class="modal fade" id="logout-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body container">
-                    <div class="row justify-content-center text-center">
-                        <span>
-                            <img src="~/Images/correct-white-medium.png" height="26" width="26" alt="">
-                        </span>
-                        @if (TempData.ContainsKey("Message"))
-                        {
-                            @if (TempData["ModalName"].ToString() == "#logout-Modal")
-                            {
-                                <p>
-                                    @TempData["Message"]
-                                </p>
-                            }
-
-                        }
-                        <p class="p-0 m-0" id="text-message">
-                            @if (TempData.ContainsKey("Message2"))
-                            {
-                                @if (TempData["ModalName"].ToString() == "#logout-Modal")
-                                {
-                                    @TempData["Message2"]
-
-                                }
-
-                            }
-                        </p>
-                        <button class="btn" data-bs-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <section id="home-section" class="main">
         <div class="wrapper" id="navbar-provider">
             <nav id="sidebar">
                 <div class="container-fluid">
                     <div class="row row1">
-                        <strong>Welcome, Sandeep.</strong>
+                        <strong>Welcome, @Context.Session.GetString("Name")</strong>
                     </div>
 
                     <div class="row row2 ">
                         <ul class="nav nav-tabs flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Service History</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Service Schedule</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Favorite Pros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Customer_Settings.html">My Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
-                            </li>
+                            @if (Context.Session.GetString("UserTypeId") == "1")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loaddashboard();">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadhistory();">Service History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadhistory();">Service Schedule</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadfavoritepros()">Favorite Pros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadsettings();">My Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("UserTypeId") == "2")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadnewservice();">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadnewservice();">New Service Request</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadupcomingservice();">Upcoming Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadservicehistory();">Service History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadmyretings();">My Ratings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadblockcustomer();">Block Customer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="mysettings();">My Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                </li>
+                            }
 
                         </ul>
                     </div>
                     <div class="row row3">
                         <ul class="navbar-nav">
+                            @if (Context.Session.GetString("isLoggedIn") == null)
 
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-bs-target="#login" data-bs-toggle="modal">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link">
+                                        Become a Helper
+                                    </a>
+                                </li>
+                            }
                             <li class="nav-item">
-                                <a class="nav-link login-trigger btn">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="Contact">Book a  Cleaner</a>
+                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Book a Cleaner</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Prices">Price & services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Warranty</a>
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="FAQ">FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact </a>
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="About">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">
-                                    Become a Helper
-                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact Us</a>
                             </li>
                         </ul>
-
                     </div>
                     <hr>
                     <div class="row4">
@@ -143,7 +143,7 @@
                                     <a class="nav-link text-white" asp-area="" asp-controller="PublicPages" asp-action="Prices">Prices</a>
                                 </li>
                                 <li class="nav-item mt-2">
-                                    <a class="nav-link text-white" href="About.html">Our Guarantee</a>
+                                    <a class="nav-link text-white" href="#">Our Guarantee</a>
                                 </li>
                                 <li class="nav-item mt-2">
                                     <a class="nav-link text-white" href="#">Blog</a>
@@ -172,8 +172,16 @@
                                                 Welcome,<br><strong>@Context.Session.GetString("Name")</strong>
                                             </li>
                                             <hr>
-                                            <li><a asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard">My Dashboard</a></li>
-                                            <li><a class="dropdown-link" data-bs-toggle="tab" asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard#settings"> My settings</a></li>
+                                            @if (Context.Session.GetString("UserTypeId") == "1")
+                                            {
+                                                <li><a asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard">My Dashboard</a></li>
+                                                <li><a asp-area="" asp-controller="CustomerPages" asp-action="Provider_Dashboard"> My settings</a></li>
+                                            }
+                                            @if (Context.Session.GetString("UserTypeId") == "2")
+                                            {
+                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
+                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard"> My settings</a></li>
+                                            }
                                             <li>
                                                 <a asp-controller="Home" asp-action="Logout">Logout</a>
                                             </li>
@@ -184,8 +192,7 @@
                                 {
                                     <li class="nav-item mt-2">
                                         <a class="nav-link btn btn-outline-light text-white  btn-home" data-bs-target="#login" data-bs-toggle="modal"
-                                           style="width: 110px;" href="#">Login</a>
-
+                                           style="width: 110px;">Login</a>
                                         <!-- login popup -->
                                         <div id="login" class="modal fade " aria-labelledby="loginLabel" tabindex="-1" aria-modal="true"
                                              role="dialog">
@@ -195,7 +202,7 @@
                                                         <div class="popup-heading">Login to your account</div>
                                                         <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         <form method="post" asp-controller="Home">
-                                                            <span class="text-danger text-center ">@ViewBag.Message1</span>
+                                                            <span class="text-danger text-center" id="emaillogin"></span>
                                                             <div class="input-group mt-3">
                                                                 <input asp-for="Email" type="Email" class="form-control" placeholder="username or email" />
                                                                 <div class="input-group-prepend">
@@ -236,12 +243,12 @@
                                                     <div class="modal-body p-3">
                                                         <div class="popup-heading">Forget Password</div>
                                                         <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-
+                                                        <br />
+                                                        <span class="text-danger" id="forgotpass"></span>
+                                                        <span class="text-success" id="forgotmsg"></span>
                                                         <form method="post">
-                                                            <span class="text-danger">@ViewBag.Message2</span>
-                                                            <span class="text-danger">@ViewBag.Message3</span>
                                                             <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
-                                                            <button type="submit" class="btn send-button">Send</button>
+                                                            <button type="submit" class="btn send-button" asp-area="" asp-controller="Home" asp-action="SendLink">Send</button>
                                                         </form>
                                                         @*<a href="#" class="back-login text-center" data-bs-toggle="modal" data-bs-target="#login"> <-- Back to Login</a>*@
                                                     </div>
@@ -270,16 +277,23 @@
                             </ul>
                         </div>
                     </nav>
-                    @if (TempData["Msg"] != null)
-                    {
-                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                alert("You have succesfully logged out");
-                            });
-                        </script>
-                    }
 
+
+                    <section id="model1"></section>
+                    <div class="modal fade bd-example-modal-sm mt-5" id="NotAcceptButton" tabindex="-1" role="dialog"
+                         aria-labelledby="NotAcceptButton" aria-hidden="true">
+                        <div class="modal-dialog" style="width: 360px;">
+                            <div class="modal-content p-3">
+                                <div class="raw-top justify-content-between">
+                                    “Another service request has already been assigned which has time overlap with this service request. You can’t pick this one!”
+                                </div>
+                                <button class="  mt-3"
+                                        data-bs-dismiss="modal">
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
 
@@ -314,7 +328,7 @@
         </div>
         <div id="main-btn-center">
             <div class="main-btn-center ">
-                <a class="btn btn-center" asp-area="" asp-controller="Home">Let's Book a Cleaner</a>
+                <a class="btn btn-center" asp-area="" asp-controller="CustomerPages" asp-action="Book_Now">Let's Book a Cleaner</a>
 
             </div>
         </div>
@@ -663,16 +677,16 @@
                                 <a asp-area="" asp-controller="PublicPages" asp-action="About">About</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="PublicPages" asp-action="#">Testimonials</a>
+                                <a href="#">Testimonials</a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="PublicPages" asp-action="FAQ">FAQs</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="PublicPages" asp-action="#">Insurance Policy</a>
+                                <a href="#">Insurance Policy</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="PublicPages" asp-action="#">Impressum</a>
+                                <a href="#">Impressum</a>
                             </li>
                         </ul>
                     </div>
@@ -712,26 +726,165 @@
             </div>
         </div>
     </footer>
+
+
+
+
+
+    @if (TempData["approved"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger;
+                alert("Not Approved");
+            });
+        </script>
+    }
+
+    @if (TempData["loginemail"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger;
+                //alert("Please Enter your Registed Email Address and Password.");
+                $("#login").modal("show");
+                $("#emaillogin").html("Please Enter your Registed Email Address and Password.");
+            });
+        </script>
+    }
+    @if (TempData["LogOutMsg"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger;
+                //alert("You have successfully logged out.");
+                $("#Logoutmodel").modal("show");
+            });
+        </script>
+    }
+    @if (Convert.ToBoolean(Context.Session.GetString("isLoggedIn")) == false)
+    {
+        <script>
+            debugger;
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            }
+        </script>
+    }
+    @if (TempData["loginreq"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //alert("Login is Required");
+                $("#login").modal("show");
+            });
+        </script>
+    }
+    @if (TempData["forgotmsg"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //alert("Reset password link has been sent to your email id");
+                $("#forgetPasswordModal").modal("show");
+                $("#forgotmsg").html("Reset password link has been sent to your email id");
+            });
+        </script>
+    }
+    @if (TempData["forgoterror"] != null)
+    {
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //alert("user does not exists.");
+                $("#forgetPasswordModal").modal("show");
+                $("#forgotpass").html("user does not exists.");
+            });
+        </script>
+    }
+
+    <!--third model for logout -->
+    <div class="modal fade" id="Logoutmodel" aria-hidden="true"
+         aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                    <span class="success-modal">
+                        <br />
+                        <img src="../images/success-icon.png" alt="">
+                    </span>
+                    <p class="logout-p">You have successfully logged out.</p>
+                    <br>
+                    <button class="continue-button ok-button mt-3"
+                            data-dismiss="modal">
+                        OK
+                    </button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--third model for logout -->
+    <!--forth model for booknow -->
+    <div class="modal fade" id="Logoutmodel" aria-hidden="true"
+         aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                    <span class="success-modal">
+                        <br />
+                        <img src="../images/success-icon.png" alt="">
+                    </span>
+                    <p class="logout-p">You have successfully logged out.</p>
+                    <br>
+                    <button class="continue-button ok-button mt-3"
+                            data-dismiss="modal">
+                        OK
+                    </button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--forth model for booknow -->
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
+    <!--Script for side bar-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <script>
         function myFunction() {
             var x = document.getElementById("cookie");
             x.style.display = "none";
         }
 
-        function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-    </script>
+
+            //function preventBack() {
+            //    window.history.forward();
+            //}
+            //setTimeout("preventBack()", 0);
+            //window.onunload = function () { null };
     </script>
 
 </body>
 
 </html>
+
+

@@ -5,11 +5,10 @@
 
 <div id="blockcustomer" class="container tab-pane active">
     <div class="row">
-        @foreach (User user in Model)
-        {
-            <div class="col-4">
-
-                <div class="card">
+        <div class="col-md-4 col-12 mb-3">
+            @foreach (User user in Model)
+            {
+                <div class="card upcoming-service-card">
                     <div class="card-body">
                         <div class="row justify-content-center mt-3">
                             <img src="../images\cap.png" alt="" class="block-cap">
@@ -26,12 +25,13 @@
                                 <a class="btn btn-reschedule-cancel mr-4 mt-3" data-id="@user.UserId" onclick="blockcustomer(this)" title="Block">Block</a>
 
                             }
-                            
+
                         </div>
                     </div>
                 </div>
-            </div>
-            i = i + 1;
-        }
-    </div>
+
+                i = i + 1;
+            }
+        </div>
+        </div>
 </div>

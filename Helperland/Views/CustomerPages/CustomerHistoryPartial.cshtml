@@ -11,7 +11,7 @@
     <!-- <div class="col-12"> -->
     <div class="heading-service-history mb-3">
         Service History
-        <button type="button" class="btn btn-export-service-history">Export</button>
+        <button type="button" class="btn btn-export-service-history" onclick="ExportToExcel('xlsx')">Export</button>
     </div>
     <!-- </div> -->
 
@@ -27,135 +27,223 @@
             </tr>
         </thead>
         <tbody class="tbody-upcoming-services">
-            @foreach (ServiceRequest dbs in service)
+            @if (service != null && service.Count > 0)
             {
-                double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
-                <tr>
-                    <td>
-                        <button class="blank-button text-center ml-5" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
-                    </td>
-                    <td scope="row" class="th-upcoming-service">
-                        <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
-                            <img src="../images\calendar2.png" alt="">
-                            @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
-                            <br />
-                            <img src="../images\layer-712.png" alt="">
-                            @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
-                        </button>
-                    </td>
-                    <td>
-                        @if (@dbs.Name != null)
-                        {
-                            <div class="row">
-                                <div class="col-3">
-                                    <img src="../images\cap.png" alt="" class="history-cap">
-                                </div>
-                                <div class="col-9">
-                                    @dbs.Name<br>
-                                    @{
-                                        int totalstars = Convert.ToInt32(dbs.ratings);
-                                        int stars = 5 - totalstars;
-                                        for (int i = 1; i <= totalstars; i++)
+                @foreach (ServiceRequest dbs in service)
+                {
+                    double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                    <tr>
+                        <td>
+                            <button class="blank-button text-center ml-5" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button>
+                        </td>
+                        <td scope="row" class="th-upcoming-service">
+                            <button class="blank-button" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">
+                                <img src="../images\calendar2.png" alt="">
+                                @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                                <br />
+                                <img src="../images\layer-712.png" alt="">
+                                @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                            </button>
+                        </td>
+                        <td>
+                            @if (@dbs.Name != null)
+                            {
+                                <div class="row">
+                                    <div class="col-3">
+                                        @if (dbs.UserProfilePicture != null)
                                         {
-                                            <span class="star">
-                                                <img src="../images/yellow-small-star.png" alt="">
-                                            </span>
+                                            if (dbs.UserProfilePicture == "1")
+                                            {
+                                                <img src="../images/avatar-car.png" alt="" class="favorit-avtar-small">
+                                            }
+                                            if (dbs.UserProfilePicture == "2")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-female.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "3")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-hat.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "4")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-iron.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "5")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-male.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "6")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-ship.png" alt="">
+                                            }
                                         }
-                                        for (int j = 1; j <= stars; j++)
+                                        else
                                         {
-                                            <span class="star">
-                                                <img src="../images/star2.png" alt="">
-                                            </span>
+                                            <img class="favorit-avtar-small" src="../images/avatar-car.png" alt="">
+                                        }
+                                    </div>
+                                    <div class="col-9">
+                                        @dbs.Name<br>
+                                        @{
+                                            int totalstars = Convert.ToInt32(dbs.ratings);
+                                            int stars = 5 - totalstars;
+                                            for (int i = 1; i <= totalstars; i++)
+                                            {
+                                                <span class="star">
+                                                    <img src="../images/yellow-small-star.png" alt="">
+                                                </span>
+                                            }
+                                            for (int j = 1; j <= stars; j++)
+                                            {
+                                                <span class="star">
+                                                    <img src="../images/star2.png" alt="">
+                                                </span>
+                                            }
+
+                                            @dbs.ratings
                                         }
 
-                                        @dbs.ratings
-                                    }
-
+                                    </div>
                                 </div>
-                            </div>
-                        }
-                    </td>
-                    <td>
-                        <p class="payment-service-history">€ @dbs.TotalCost</p>
-                    </td>
-                    <td>
-                        @if (@dbs.Status == 1)
-                        {
-                            <button type="button" class="btn btn-status-service-history">Completed</button>
-                        }
-                        else
-                        {
-                            <button type="button" class="btn btn-status-cancel-service-history">Canceled</button>
-                        }
-                    </td>
-                    <td>
-                        @if (dbs.Status == 1)
-                        {
-                            <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" data-toggle="modal" data-target="#RateSPModel" onclick="ratingmodal(this)">Rate SP</button>
-                        }
+                            }
+                        </td>
+                        <td>
+                            <p class="payment-service-history">€ @dbs.TotalCost</p>
+                        </td>
+                        <td>
+                            @if (@dbs.Status == 1)
+                            {
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-status-cancel-service-history">Canceled</button>
+                            }
+                        </td>
+                        <td>
+                            @if (dbs.Status == 1)
+                            {
+                                <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" onclick="ratingmodal(this)">Rate SP</button>
+                            }
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                }
             }
+
 
         </tbody>
     </table>
 </div>
 
 
+<div class="col col3" id="mobile-card">
+    <div class="tab-content">
+        <div class="mobile-card">
+            <h2>Service History</h2>
 
+            @if (service != null && service.Count > 0)
+            {
+                @foreach (ServiceRequest dbs in service)
+                {
+                    double time = Convert.ToDouble(dbs.ServiceHours + dbs.ExtraHours);
+                    <div class="card upcoming-service-card">
+                    <ul class="list-group ">
+                        <li class="list-group-item"><b>Service Request Id : <button class="blank-button text-center ml-1" data-id="@dbs.ServiceRequestId" onclick="detailes(this)">@dbs.ServiceRequestId</button></b></li>
+                        <div class="line-botom"></div>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="../images\calendar2.png" alt="">
+                                    @dbs.ServiceStartDate.ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="col-6">
+                                    <img src="../images\layer-712.png" alt="">
+                                    @dbs.ServiceStartDate.ToString("HH:mm") - @dbs.ServiceStartDate.AddHours(time).ToString("HH:mm")
+                                </div>
 
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            @if (@dbs.Name != null)
+                            {
+                                <div class="row">
+                                    <div class="col-2">
+                                        @if (dbs.UserProfilePicture != null)
+                                        {
+                                            if (dbs.UserProfilePicture == "1")
+                                            {
+                                                <img src="../images/avatar-car.png" alt="" class="favorit-avtar-small">
+                                            }
+                                            if (dbs.UserProfilePicture == "2")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-female.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "3")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-hat.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "4")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-iron.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "5")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-male.png" alt="">
+                                            }
+                                            if (dbs.UserProfilePicture == "6")
+                                            {
+                                                <img class="favorit-avtar-small" src="../images/avatar-ship.png" alt="">
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img class="favorit-avtar-small" src="../images/avatar-car.png" alt="">
+                                        }
+                                    </div>
+                                    <div class="col-10">
+                                        @dbs.Name<br>
+                                        @{
+                                            int totalstars = Convert.ToInt32(dbs.ratings);
+                                            int stars = 5 - totalstars;
+                                            for (int i = 1; i <= totalstars; i++)
+                                            {
+                                                <span class="star">
+                                                    <img src="../images/yellow-small-star.png" alt="">
+                                                </span>
+                                            }
+                                            for (int j = 1; j <= stars; j++)
+                                            {
+                                                <span class="star">
+                                                    <img src="../images/star2.png" alt="">
+                                                </span>
+                                            }
 
-
-
-
-
-
-
-@*<div class="row pagination-1">
-        <div class="col-lg-6 col-md-4 col-sm-12">
-            <h5 class="h4-service-history">
-                Show
-                <button class="p-service-history"> 10 <img src="../images\keyboard-right-arrow-button.png" alt=""></button>
-                entries | Total Record: 55
-            </h5>
+                                            @dbs.ratings
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <li class="list-group-item">
+                            <p class="payment-service-history">€ @dbs.TotalCost</p>
+                        </li>
+                        <li class="list-group-item">
+                            @if (@dbs.Status == 1)
+                            {
+                                <button type="button" class="btn btn-status-service-history">Completed</button>
+                                <button type="button" class="btn btn-rate-service-history" data-id="@dbs.ServiceRequestId" onclick="ratingmodal(this)">Rate SP</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-status-cancel-service-history">Canceled</button>
+                            }
+                        </li>
+                    </ul>
+                </div>
+                }
+            }
+                 
         </div>
-        <div class="col-lg-6 col-md-8 col-sm-12 nav-service-history">
-            <nav class="nav-service-history">
-                <ul class="pagination">
-                    <li class="page-item disabled" title="next">
-                        <a href="homepage.html" class="page-link rounded-circle m-1">
-                            <img src="../images\first-page.png" alt="">
-                        </a>
-                    </li>
-                    <li class="page-item disabled " title="previous">
-                        <a href="homepage.html" class="page-link rounded-circle m-1">
-                            <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
-                        </a>
-                    </li>
-                    <li class="page-item active" title=" ">
-                        <a href="" class="page-link rounded-circle m-1" style="background-color:#1d7a8c;">1</a>
-                    </li>
-                    <li class="page-item disabled" title=" ">
-                        <a href="" class="page-link rounded-circle m-1">2</a>
-                    </li>
-                    <li class="page-item disabled" title=" ">
-                        <a href="" class="page-link rounded-circle m-1">3</a>
-                    </li>
-                    <li class="page-item disabled" title=" ">
-                        <a href="" class="page-link rounded-circle m-1">4</a>
-                    </li>
-                    <li class="page-item disabled" title="next">
-                        <a href="homepage.html" class="page-link rounded-circle m-1">
-                            <img src="../images\first-page.png" alt="">
-                        </a>
-                    </li>
-                    <li class="page-item disabled" title="next">
-                        <a href="homepage.html" class="page-link rounded-circle m-1">
-                            <img src="../images\keyboard-right-arrow-button-copy.png" alt="">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>*@
+    </div>
+</div>

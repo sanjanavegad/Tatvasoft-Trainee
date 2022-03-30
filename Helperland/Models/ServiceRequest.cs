@@ -76,6 +76,9 @@ namespace Helperland.Models
         [NotMapped]
         public int Extra { get; set; }
 
+        [NotMapped]
+        public string UserProfilePicture { get; set; }
+
 
         public virtual User ServiceProvider { get; set; }
         public virtual User User { get; set; }

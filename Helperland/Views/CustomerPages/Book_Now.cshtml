@@ -208,13 +208,13 @@
                                                     <div class="col-md-6 mb-1">
                                                         <label for="postalcode">
                                                             <strong>Postal Code</strong>
-                                                            <input class="form-control" id="addpostalcode" placeholder="Postal Code" value="">
+                                                            <input class="form-control" id="addpostalcode" placeholder="Postal Code">
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6 mb-1">
                                                         <label for="city">
                                                             <strong>City</strong>
-                                                            <input type="text" class="form-control" id="addcity"  placeholder="City" value="" >
+                                                            <input type="text" class="form-control" id="addcity"  placeholder="City">
                                                         </label>
                                                     </div>
                                                 </div>
@@ -222,7 +222,7 @@
                                                     <div class="col-md-6 mb-1">
                                                         <label for="phonenumber">
                                                             <strong>Phone Number</strong>
-                                                            <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" value="">
+                                                            <input type="tel" class="form-control" id="addphonenumber" placeholder="Phone Number" >
                                                         </label>
                                                     </div>
                                                 </div>
@@ -352,27 +352,30 @@
                             </span>
                             <br /><br>
                         </div>
-                        <div class="second-line"> Duration </div>
-                        <span id="servicecardhour"></span>
+                        <div class="second-line"> Duration - <span id="servicecardhour"></span></div>
+                        
                         <div class="row">
-                            <div class="col-8 d-none" id="etc-1">Basic <br> Inside cabinets (extra)</div>
-                            <div class="col-4 d-none text-end" id="etc1"> 3 Hrs <br> 30 Mins</div>
 
-                            <div class="col-8 d-none" id="etc-1">Inside fridge (extra)</div>
+                            <div class="col-12">Basic</div>
+
+                            <div class="col-8 d-none" id="etc-1">Inside cabinets (extra)</div>
                             <div class="col-4 d-none text-end" id="etc1"> 30 Mins</div>
 
-                            <div class="col-8 d-none" id="etc-2">Inside oven (extra)</div>
-                            <div class="col-4 d-none text-end" id="etc2">  30 Mins</div>
+                            <div class="col-8 d-none" id="etc-2">Inside fridge (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc2"> 30 Mins</div>
 
-                            <div class="col-8 d-none" id="etc-3">Inside loundry (extra)</div>
+                            <div class="col-8 d-none" id="etc-3">Inside oven (extra)</div>
                             <div class="col-4 d-none text-end" id="etc3">  30 Mins</div>
 
-                            <div class="col-8 d-none" id="etc-4">Inside Windows (extra)</div>
+                            <div class="col-8 d-none" id="etc-4">Inside loundry (extra)</div>
                             <div class="col-4 d-none text-end" id="etc4">  30 Mins</div>
+
+                            <div class="col-8 d-none" id="etc-5">Inside Windows (extra)</div>
+                            <div class="col-4 d-none text-end" id="etc5">  30 Mins</div>
 
                             <hr class="second-line-hr">
                             <div class="col-8"><strong>Total Service Time</strong> </div>
-                            <div class="col-4 text-end" id="totaltime" onchange="servicetime()"> <strong>3.5 Hrs</strong> </div>
+                            <div class="col-4 text-end" id="totalhours"> <strong>0</strong> <span><strong> Hrs</strong></span></div>
                         </div>
                     </div>
                     <hr class="main-hr">
@@ -385,8 +388,8 @@
                     <hr class="main-hr">
                     <div class="row-4 p-3">
                         <div class="row total-payment">
-                            <div class="col-8 pt-2">Total Payment</div>
-                            <div class="col-4 total-p">$63</div>
+                            <div class="col-7 pt-2">Total Payment</div>
+                            <div class="col-5 total-p" id="totalprice">$63</div>
                         </div>
                         <div class="row">
                             <div class="col-8">Effective Price</div>

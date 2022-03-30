@@ -26,123 +26,69 @@
             <nav id="sidebar">
                 <div class="container-fluid">
                     <div class="row row1">
-                        <strong>Welcome, Sandeep.</strong>
+                        <strong>Welcome, @Context.Session.GetString("Name")</strong>
                     </div>
 
                     <div class="row row2 ">
                         <ul class="nav nav-tabs flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Service History</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Service Schedule</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Service_History.html">Favorite Pros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Customer_Settings.html">My Settings</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Home" asp-action="Logout">Logout</a>
-                            </li>
+                            @if (Context.Session.GetString("UserTypeId") == "1")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loaddashboard();">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadhistory();">Service History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadhistory();">Service Schedule</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadfavoritepros()">Favorite Pros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadsettings();">My Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("UserTypeId") == "2")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadnewservice();">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadnewservice();">New Service Request</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadupcomingservice();">Upcoming Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadservicehistory();">Service History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadmyretings();">My Ratings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="loadblockcustomer();">Block Customer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="mysettings();">My Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                     <div class="row row3">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Book a Cleaner</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Prices">Price & services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Warranty</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact </a>
-                            </li>
-                            @if (Context.Session.GetString("isLoggedIn") != null)
+                            @if (Context.Session.GetString("isLoggedIn") == null)
 
                             {
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="#" class="nav-link">Notification</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="#" class="nav-link">My settings</a>
-                                </li>
-                            }
-
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary text-white" data-bs-target="#login" data-bs-toggle="modal" href="#">Login</a>
-
-                                    <!-- login popup -->
-                                    <div id="login" class="modal fade " aria-labelledby="loginLabel" tabindex="-1" aria-modal="true"
-                                         role="dialog">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="popup-heading">Login to your account</div>
-                                                    <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    <form method="post" asp-controller="Home">
-                                                        <span class="text-danger text-center ">@ViewBag.Message1</span>
-                                                        <div class="input-group mt-3">
-                                                            <input asp-for="Email" type="Email" class="form-control" placeholder="username or email" />
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text "><i class="fas fa-user"></i></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="input-group">
-                                                            <input asp-for="Password" type="Password" class="form-control" placeholder="password" />
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fas fa-lock"></i><span>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <input class="checkbox1" type="checkbox" value="" />
-                                                            <label style="margin:8px 25px "> Remember me</label>
-                                                        </div><br />
-                                                        <button type="submit" class="btn login-button">Login</button>
-                                                        <br><br>
-                                                    </form>
-                                                    <a href="" class="d-block text-center forgot-password" data-bs-toggle="modal"
-                                                       data-bs-target="#forgetPasswordModal">
-                                                        Forget Password?
-                                                    </a>
-                                                    <div class="account">
-                                                        Don't have account?
-                                                        <a class="create-account" asp-area="" asp-controller="Home" asp-action="Create_Account">create account</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Forgotpassword popup -->
-                                    <div class="modal fade" id="forgetPasswordModal" aria-hidden="true"
-                                         aria-labelledby="forgetPasswordModalLabel" tabindex="-1">
-                                        <div class="modal-dialog  modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body p-3">
-                                                    <div class="popup-heading">Forget Password</div>
-                                                    <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    <span class="text-danger">@ViewBag.Message2</span>
-                                                    <span class="text-danger">@ViewBag.Message3</span>
-                                                    <form method="post">
-                                                        <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
-                                                        <button type="submit" class="btn send-button">Send</button>
-                                                    </form>
-                                                    @*<a href="#" class="back-login text-center" data-bs-toggle="modal" data-bs-target="#login"> <-- Back to Login</a>*@
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a class="nav-link btn btn-primary text-white" data-bs-target="#login" data-bs-toggle="modal">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link">
@@ -150,8 +96,22 @@
                                     </a>
                                 </li>
                             }
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="#" asp-action="#">Book a Cleaner</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Prices">Price & services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="FAQ">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="About">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact Us</a>
+                            </li>
                         </ul>
-
                     </div>
                     <hr>
                     <div class="row4">
@@ -181,10 +141,10 @@
                                     <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Prices">Prices</a>
                                 </li>
                                 <li class="nav-item mt-1">
-                                    <a class="nav-link" href="About.html">Our Guarantee</a>
+                                    <a class="nav-link" href="#">Our Guarantee</a>
                                 </li>
                                 <li class="nav-item mt-1">
-                                    <a class="nav-link" href="#service">Blog</a>
+                                    <a class="nav-link" href="#">Blog</a>
                                 </li>
                                 <li class="nav-item mt-1 mr-3">
                                     <a class="nav-link" asp-area="" asp-controller="PublicPages" asp-action="Contact">Contact Us</a>
@@ -210,12 +170,19 @@
                                                 Welcome,<br><strong>@Context.Session.GetString("Name")</strong>
                                             </li>
                                             <hr>
-
-                                            <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
-                                            <li><a href="mysetting.html"> My settings</a></li>
+                                            @if (Context.Session.GetString("UserTypeId") == "1")
+                                            {
+                                                <li><a asp-area="" asp-controller="CustomerPages" asp-action="Customer_Dashboard">My Dashboard</a></li>
+                                                <li><a asp-area="" asp-controller="CustomerPages" asp-action="Provider_Dashboard"> My settings</a></li>
+                                            }
+                                            @if (Context.Session.GetString("UserTypeId") == "2")
+                                            {
+                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard">My Dashboard</a></li>
+                                                <li><a asp-area="" asp-controller="ProviderPages" asp-action="Provider_Dashboard"> My settings</a></li>
+                                            }
 
                                             <li>
-                                                <a asp-controller="Home" asp-action="Logout" onclick="preventBack()">Logout</a>
+                                                <a asp-controller="Home" asp-action="Logout">Logout</a>
 
                                             </li>
                                         </ul>
@@ -227,14 +194,10 @@
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link btn btn-primary text-white" data-bs-target="#login" data-bs-toggle="modal"
-                                           style="padding-left: 20px;padding-right: 20px; margin-bottom: 4px;" href="#">Login</a>
-
-
+                                           style="padding-left: 20px;padding-right: 20px; margin-bottom: 4px;">Login</a>
                                     </li>
-
-
                                     <li class="nav-item">
-                                        <a  asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;">
+                                        <a asp-area="" asp-controller="Home" asp-action="Service_Provider" class="nav-link btn btn-primary text-white" style="padding-left: 15px;padding-right: 15px;">
                                             Become a Helper
                                         </a>
                                     </li>
@@ -242,14 +205,16 @@
                             </ul>
                         </div>
                     </nav>
-                    
 
-                    @if (TempData["Msg"] != null)
+
+                    @if (TempData["LogOutMsg"] != null)
                     {
                         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                alert("You have succesfully logged out");
+
+                                $("#Logoutmodel").modal("show");
+                                $("#logout-p").html(" You have successfully logged out.");
                             });
                         </script>
                     }
@@ -263,7 +228,7 @@
     <div>
         @RenderBody()
     </div>
-    <footer class="site-footer mt-3">
+    <footer class="site-footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row align-items-center">
@@ -275,22 +240,22 @@
                     <div class="col-lg-8 footer-widget">
                         <ul class="footer-navigation d-flex justify-content-center">
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index" title="Home">Home</a>
+                                <a asp-area="" asp-controller="Home" asp-action="index">Home</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="PublicPages" asp-action="About" title="About">About</a>
+                                <a asp-area="" asp-controller="PublicPages" asp-action="About">About</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="#" asp-action="#" title="Testimonials">Testimonials</a>
+                                <a href="#">Testimonials</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="PublicPages" asp-action="FAQ" title="FAQs">FAQs</a>
+                                <a asp-area="" asp-controller="PublicPages" asp-action="FAQ">FAQs</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="#" asp-action="#" title="Insurance Policy">Insurance Policy</a>
+                                <a href="#">Insurance Policy</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="#" asp-action="#" title="Impressum">Impressum</a>
+                                <a href="#">Impressum</a>
                             </li>
                         </ul>
                     </div>
@@ -313,15 +278,106 @@
                 <div class="justify-content-lg-center text-center" style="font-size: 16px;">
                     <div>
                         ©2018 Helperland. All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp; <a href="" class="row-bottom">
-                            Terms and Conditions
+                            Terms and
+                            Conditions
                         </a> | <a href="" class="row-bottom">Privacy Policy</a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="footer-bottom" id="cookie">
+            <div class="container text-center">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam
+                    ac. <a href="#" title="Privacy Policy">Privacy Policy</a>
+                </p>
+                <a href="#" class="yellow-btn ok-btn" onclick="myFunction()">OK!</a>
+            </div>
+        </div>
     </footer>
 
 
+    @* ---------------------All modals-------------------------- *@
+    <!-- login popup -->
+    <div id="login" class="modal fade " aria-labelledby="loginLabel" tabindex="-1" aria-modal="true"
+         role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup-heading">Login to your account</div>
+                    <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <form method="post" asp-controller="Home" asp-action="Index">
+                        <span class="text-danger text-center ">@ViewBag.Message1</span>
+                        <div class="input-group mt-3">
+                            <input asp-for="Email" type="Email" class="form-control" placeholder="username or email" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text "><i class="fas fa-user"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <input asp-for="Password" type="Password" class="form-control" placeholder="password" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i><span>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="checkbox1" type="checkbox" value="" />
+                            <label style="margin:8px 25px "> Remember me</label>
+                        </div><br />
+                        <button type="submit" class="btn login-button">Login</button>
+                        <br><br>
+                    </form>
+                    <a href="" class="d-block text-center forgot-password" data-bs-toggle="modal"
+                       data-bs-target="#forgetPasswordModal">
+                        Forget Password?
+                    </a>
+                    <div class="account">
+                        Don't have account?
+                        <a class="create-account" asp-area="" asp-controller="Home" asp-action="Create_Account">create account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgotpassword popup -->
+    <div class="modal fade" id="forgetPasswordModal" aria-hidden="true"
+         aria-labelledby="forgetPasswordModalLabel" tabindex="-1">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-3">
+                    <div class="popup-heading">Forget Password</div>
+                    <button type="button" class="btn-close" style="float: right;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <span class="text-danger">@ViewBag.Message2</span>
+                    <span class="text-danger">@ViewBag.Message3</span>
+                    <form method="post">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
+                        <button type="submit" class="btn send-button">Send</button>
+                    </form>
+                    @*<a href="#" class="back-login text-center" data-bs-toggle="modal" data-bs-target="#login"> <-- Back to Login</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LogOut  popup -->
+    <div class="modal fade" id="Logoutmodel" aria-hidden="true"
+         aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                    <span class="success-modal">
+                        <img src="../images/correct-white-medium.png" />
+                    </span>
+                    <p id="logout-p"></p>
+                    <br>
+                    <button type="button" class="btn logout-ok-button" data-dismiss="modal"> OK </button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -338,10 +394,16 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
-    
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 
     <script>
+        function myFunction() {
+            var x = document.getElementById("cookie");
+            x.style.display = "none";
+        }
+
         $(document).ready(function () {
             $('#datatable').DataTable({
 
@@ -359,11 +421,7 @@
             });
         });
 
-        function preventBack() {
-            window.history.forward();
-        }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
+        
     </script>
     @RenderSection("Scripts", required: false)
 </body>
